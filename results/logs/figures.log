@@ -1,0 +1,12 @@
+found: X1 cells 9 | complete True | X2 True | X3 True | X4 True | checks True
+  wrote fig1_who_tells
+  wrote fig3_sharing_vs_friendliness
+  wrote fig2_why_and_clans
+  H2 exceptions: [('two friend groups', 'E0', 0.375, 8, 0.611111111111111, 0.7777777777777777, 4, 0.6666666666666666)]
+  mixed vs own-kind population: differing cells = ['strong candidate 2, fixed seats, friendly group {1,3,5}, clannish(0.2,0.3) group {2,4,6}']
+  wrote tab_x2.tex
+  wrote fig4_learning
+  wrote tab_x3.tex
+  wrote fig5_company_loss
+  wrote tab_checks.tex
+  wrote numbers.tex (524 macros)

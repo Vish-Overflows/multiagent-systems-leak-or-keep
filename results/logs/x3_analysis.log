@@ -1,0 +1,79 @@
+learner      env rule  | agree(T) [CI]        agree@60k  mp@60k | regret(T)  cce_gap(T)   t90(frac, med)
+eps-greedy   E0  SEATS | 0.825 [0.783,0.867]  0.781     0.767  |   146.10  0.00475   (0.47, None)  expl=0.01252 exact_eq=0.13 type_ok=[0.93, 0.64, 0.82]
+eps-greedy   E0  BAR   | 0.739 [0.708,0.769]  0.722     0.722  |    81.24  0.00215   (0.13, None)  expl=0.00100 exact_eq=0.00 type_ok=[0.73, 0.75, 0.68]
+eps-greedy   E1  SEATS | 0.706 [0.653,0.761]  0.614     0.572  |   153.75  0.00436   (0.20, None)  expl=0.00804 exact_eq=0.00 type_ok=[0.7, 0.64, 0.65]
+eps-greedy   E1  BAR   | 0.861 [0.828,0.894]  0.767     0.714  |   178.27  0.00507   (0.50, None)  expl=0.01099 exact_eq=0.03 type_ok=[0.95, 0.71, 0.77]
+eps-greedy   E2  SEATS | 0.722 [0.681,0.764]  0.619     0.586  |   146.64  0.00422   (0.13, None)  expl=0.00792 exact_eq=0.00 type_ok=[0.73, 0.6, 0.72]
+eps-greedy   E2  BAR   | 0.856 [0.817,0.894]  0.758     0.725  |   174.30  0.00512   (0.53, 160500.0)  expl=0.01027 exact_eq=0.10 type_ok=[0.92, 0.75, 0.77]
+UCB1         E0  SEATS | 0.964 [0.942,0.983]  0.922     0.914  |   463.03  0.01009   (1.00, 16500.0)  expl=0.00172 exact_eq=0.70 type_ok=[0.99, 0.9, 1.0]
+UCB1         E0  BAR   | 0.558 [0.536,0.583]  0.547     0.536  |   466.10  0.01136   (0.03, None)  expl=0.00100 exact_eq=0.00 type_ok=[0.52, 0.6, 0.56]
+UCB1         E1  SEATS | 0.931 [0.903,0.956]  0.828     0.822  |   245.56  0.00520   (1.00, 56000.0)  expl=0.00361 exact_eq=0.40 type_ok=[0.99, 0.83, 0.96]
+UCB1         E1  BAR   | 0.992 [0.983,1.000]  0.928     0.928  |   421.34  0.00899   (1.00, 18000.0)  expl=0.00139 exact_eq=0.87 type_ok=[1.0, 0.97, 1.0]
+UCB1         E2  SEATS | 0.944 [0.919,0.967]  0.803     0.803  |   245.05  0.00517   (1.00, 60500.0)  expl=0.00314 exact_eq=0.50 type_ok=[0.95, 0.93, 0.95]
+UCB1         E2  BAR   | 0.994 [0.986,1.000]  0.944     0.947  |   419.58  0.00906   (1.00, 12000.0)  expl=0.00065 exact_eq=0.93 type_ok=[1.0, 0.99, 0.99]
+Thompson     E0  SEATS | 0.928 [0.911,0.944]  0.919     0.917  |   158.08  0.00331   (1.00, 19500.0)  expl=0.00334 exact_eq=0.37 type_ok=[1.0, 0.78, 1.0]
+Thompson     E0  BAR   | 0.703 [0.664,0.744]  0.622     0.614  |    92.72  0.00237   (0.13, None)  expl=0.00100 exact_eq=0.00 type_ok=[0.64, 0.65, 0.64]
+Thompson     E1  SEATS | 0.917 [0.892,0.942]  0.783     0.711  |   173.29  0.00395   (0.93, 78000.0)  expl=0.00416 exact_eq=0.33 type_ok=[0.94, 0.82, 0.93]
+Thompson     E1  BAR   | 0.992 [0.983,1.000]  0.942     0.917  |   190.82  0.00463   (1.00, 19000.0)  expl=0.00138 exact_eq=0.87 type_ok=[1.0, 0.98, 0.99]
+Thompson     E2  SEATS | 0.942 [0.919,0.961]  0.742     0.672  |   179.50  0.00401   (0.97, 80000.0)  expl=0.00479 exact_eq=0.27 type_ok=[0.92, 0.82, 0.91]
+Thompson     E2  BAR   | 0.992 [0.978,1.000]  0.939     0.914  |   196.95  0.00480   (1.00, 16500.0)  expl=0.00162 exact_eq=0.83 type_ok=[1.0, 0.98, 0.98]
+EXP3         E0  SEATS | 0.931 [0.911,0.950]  0.858     0.811  |   512.34  0.01150   (1.00, 29000.0)  expl=0.00659 exact_eq=0.20 type_ok=[0.98, 0.78, 0.99]
+EXP3         E0  BAR   | 0.508 [0.500,0.517]  0.528     0.550  |   706.14  0.01550   (0.03, None)  expl=0.00100 exact_eq=0.00 type_ok=[0.5, 0.51, 0.52]
+EXP3         E1  SEATS | 0.808 [0.772,0.844]  0.631     0.608  |   251.07  0.00536   (0.57, 141000.0)  expl=0.00752 exact_eq=0.03 type_ok=[0.83, 0.73, 0.73]
+EXP3         E1  BAR   | 0.939 [0.914,0.961]  0.844     0.786  |   442.40  0.00941   (0.97, 61000.0)  expl=0.00808 exact_eq=0.30 type_ok=[1.0, 0.93, 0.8]
+EXP3         E2  SEATS | 0.842 [0.803,0.878]  0.692     0.611  |   247.22  0.00522   (0.63, 122000.0)  expl=0.00770 exact_eq=0.03 type_ok=[0.84, 0.79, 0.78]
+EXP3         E2  BAR   | 0.928 [0.903,0.950]  0.828     0.778  |   440.97  0.00928   (0.97, 41000.0)  expl=0.00786 exact_eq=0.30 type_ok=[1.0, 0.95, 0.79]
+model-based  E0  SEATS | 0.964 [0.942,0.983]  0.922     0.914  |   463.03  0.01009   (1.00, 16500.0)  expl=0.00172 exact_eq=0.70 type_ok=[0.99, 0.9, 1.0]
+model-based  E0  BAR   | 0.558 [0.536,0.583]  0.547     0.536  |   466.10  0.01136   (0.03, None)  expl=0.00100 exact_eq=0.00 type_ok=[0.52, 0.6, 0.56]
+model-based  E1  SEATS | 0.997 [0.992,1.000]  0.928     0.931  |   247.33  0.00525   (1.00, 27000.0)  expl=0.00019 exact_eq=0.97 type_ok=[1.0, 0.99, 1.0]
+model-based  E1  BAR   | 1.000 [1.000,1.000]  0.994     0.992  |    70.45  0.00164   (1.00, 7000.0)  expl=0.00000 exact_eq=1.00 type_ok=[1.0, 1.0, 1.0]
+model-based  E2  SEATS | 1.000 [1.000,1.000]  0.925     0.928  |   247.46  0.00517   (1.00, 28500.0)  expl=0.00000 exact_eq=1.00 type_ok=[1.0, 1.0, 1.0]
+model-based  E2  BAR   | 1.000 [1.000,1.000]  0.994     0.994  |    98.00  0.00241   (1.00, 8500.0)  expl=0.00000 exact_eq=1.00 type_ok=[1.0, 1.0, 1.0]
+BAR vs SEATS agreement (Holm):
+  eps-greedy   E0: diff=-0.086 CI=(-0.131,-0.044) p=0.0013 p_holm=0.0052
+  eps-greedy   E1: diff=+0.156 CI=(+0.089,+0.225) p=0.0001 p_holm=0.0008
+  eps-greedy   E2: diff=+0.133 CI=(+0.081,+0.186) p=0.0001 p_holm=0.0008
+  UCB1         E0: diff=-0.406 CI=(-0.431,-0.381) p=0.0001 p_holm=0.0008
+  UCB1         E1: diff=+0.061 CI=(+0.036,+0.089) p=0.0001 p_holm=0.0008
+  UCB1         E2: diff=+0.050 CI=(+0.025,+0.078) p=0.0020 p_holm=0.0060
+  Thompson     E0: diff=-0.225 CI=(-0.264,-0.186) p=0.0001 p_holm=0.0008
+  Thompson     E1: diff=+0.075 CI=(+0.047,+0.103) p=0.0001 p_holm=0.0008
+  Thompson     E2: diff=+0.050 CI=(+0.028,+0.072) p=0.0003 p_holm=0.0021
+  EXP3         E0: diff=-0.422 CI=(-0.444,-0.400) p=0.0001 p_holm=0.0008
+  EXP3         E1: diff=+0.131 CI=(+0.089,+0.175) p=0.0001 p_holm=0.0008
+  EXP3         E2: diff=+0.086 CI=(+0.044,+0.131) p=0.0006 p_holm=0.0030
+  model-based  E0: diff=-0.406 CI=(-0.431,-0.381) p=0.0001 p_holm=0.0008
+  model-based  E1: diff=+0.003 CI=(+0.000,+0.008) p=1.0000 p_holm=1.0000
+  model-based  E2: diff=+0.000 CI=(+0.000,+0.000) p=1.0000 p_holm=1.0000
+model-based vs UCB1 (Holm):
+  E0 SEATS agree@20k(MB)-agree@20k(UCB1)   : diff=+0.0000 p=1.0000 p_holm=1.0000
+  E0 SEATS agree@T(MB)-agree@T(UCB1)       : diff=+0.0000 p=1.0000 p_holm=1.0000
+  E0 SEATS regret(MB)-regret(UCB1)         : diff=+0.0000 p=1.0000 p_holm=1.0000
+  E0 SEATS cce_gap(MB)-cce_gap(UCB1)       : diff=+0.0000 p=1.0000 p_holm=1.0000
+  E0 BAR   agree@20k(MB)-agree@20k(UCB1)   : diff=+0.0000 p=1.0000 p_holm=1.0000
+  E0 BAR   agree@T(MB)-agree@T(UCB1)       : diff=+0.0000 p=1.0000 p_holm=1.0000
+  E0 BAR   regret(MB)-regret(UCB1)         : diff=+0.0000 p=1.0000 p_holm=1.0000
+  E0 BAR   cce_gap(MB)-cce_gap(UCB1)       : diff=+0.0000 p=1.0000 p_holm=1.0000
+  E1 SEATS agree@20k(MB)-agree@20k(UCB1)   : diff=+0.1250 p=0.0013 p_holm=0.0200
+  E1 SEATS agree@T(MB)-agree@T(UCB1)       : diff=+0.0667 p=0.0001 p_holm=0.0012
+  E1 SEATS regret(MB)-regret(UCB1)         : diff=+1.7729 p=0.2737 p_holm=1.0000
+  E1 SEATS cce_gap(MB)-cce_gap(UCB1)       : diff=+0.0001 p=0.2169 p_holm=1.0000
+  E1 BAR   agree@20k(MB)-agree@20k(UCB1)   : diff=+0.1167 p=0.0001 p_holm=0.0012
+  E1 BAR   agree@T(MB)-agree@T(UCB1)       : diff=+0.0083 p=0.2538 p_holm=1.0000
+  E1 BAR   regret(MB)-regret(UCB1)         : diff=-350.8816 p=0.0001 p_holm=0.0012
+  E1 BAR   cce_gap(MB)-cce_gap(UCB1)       : diff=-0.0073 p=0.0001 p_holm=0.0012
+  E2 SEATS agree@20k(MB)-agree@20k(UCB1)   : diff=+0.1083 p=0.0013 p_holm=0.0200
+  E2 SEATS agree@T(MB)-agree@T(UCB1)       : diff=+0.0556 p=0.0001 p_holm=0.0018
+  E2 SEATS regret(MB)-regret(UCB1)         : diff=+2.4164 p=0.1196 p_holm=1.0000
+  E2 SEATS cce_gap(MB)-cce_gap(UCB1)       : diff=-0.0000 p=0.9591 p_holm=1.0000
+  E2 BAR   agree@20k(MB)-agree@20k(UCB1)   : diff=+0.0722 p=0.0009 p_holm=0.0153
+  E2 BAR   agree@T(MB)-agree@T(UCB1)       : diff=+0.0056 p=0.4996 p_holm=1.0000
+  E2 BAR   regret(MB)-regret(UCB1)         : diff=-321.5863 p=0.0001 p_holm=0.0012
+  E2 BAR   cce_gap(MB)-cce_gap(UCB1)       : diff=-0.0067 p=0.0001 p_holm=0.0012
+MB == UCB1 under E0: True
+CCE gap falls (10k -> T), Holm:
+  eps-greedy  : diff=+0.00459 p=0.0001 p_holm=0.0003
+  UCB1        : diff=+0.00586 p=0.0001 p_holm=0.0003
+  Thompson    : diff=+0.00660 p=0.0001 p_holm=0.0003
+  EXP3        : diff=+0.00733 p=0.0001 p_holm=0.0003
+  model-based : diff=+0.00684 p=0.0001 p_holm=0.0003

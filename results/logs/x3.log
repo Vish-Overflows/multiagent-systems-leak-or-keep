@@ -1,0 +1,51 @@
+  [UCB1] t=  22000  agree=0.737  cce_gap=0.01286    47.2s
+  [Thompson] t=  22000  agree=0.739  cce_gap=0.00852    47.4s
+  [eps-greedy] t=  22000  agree=0.654  cce_gap=0.00733    49.6s
+  [EXP3] t=  22000  agree=0.642  cce_gap=0.01593    53.2s
+  [model-based] t=  22000  agree=0.803  cce_gap=0.01130    61.1s
+  [UCB1] t=  47000  agree=0.797  cce_gap=0.01140   111.1s
+  [Thompson] t=  47000  agree=0.787  cce_gap=0.00674   111.1s
+  [eps-greedy] t=  47000  agree=0.697  cce_gap=0.00613   117.8s
+  [EXP3] t=  47000  agree=0.714  cce_gap=0.01447   125.0s
+  [model-based] t=  47000  agree=0.862  cce_gap=0.00958   139.7s
+  [UCB1] t=  72000  agree=0.841  cce_gap=0.01055   163.1s
+  [Thompson] t=  72000  agree=0.843  cce_gap=0.00582   162.9s
+  [eps-greedy] t=  72000  agree=0.719  cce_gap=0.00557   171.3s
+  [EXP3] t=  72000  agree=0.750  cce_gap=0.01324   180.7s
+  [model-based] t=  72000  agree=0.890  cce_gap=0.00858   198.5s
+  [UCB1] t=  97000  agree=0.857  cce_gap=0.00992   210.6s
+  [Thompson] t=  97000  agree=0.862  cce_gap=0.00521   210.6s
+  [eps-greedy] t=  97000  agree=0.740  cce_gap=0.00520   222.8s
+  [EXP3] t=  97000  agree=0.771  cce_gap=0.01222   235.3s
+  [UCB1] t= 122000  agree=0.872  cce_gap=0.00943   261.6s
+  [Thompson] t= 122000  agree=0.879  cce_gap=0.00476   261.6s
+  [model-based] t=  97000  agree=0.900  cce_gap=0.00780   263.0s
+  [eps-greedy] t= 122000  agree=0.755  cce_gap=0.00490   278.6s
+  [EXP3] t= 122000  agree=0.797  cce_gap=0.01134   293.4s
+  [UCB1] t= 147000  agree=0.884  cce_gap=0.00899   312.6s
+  [Thompson] t= 147000  agree=0.897  cce_gap=0.00441   312.8s
+  [model-based] t= 122000  agree=0.912  cce_gap=0.00719   326.3s
+  [eps-greedy] t= 147000  agree=0.765  cce_gap=0.00467   330.2s
+  [EXP3] t= 147000  agree=0.806  cce_gap=0.01061   348.7s
+  [UCB1] t= 172000  agree=0.895  cce_gap=0.00865   358.2s
+  [Thompson] t= 172000  agree=0.906  cce_gap=0.00412   359.7s
+  [eps-greedy] t= 172000  agree=0.780  cce_gap=0.00447   379.6s
+  [model-based] t= 147000  agree=0.911  cce_gap=0.00668   384.2s
+  [EXP3] t= 172000  agree=0.817  cce_gap=0.00998   403.7s
+  [UCB1] t= 197000  agree=0.896  cce_gap=0.00834   405.6s
+  [Thompson] t= 197000  agree=0.911  cce_gap=0.00387   407.1s
+  [UCB1] t= 200000  agree=0.897  cce_gap=0.00831   410.7s
+finished UCB1 in 411s
+  [Thompson] t= 200000  agree=0.912  cce_gap=0.00384   412.4s
+finished Thompson in 412s
+  [eps-greedy] t= 197000  agree=0.784  cce_gap=0.00430   428.9s
+  [eps-greedy] t= 200000  agree=0.785  cce_gap=0.00428   435.2s
+finished eps-greedy in 435s
+  [model-based] t= 172000  agree=0.912  cce_gap=0.00629   441.5s
+  [EXP3] t= 197000  agree=0.825  cce_gap=0.00944   450.1s
+  [EXP3] t= 200000  agree=0.826  cce_gap=0.00938   455.9s
+finished EXP3 in 456s
+  [model-based] t= 197000  agree=0.916  cce_gap=0.00594   479.4s
+  [model-based] t= 200000  agree=0.917  cce_gap=0.00590   483.9s
+finished model-based in 484s
+X3 done in 632s

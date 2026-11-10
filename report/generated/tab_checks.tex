@@ -1,0 +1,13 @@
+\begin{tabular}{@{}llll@{}}
+\toprule
+Check & What must hold & Simulator & Verdict \\
+\midrule
+Worked example & $0.7083,\ 0.9149,\ 0.7083$ (exact) & $0.7085,\ 0.9157,\ 0.7088$ & pass \\
+Lemma 1 & a tell never lowers the friend's score, changes no one else's & min change $0$, others $0$ & pass \\
+Prop.\ 3 & leaked fraction $=1-(1-m/Q)^{n_j}$, $n_j=1,2,3$ & largest error $0.0013$ ($2.2$ s.e.) & pass \\
+Prop.\ 2 & under a cut-off, own row never changes own hire & largest change $0$ & pass \\
+ & \ldots and friends' gain is the same for every own type & largest spread $0.0029$ & pass \\
+Prop.\ 1 & everyone friends, fixed seats: nobody tells ($n{=}4$ solved, $n{=}6$ deviations) & unique equilibrium; 0 of 684 deviations pay & pass \\
+Selfish baseline & nobody tells at $\alpha=0$ (both rules, E0--E2) & 6 of 6 games & pass \\
+\bottomrule
+\end{tabular}

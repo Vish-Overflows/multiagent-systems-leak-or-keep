@@ -1,0 +1,5695 @@
+{
+ "network": "two_groups",
+ "env": "E2",
+ "n_days": 2000,
+ "table_seconds": 13.412054777145386,
+ "rules": {
+  "SEATS": {
+   "rule": "SEATS",
+   "network": "two_groups",
+   "env": "E2",
+   "cells": [
+    "c1/weak",
+    "c1/avg",
+    "c1/strong",
+    "c2/weak",
+    "c2/avg",
+    "c2/strong",
+    "c3/weak",
+    "c3/avg",
+    "c3/strong",
+    "c4/weak",
+    "c4/avg",
+    "c4/strong"
+   ],
+   "records": [
+    {
+     "alpha": 0.0,
+     "n_bne": 1,
+     "n_eps_bne_1e-3": 1,
+     "min_exploitability_all": 0.0,
+     "sharing_rate_min": 0.0,
+     "sharing_rate_max": 0.0,
+     "sharing_rate_mean": 0.0,
+     "cell_tells_first": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "cell_shares_all_bne": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     "cell_shares_some_bne": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     "first_bne": {
+      "c1/weak": [],
+      "c1/avg": [],
+      "c1/strong": [],
+      "c2/weak": [],
+      "c2/avg": [],
+      "c2/strong": [],
+      "c3/weak": [],
+      "c3/avg": [],
+      "c3/strong": [],
+      "c4/weak": [],
+      "c4/avg": [],
+      "c4/strong": []
+     },
+     "welfare_first": 2.0000000004346012,
+     "profiles": [
+      [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ]
+     ],
+     "br_dynamics": {
+      "n_converged": 8,
+      "n_distinct": 1
+     },
+     "bootstrap": {
+      "eps95": 0.0,
+      "frac_exact_bne": 1.0,
+      "R": 200
+     },
+     "replicator": [
+      {
+       "converged": true,
+       "exploitability": 4.203734582652885e-12,
+       "is_pure": true,
+       "iterations": 219,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 4.407099685188598e-12,
+       "is_pure": true,
+       "iterations": 219,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 4.265823805305047e-12,
+       "is_pure": true,
+       "iterations": 224,
+       "matches_bne": true
+      }
+     ]
+    },
+    {
+     "alpha": 0.025,
+     "n_bne": 1,
+     "n_eps_bne_1e-3": 1,
+     "min_exploitability_all": 0.0,
+     "sharing_rate_min": 0.0,
+     "sharing_rate_max": 0.0,
+     "sharing_rate_mean": 0.0,
+     "cell_tells_first": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "cell_shares_all_bne": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     "cell_shares_some_bne": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     "first_bne": {
+      "c1/weak": [],
+      "c1/avg": [],
+      "c1/strong": [],
+      "c2/weak": [],
+      "c2/avg": [],
+      "c2/strong": [],
+      "c3/weak": [],
+      "c3/avg": [],
+      "c3/strong": [],
+      "c4/weak": [],
+      "c4/avg": [],
+      "c4/strong": []
+     },
+     "welfare_first": 2.1000000004563315,
+     "profiles": [
+      [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ]
+     ],
+     "br_dynamics": {
+      "n_converged": 8,
+      "n_distinct": 1
+     },
+     "bootstrap": {
+      "eps95": 0.0,
+      "frac_exact_bne": 1.0,
+      "R": 200
+     },
+     "replicator": [
+      {
+       "converged": true,
+       "exploitability": 4.313244206244349e-12,
+       "is_pure": true,
+       "iterations": 282,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 4.5413117710779716e-12,
+       "is_pure": true,
+       "iterations": 284,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 4.532998976181091e-12,
+       "is_pure": true,
+       "iterations": 291,
+       "matches_bne": true
+      }
+     ]
+    },
+    {
+     "alpha": 0.05,
+     "n_bne": 1,
+     "n_eps_bne_1e-3": 1,
+     "min_exploitability_all": 0.0,
+     "sharing_rate_min": 0.0,
+     "sharing_rate_max": 0.0,
+     "sharing_rate_mean": 0.0,
+     "cell_tells_first": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "cell_shares_all_bne": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     "cell_shares_some_bne": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     "first_bne": {
+      "c1/weak": [],
+      "c1/avg": [],
+      "c1/strong": [],
+      "c2/weak": [],
+      "c2/avg": [],
+      "c2/strong": [],
+      "c3/weak": [],
+      "c3/avg": [],
+      "c3/strong": [],
+      "c4/weak": [],
+      "c4/avg": [],
+      "c4/strong": []
+     },
+     "welfare_first": 2.200000000478061,
+     "profiles": [
+      [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ]
+     ],
+     "br_dynamics": {
+      "n_converged": 8,
+      "n_distinct": 1
+     },
+     "bootstrap": {
+      "eps95": 0.0,
+      "frac_exact_bne": 1.0,
+      "R": 200
+     },
+     "replicator": [
+      {
+       "converged": true,
+       "exploitability": 4.570691047867115e-12,
+       "is_pure": true,
+       "iterations": 403,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 4.710398737728383e-12,
+       "is_pure": true,
+       "iterations": 403,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 4.664310604418631e-12,
+       "is_pure": true,
+       "iterations": 416,
+       "matches_bne": true
+      }
+     ]
+    },
+    {
+     "alpha": 0.075,
+     "n_bne": 1,
+     "n_eps_bne_1e-3": 1,
+     "min_exploitability_all": 0.0,
+     "sharing_rate_min": 0.0,
+     "sharing_rate_max": 0.0,
+     "sharing_rate_mean": 0.0,
+     "cell_tells_first": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "cell_shares_all_bne": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     "cell_shares_some_bne": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     "first_bne": {
+      "c1/weak": [],
+      "c1/avg": [],
+      "c1/strong": [],
+      "c2/weak": [],
+      "c2/avg": [],
+      "c2/strong": [],
+      "c3/weak": [],
+      "c3/avg": [],
+      "c3/strong": [],
+      "c4/weak": [],
+      "c4/avg": [],
+      "c4/strong": []
+     },
+     "welfare_first": 2.3000000004997916,
+     "profiles": [
+      [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ]
+     ],
+     "br_dynamics": {
+      "n_converged": 8,
+      "n_distinct": 1
+     },
+     "bootstrap": {
+      "eps95": 0.0,
+      "frac_exact_bne": 1.0,
+      "R": 200
+     },
+     "replicator": [
+      {
+       "converged": true,
+       "exploitability": 4.772016115595079e-12,
+       "is_pure": true,
+       "iterations": 720,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 4.7333942321259315e-12,
+       "is_pure": true,
+       "iterations": 698,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 4.833744515764238e-12,
+       "is_pure": true,
+       "iterations": 735,
+       "matches_bne": true
+      }
+     ]
+    },
+    {
+     "alpha": 0.1,
+     "n_bne": 1,
+     "n_eps_bne_1e-3": 55,
+     "min_exploitability_all": 0.0,
+     "sharing_rate_min": 0.0,
+     "sharing_rate_max": 0.0,
+     "sharing_rate_mean": 0.0,
+     "cell_tells_first": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "cell_shares_all_bne": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     "cell_shares_some_bne": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     "first_bne": {
+      "c1/weak": [],
+      "c1/avg": [],
+      "c1/strong": [],
+      "c2/weak": [],
+      "c2/avg": [],
+      "c2/strong": [],
+      "c3/weak": [],
+      "c3/avg": [],
+      "c3/strong": [],
+      "c4/weak": [],
+      "c4/avg": [],
+      "c4/strong": []
+     },
+     "welfare_first": 2.4000000005215214,
+     "profiles": [
+      [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ]
+     ],
+     "br_dynamics": {
+      "n_converged": 8,
+      "n_distinct": 1
+     },
+     "bootstrap": {
+      "eps95": 0.0,
+      "frac_exact_bne": 1.0,
+      "R": 200
+     },
+     "replicator": [
+      {
+       "converged": false,
+       "exploitability": 2.1466571575867732e-10,
+       "is_pure": true,
+       "iterations": 3000,
+       "matches_bne": true
+      },
+      {
+       "converged": false,
+       "exploitability": 2.6957838739072315e-11,
+       "is_pure": true,
+       "iterations": 3000,
+       "matches_bne": true
+      },
+      {
+       "converged": false,
+       "exploitability": 7.610268248914309e-10,
+       "is_pure": true,
+       "iterations": 3000,
+       "matches_bne": true
+      }
+     ]
+    },
+    {
+     "alpha": 0.125,
+     "n_bne": 1,
+     "n_eps_bne_1e-3": 4,
+     "min_exploitability_all": 0.0,
+     "sharing_rate_min": 0.3333333333333333,
+     "sharing_rate_max": 0.3333333333333333,
+     "sharing_rate_mean": 0.3333333333333333,
+     "cell_tells_first": [
+      2,
+      0,
+      0,
+      2,
+      0,
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+     ],
+     "cell_shares_all_bne": [
+      true,
+      false,
+      false,
+      true,
+      false,
+      false,
+      true,
+      false,
+      false,
+      true,
+      false,
+      false
+     ],
+     "cell_shares_some_bne": [
+      true,
+      false,
+      false,
+      true,
+      false,
+      false,
+      true,
+      false,
+      false,
+      true,
+      false,
+      false
+     ],
+     "first_bne": {
+      "c1/weak": [
+       3,
+       5
+      ],
+      "c1/avg": [],
+      "c1/strong": [],
+      "c2/weak": [
+       4,
+       6
+      ],
+      "c2/avg": [],
+      "c2/strong": [],
+      "c3/weak": [
+       5
+      ],
+      "c3/avg": [],
+      "c3/strong": [],
+      "c4/weak": [
+       6
+      ],
+      "c4/avg": [],
+      "c4/strong": []
+     },
+     "welfare_first": 2.498000001405387,
+     "profiles": [
+      [
+       3,
+       3,
+       1,
+       1,
+       0,
+       0
+      ]
+     ],
+     "br_dynamics": {
+      "n_converged": 8,
+      "n_distinct": 1
+     },
+     "bootstrap": {
+      "eps95": 0.0,
+      "frac_exact_bne": 1.0,
+      "R": 200
+     },
+     "replicator": [
+      {
+       "converged": true,
+       "exploitability": 4.9317494532630235e-12,
+       "is_pure": true,
+       "iterations": 2130,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 4.9398263257671715e-12,
+       "is_pure": true,
+       "iterations": 1957,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 4.90446572243286e-12,
+       "is_pure": true,
+       "iterations": 1834,
+       "matches_bne": true
+      }
+     ]
+    },
+    {
+     "alpha": 0.15,
+     "n_bne": 1,
+     "n_eps_bne_1e-3": 1,
+     "min_exploitability_all": 0.0,
+     "sharing_rate_min": 0.3333333333333333,
+     "sharing_rate_max": 0.3333333333333333,
+     "sharing_rate_mean": 0.3333333333333333,
+     "cell_tells_first": [
+      2,
+      0,
+      0,
+      2,
+      0,
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+     ],
+     "cell_shares_all_bne": [
+      true,
+      false,
+      false,
+      true,
+      false,
+      false,
+      true,
+      false,
+      false,
+      true,
+      false,
+      false
+     ],
+     "cell_shares_some_bne": [
+      true,
+      false,
+      false,
+      true,
+      false,
+      false,
+      true,
+      false,
+      false,
+      true,
+      false,
+      false
+     ],
+     "first_bne": {
+      "c1/weak": [
+       3,
+       5
+      ],
+      "c1/avg": [],
+      "c1/strong": [],
+      "c2/weak": [
+       4,
+       6
+      ],
+      "c2/avg": [],
+      "c2/strong": [],
+      "c3/weak": [
+       5
+      ],
+      "c3/avg": [],
+      "c3/strong": [],
+      "c4/weak": [
+       6
+      ],
+      "c4/avg": [],
+      "c4/strong": []
+     },
+     "welfare_first": 2.598000001461603,
+     "profiles": [
+      [
+       3,
+       3,
+       1,
+       1,
+       0,
+       0
+      ]
+     ],
+     "br_dynamics": {
+      "n_converged": 8,
+      "n_distinct": 1
+     },
+     "bootstrap": {
+      "eps95": 0.0,
+      "frac_exact_bne": 1.0,
+      "R": 200
+     },
+     "replicator": [
+      {
+       "converged": true,
+       "exploitability": 4.737238379348696e-12,
+       "is_pure": true,
+       "iterations": 694,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 4.773431649951476e-12,
+       "is_pure": true,
+       "iterations": 671,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 4.839323386462979e-12,
+       "is_pure": true,
+       "iterations": 622,
+       "matches_bne": true
+      }
+     ]
+    },
+    {
+     "alpha": 0.175,
+     "n_bne": 1,
+     "n_eps_bne_1e-3": 1,
+     "min_exploitability_all": 0.0,
+     "sharing_rate_min": 0.3333333333333333,
+     "sharing_rate_max": 0.3333333333333333,
+     "sharing_rate_mean": 0.3333333333333333,
+     "cell_tells_first": [
+      2,
+      0,
+      0,
+      2,
+      0,
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+     ],
+     "cell_shares_all_bne": [
+      true,
+      false,
+      false,
+      true,
+      false,
+      false,
+      true,
+      false,
+      false,
+      true,
+      false,
+      false
+     ],
+     "cell_shares_some_bne": [
+      true,
+      false,
+      false,
+      true,
+      false,
+      false,
+      true,
+      false,
+      false,
+      true,
+      false,
+      false
+     ],
+     "first_bne": {
+      "c1/weak": [
+       3,
+       5
+      ],
+      "c1/avg": [],
+      "c1/strong": [],
+      "c2/weak": [
+       4,
+       6
+      ],
+      "c2/avg": [],
+      "c2/strong": [],
+      "c3/weak": [
+       5
+      ],
+      "c3/avg": [],
+      "c3/strong": [],
+      "c4/weak": [
+       6
+      ],
+      "c4/avg": [],
+      "c4/strong": []
+     },
+     "welfare_first": 2.6980000015178183,
+     "profiles": [
+      [
+       3,
+       3,
+       1,
+       1,
+       0,
+       0
+      ]
+     ],
+     "br_dynamics": {
+      "n_converged": 8,
+      "n_distinct": 1
+     },
+     "bootstrap": {
+      "eps95": 0.0,
+      "frac_exact_bne": 1.0,
+      "R": 200
+     },
+     "replicator": [
+      {
+       "converged": true,
+       "exploitability": 4.690664523465671e-12,
+       "is_pure": true,
+       "iterations": 415,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 4.544420395546922e-12,
+       "is_pure": true,
+       "iterations": 410,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 4.6614379023424135e-12,
+       "is_pure": true,
+       "iterations": 378,
+       "matches_bne": true
+      }
+     ]
+    },
+    {
+     "alpha": 0.2,
+     "n_bne": 1,
+     "n_eps_bne_1e-3": 1,
+     "min_exploitability_all": 0.0,
+     "sharing_rate_min": 0.3333333333333333,
+     "sharing_rate_max": 0.3333333333333333,
+     "sharing_rate_mean": 0.3333333333333333,
+     "cell_tells_first": [
+      2,
+      0,
+      0,
+      2,
+      0,
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+     ],
+     "cell_shares_all_bne": [
+      true,
+      false,
+      false,
+      true,
+      false,
+      false,
+      true,
+      false,
+      false,
+      true,
+      false,
+      false
+     ],
+     "cell_shares_some_bne": [
+      true,
+      false,
+      false,
+      true,
+      false,
+      false,
+      true,
+      false,
+      false,
+      true,
+      false,
+      false
+     ],
+     "first_bne": {
+      "c1/weak": [
+       3,
+       5
+      ],
+      "c1/avg": [],
+      "c1/strong": [],
+      "c2/weak": [
+       4,
+       6
+      ],
+      "c2/avg": [],
+      "c2/strong": [],
+      "c3/weak": [
+       5
+      ],
+      "c3/avg": [],
+      "c3/strong": [],
+      "c4/weak": [
+       6
+      ],
+      "c4/avg": [],
+      "c4/strong": []
+     },
+     "welfare_first": 2.798000001574034,
+     "profiles": [
+      [
+       3,
+       3,
+       1,
+       1,
+       0,
+       0
+      ]
+     ],
+     "br_dynamics": {
+      "n_converged": 8,
+      "n_distinct": 1
+     },
+     "bootstrap": {
+      "eps95": 0.0,
+      "frac_exact_bne": 1.0,
+      "R": 200
+     },
+     "replicator": [
+      {
+       "converged": true,
+       "exploitability": 4.339695269806043e-12,
+       "is_pure": true,
+       "iterations": 308,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 4.442279877281408e-12,
+       "is_pure": true,
+       "iterations": 296,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 4.476030657230012e-12,
+       "is_pure": true,
+       "iterations": 272,
+       "matches_bne": true
+      }
+     ]
+    },
+    {
+     "alpha": 0.225,
+     "n_bne": 1,
+     "n_eps_bne_1e-3": 1,
+     "min_exploitability_all": 0.0,
+     "sharing_rate_min": 0.3333333333333333,
+     "sharing_rate_max": 0.3333333333333333,
+     "sharing_rate_mean": 0.3333333333333333,
+     "cell_tells_first": [
+      2,
+      0,
+      0,
+      2,
+      0,
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+     ],
+     "cell_shares_all_bne": [
+      true,
+      false,
+      false,
+      true,
+      false,
+      false,
+      true,
+      false,
+      false,
+      true,
+      false,
+      false
+     ],
+     "cell_shares_some_bne": [
+      true,
+      false,
+      false,
+      true,
+      false,
+      false,
+      true,
+      false,
+      false,
+      true,
+      false,
+      false
+     ],
+     "first_bne": {
+      "c1/weak": [
+       3,
+       5
+      ],
+      "c1/avg": [],
+      "c1/strong": [],
+      "c2/weak": [
+       4,
+       6
+      ],
+      "c2/avg": [],
+      "c2/strong": [],
+      "c3/weak": [
+       5
+      ],
+      "c3/avg": [],
+      "c3/strong": [],
+      "c4/weak": [
+       6
+      ],
+      "c4/avg": [],
+      "c4/strong": []
+     },
+     "welfare_first": 2.898000001630249,
+     "profiles": [
+      [
+       3,
+       3,
+       1,
+       1,
+       0,
+       0
+      ]
+     ],
+     "br_dynamics": {
+      "n_converged": 8,
+      "n_distinct": 1
+     },
+     "bootstrap": {
+      "eps95": 0.0,
+      "frac_exact_bne": 1.0,
+      "R": 200
+     },
+     "replicator": [
+      {
+       "converged": true,
+       "exploitability": 4.171052392365482e-12,
+       "is_pure": true,
+       "iterations": 250,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 4.571065748137926e-12,
+       "is_pure": true,
+       "iterations": 262,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 4.308720047419001e-12,
+       "is_pure": true,
+       "iterations": 231,
+       "matches_bne": true
+      }
+     ]
+    },
+    {
+     "alpha": 0.25,
+     "n_bne": 1,
+     "n_eps_bne_1e-3": 1,
+     "min_exploitability_all": 0.0,
+     "sharing_rate_min": 0.3333333333333333,
+     "sharing_rate_max": 0.3333333333333333,
+     "sharing_rate_mean": 0.3333333333333333,
+     "cell_tells_first": [
+      2,
+      0,
+      0,
+      2,
+      0,
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+     ],
+     "cell_shares_all_bne": [
+      true,
+      false,
+      false,
+      true,
+      false,
+      false,
+      true,
+      false,
+      false,
+      true,
+      false,
+      false
+     ],
+     "cell_shares_some_bne": [
+      true,
+      false,
+      false,
+      true,
+      false,
+      false,
+      true,
+      false,
+      false,
+      true,
+      false,
+      false
+     ],
+     "first_bne": {
+      "c1/weak": [
+       3,
+       5
+      ],
+      "c1/avg": [],
+      "c1/strong": [],
+      "c2/weak": [
+       4,
+       6
+      ],
+      "c2/avg": [],
+      "c2/strong": [],
+      "c3/weak": [
+       5
+      ],
+      "c3/avg": [],
+      "c3/strong": [],
+      "c4/weak": [
+       6
+      ],
+      "c4/avg": [],
+      "c4/strong": []
+     },
+     "welfare_first": 2.9980000016864645,
+     "profiles": [
+      [
+       3,
+       3,
+       1,
+       1,
+       0,
+       0
+      ]
+     ],
+     "br_dynamics": {
+      "n_converged": 8,
+      "n_distinct": 1
+     },
+     "bootstrap": {
+      "eps95": 0.0,
+      "frac_exact_bne": 1.0,
+      "R": 200
+     },
+     "replicator": [
+      {
+       "converged": true,
+       "exploitability": 4.448219570463152e-12,
+       "is_pure": true,
+       "iterations": 334,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 4.393485575349132e-12,
+       "is_pure": true,
+       "iterations": 358,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 4.565237077258644e-12,
+       "is_pure": true,
+       "iterations": 314,
+       "matches_bne": true
+      }
+     ]
+    },
+    {
+     "alpha": 0.275,
+     "n_bne": 1,
+     "n_eps_bne_1e-3": 1,
+     "min_exploitability_all": 0.0,
+     "sharing_rate_min": 0.3333333333333333,
+     "sharing_rate_max": 0.3333333333333333,
+     "sharing_rate_mean": 0.3333333333333333,
+     "cell_tells_first": [
+      2,
+      0,
+      0,
+      2,
+      0,
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+     ],
+     "cell_shares_all_bne": [
+      true,
+      false,
+      false,
+      true,
+      false,
+      false,
+      true,
+      false,
+      false,
+      true,
+      false,
+      false
+     ],
+     "cell_shares_some_bne": [
+      true,
+      false,
+      false,
+      true,
+      false,
+      false,
+      true,
+      false,
+      false,
+      true,
+      false,
+      false
+     ],
+     "first_bne": {
+      "c1/weak": [
+       3,
+       5
+      ],
+      "c1/avg": [],
+      "c1/strong": [],
+      "c2/weak": [
+       4,
+       6
+      ],
+      "c2/avg": [],
+      "c2/strong": [],
+      "c3/weak": [
+       5
+      ],
+      "c3/avg": [],
+      "c3/strong": [],
+      "c4/weak": [
+       6
+      ],
+      "c4/avg": [],
+      "c4/strong": []
+     },
+     "welfare_first": 3.09800000174268,
+     "profiles": [
+      [
+       3,
+       3,
+       1,
+       1,
+       0,
+       0
+      ]
+     ],
+     "br_dynamics": {
+      "n_converged": 8,
+      "n_distinct": 1
+     },
+     "bootstrap": {
+      "eps95": 0.0,
+      "frac_exact_bne": 1.0,
+      "R": 200
+     },
+     "replicator": [
+      {
+       "converged": true,
+       "exploitability": 4.6614379023424135e-12,
+       "is_pure": true,
+       "iterations": 520,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 4.625577698647021e-12,
+       "is_pure": true,
+       "iterations": 560,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 4.6506687390035495e-12,
+       "is_pure": true,
+       "iterations": 491,
+       "matches_bne": true
+      }
+     ]
+    },
+    {
+     "alpha": 0.3,
+     "n_bne": 1,
+     "n_eps_bne_1e-3": 17,
+     "min_exploitability_all": 0.0,
+     "sharing_rate_min": 0.3333333333333333,
+     "sharing_rate_max": 0.3333333333333333,
+     "sharing_rate_mean": 0.3333333333333333,
+     "cell_tells_first": [
+      2,
+      0,
+      0,
+      2,
+      0,
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+     ],
+     "cell_shares_all_bne": [
+      true,
+      false,
+      false,
+      true,
+      false,
+      false,
+      true,
+      false,
+      false,
+      true,
+      false,
+      false
+     ],
+     "cell_shares_some_bne": [
+      true,
+      false,
+      false,
+      true,
+      false,
+      false,
+      true,
+      false,
+      false,
+      true,
+      false,
+      false
+     ],
+     "first_bne": {
+      "c1/weak": [
+       3,
+       5
+      ],
+      "c1/avg": [],
+      "c1/strong": [],
+      "c2/weak": [
+       4,
+       6
+      ],
+      "c2/avg": [],
+      "c2/strong": [],
+      "c3/weak": [
+       5
+      ],
+      "c3/avg": [],
+      "c3/strong": [],
+      "c4/weak": [
+       6
+      ],
+      "c4/avg": [],
+      "c4/strong": []
+     },
+     "welfare_first": 3.198000001798895,
+     "profiles": [
+      [
+       3,
+       3,
+       1,
+       1,
+       0,
+       0
+      ]
+     ],
+     "br_dynamics": {
+      "n_converged": 8,
+      "n_distinct": 1
+     },
+     "bootstrap": {
+      "eps95": 0.0,
+      "frac_exact_bne": 1.0,
+      "R": 200
+     },
+     "replicator": [
+      {
+       "converged": true,
+       "exploitability": 4.878208947900475e-12,
+       "is_pure": true,
+       "iterations": 1208,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 4.833966560369163e-12,
+       "is_pure": true,
+       "iterations": 1319,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 4.8440140787420205e-12,
+       "is_pure": true,
+       "iterations": 1145,
+       "matches_bne": true
+      }
+     ]
+    },
+    {
+     "alpha": 0.325,
+     "n_bne": 1,
+     "n_eps_bne_1e-3": 40,
+     "min_exploitability_all": 0.0,
+     "sharing_rate_min": 0.5555555555555556,
+     "sharing_rate_max": 0.5555555555555556,
+     "sharing_rate_mean": 0.5555555555555556,
+     "cell_tells_first": [
+      2,
+      2,
+      0,
+      2,
+      2,
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+     ],
+     "cell_shares_all_bne": [
+      true,
+      true,
+      false,
+      true,
+      true,
+      false,
+      true,
+      false,
+      false,
+      true,
+      false,
+      false
+     ],
+     "cell_shares_some_bne": [
+      true,
+      true,
+      false,
+      true,
+      true,
+      false,
+      true,
+      false,
+      false,
+      true,
+      false,
+      false
+     ],
+     "first_bne": {
+      "c1/weak": [
+       3,
+       5
+      ],
+      "c1/avg": [
+       3,
+       5
+      ],
+      "c1/strong": [],
+      "c2/weak": [
+       4,
+       6
+      ],
+      "c2/avg": [
+       4,
+       6
+      ],
+      "c2/strong": [],
+      "c3/weak": [
+       5
+      ],
+      "c3/avg": [],
+      "c3/strong": [],
+      "c4/weak": [
+       6
+      ],
+      "c4/avg": [],
+      "c4/strong": []
+     },
+     "welfare_first": 3.2966666665332056,
+     "profiles": [
+      [
+       15,
+       15,
+       1,
+       1,
+       0,
+       0
+      ]
+     ],
+     "br_dynamics": {
+      "n_converged": 8,
+      "n_distinct": 1
+     },
+     "bootstrap": {
+      "eps95": 9.379007108014037e-05,
+      "frac_exact_bne": 0.805,
+      "R": 200
+     },
+     "replicator": [
+      {
+       "converged": false,
+       "exploitability": 1.1000434674279802e-07,
+       "is_pure": true,
+       "iterations": 3000,
+       "matches_bne": true
+      },
+      {
+       "converged": false,
+       "exploitability": 2.801769372062779e-09,
+       "is_pure": true,
+       "iterations": 3000,
+       "matches_bne": true
+      },
+      {
+       "converged": false,
+       "exploitability": 2.199981469219736e-08,
+       "is_pure": true,
+       "iterations": 3000,
+       "matches_bne": true
+      }
+     ]
+    },
+    {
+     "alpha": 0.35,
+     "n_bne": 1,
+     "n_eps_bne_1e-3": 4,
+     "min_exploitability_all": 0.0,
+     "sharing_rate_min": 0.6666666666666666,
+     "sharing_rate_max": 0.6666666666666666,
+     "sharing_rate_mean": 0.6666666666666666,
+     "cell_tells_first": [
+      2,
+      2,
+      0,
+      2,
+      2,
+      0,
+      1,
+      1,
+      0,
+      1,
+      1,
+      0
+     ],
+     "cell_shares_all_bne": [
+      true,
+      true,
+      false,
+      true,
+      true,
+      false,
+      true,
+      true,
+      false,
+      true,
+      true,
+      false
+     ],
+     "cell_shares_some_bne": [
+      true,
+      true,
+      false,
+      true,
+      true,
+      false,
+      true,
+      true,
+      false,
+      true,
+      true,
+      false
+     ],
+     "first_bne": {
+      "c1/weak": [
+       3,
+       5
+      ],
+      "c1/avg": [
+       3,
+       5
+      ],
+      "c1/strong": [],
+      "c2/weak": [
+       4,
+       6
+      ],
+      "c2/avg": [
+       4,
+       6
+      ],
+      "c2/strong": [],
+      "c3/weak": [
+       5
+      ],
+      "c3/avg": [
+       5
+      ],
+      "c3/strong": [],
+      "c4/weak": [
+       6
+      ],
+      "c4/avg": [
+       6
+      ],
+      "c4/strong": []
+     },
+     "welfare_first": 3.396000001288287,
+     "profiles": [
+      [
+       15,
+       15,
+       3,
+       3,
+       0,
+       0
+      ]
+     ],
+     "br_dynamics": {
+      "n_converged": 8,
+      "n_distinct": 1
+     },
+     "bootstrap": {
+      "eps95": 0.0,
+      "frac_exact_bne": 1.0,
+      "R": 200
+     },
+     "replicator": [
+      {
+       "converged": true,
+       "exploitability": 4.848010881630671e-12,
+       "is_pure": true,
+       "iterations": 1040,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 4.899747274578203e-12,
+       "is_pure": true,
+       "iterations": 1146,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 4.860889468716323e-12,
+       "is_pure": true,
+       "iterations": 1105,
+       "matches_bne": true
+      }
+     ]
+    },
+    {
+     "alpha": 0.375,
+     "n_bne": 1,
+     "n_eps_bne_1e-3": 33,
+     "min_exploitability_all": 0.0,
+     "sharing_rate_min": 0.6666666666666666,
+     "sharing_rate_max": 0.6666666666666666,
+     "sharing_rate_mean": 0.6666666666666666,
+     "cell_tells_first": [
+      2,
+      2,
+      0,
+      2,
+      2,
+      0,
+      1,
+      1,
+      0,
+      1,
+      1,
+      0
+     ],
+     "cell_shares_all_bne": [
+      true,
+      true,
+      false,
+      true,
+      true,
+      false,
+      true,
+      true,
+      false,
+      true,
+      true,
+      false
+     ],
+     "cell_shares_some_bne": [
+      true,
+      true,
+      false,
+      true,
+      true,
+      false,
+      true,
+      true,
+      false,
+      true,
+      true,
+      false
+     ],
+     "first_bne": {
+      "c1/weak": [
+       3,
+       5
+      ],
+      "c1/avg": [
+       3,
+       5
+      ],
+      "c1/strong": [],
+      "c2/weak": [
+       4,
+       6
+      ],
+      "c2/avg": [
+       4,
+       6
+      ],
+      "c2/strong": [],
+      "c3/weak": [
+       5
+      ],
+      "c3/avg": [
+       5
+      ],
+      "c3/strong": [],
+      "c4/weak": [
+       6
+      ],
+      "c4/avg": [
+       6
+      ],
+      "c4/strong": []
+     },
+     "welfare_first": 3.4960000013261783,
+     "profiles": [
+      [
+       15,
+       15,
+       3,
+       3,
+       0,
+       0
+      ]
+     ],
+     "br_dynamics": {
+      "n_converged": 8,
+      "n_distinct": 1
+     },
+     "bootstrap": {
+      "eps95": 0.0,
+      "frac_exact_bne": 0.98,
+      "R": 200
+     },
+     "replicator": [
+      {
+       "converged": false,
+       "exploitability": 1.212191458321854e-09,
+       "is_pure": true,
+       "iterations": 3000,
+       "matches_bne": true
+      },
+      {
+       "converged": false,
+       "exploitability": 4.0699138836863824e-08,
+       "is_pure": true,
+       "iterations": 3000,
+       "matches_bne": true
+      },
+      {
+       "converged": false,
+       "exploitability": 5.307683181854372e-10,
+       "is_pure": true,
+       "iterations": 3000,
+       "matches_bne": true
+      }
+     ]
+    },
+    {
+     "alpha": 0.4,
+     "n_bne": 1,
+     "n_eps_bne_1e-3": 64,
+     "min_exploitability_all": 0.0,
+     "sharing_rate_min": 0.8888888888888887,
+     "sharing_rate_max": 0.8888888888888887,
+     "sharing_rate_mean": 0.8888888888888887,
+     "cell_tells_first": [
+      2,
+      2,
+      1,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "cell_shares_all_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "cell_shares_some_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "first_bne": {
+      "c1/weak": [
+       3,
+       5
+      ],
+      "c1/avg": [
+       3,
+       5
+      ],
+      "c1/strong": [
+       5
+      ],
+      "c2/weak": [
+       4,
+       6
+      ],
+      "c2/avg": [
+       4,
+       6
+      ],
+      "c2/strong": [
+       6
+      ],
+      "c3/weak": [
+       5
+      ],
+      "c3/avg": [
+       5
+      ],
+      "c3/strong": [
+       5
+      ],
+      "c4/weak": [
+       6
+      ],
+      "c4/avg": [
+       6
+      ],
+      "c4/strong": [
+       6
+      ]
+     },
+     "welfare_first": 3.5946666627278,
+     "profiles": [
+      [
+       47,
+       47,
+       7,
+       7,
+       0,
+       0
+      ]
+     ],
+     "br_dynamics": {
+      "n_converged": 8,
+      "n_distinct": 1
+     },
+     "bootstrap": {
+      "eps95": 0.0002539271657343743,
+      "frac_exact_bne": 0.365,
+      "R": 200
+     },
+     "replicator": [
+      {
+       "converged": false,
+       "exploitability": 1.918610334938897e-06,
+       "is_pure": false,
+       "iterations": 3000,
+       "matches_bne": false
+      },
+      {
+       "converged": false,
+       "exploitability": 1.6653016494672102e-06,
+       "is_pure": false,
+       "iterations": 3000,
+       "matches_bne": false
+      },
+      {
+       "converged": false,
+       "exploitability": 1.8791889039304621e-06,
+       "is_pure": false,
+       "iterations": 3000,
+       "matches_bne": false
+      }
+     ]
+    },
+    {
+     "alpha": 0.425,
+     "n_bne": 1,
+     "n_eps_bne_1e-3": 2,
+     "min_exploitability_all": 0.0,
+     "sharing_rate_min": 0.9999999999999997,
+     "sharing_rate_max": 0.9999999999999997,
+     "sharing_rate_mean": 0.9999999999999997,
+     "cell_tells_first": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "cell_shares_all_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "cell_shares_some_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "first_bne": {
+      "c1/weak": [
+       3,
+       5
+      ],
+      "c1/avg": [
+       3,
+       5
+      ],
+      "c1/strong": [
+       3,
+       5
+      ],
+      "c2/weak": [
+       4,
+       6
+      ],
+      "c2/avg": [
+       4,
+       6
+      ],
+      "c2/strong": [
+       4,
+       6
+      ],
+      "c3/weak": [
+       5
+      ],
+      "c3/avg": [
+       5
+      ],
+      "c3/strong": [
+       5
+      ],
+      "c4/weak": [
+       6
+      ],
+      "c4/avg": [
+       6
+      ],
+      "c4/strong": [
+       6
+      ]
+     },
+     "welfare_first": 3.6939999985797156,
+     "profiles": [
+      [
+       63,
+       63,
+       7,
+       7,
+       0,
+       0
+      ]
+     ],
+     "br_dynamics": {
+      "n_converged": 8,
+      "n_distinct": 1
+     },
+     "bootstrap": {
+      "eps95": 0.0,
+      "frac_exact_bne": 1.0,
+      "R": 200
+     },
+     "replicator": [
+      {
+       "converged": true,
+       "exploitability": 4.83957318664352e-12,
+       "is_pure": true,
+       "iterations": 1414,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 4.829026067909581e-12,
+       "is_pure": true,
+       "iterations": 1061,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 4.889200155844264e-12,
+       "is_pure": true,
+       "iterations": 1086,
+       "matches_bne": true
+      }
+     ]
+    },
+    {
+     "alpha": 0.45,
+     "n_bne": 1,
+     "n_eps_bne_1e-3": 1,
+     "min_exploitability_all": 0.0,
+     "sharing_rate_min": 0.9999999999999997,
+     "sharing_rate_max": 0.9999999999999997,
+     "sharing_rate_mean": 0.9999999999999997,
+     "cell_tells_first": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "cell_shares_all_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "cell_shares_some_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "first_bne": {
+      "c1/weak": [
+       3,
+       5
+      ],
+      "c1/avg": [
+       3,
+       5
+      ],
+      "c1/strong": [
+       3,
+       5
+      ],
+      "c2/weak": [
+       4,
+       6
+      ],
+      "c2/avg": [
+       4,
+       6
+      ],
+      "c2/strong": [
+       4,
+       6
+      ],
+      "c3/weak": [
+       5
+      ],
+      "c3/avg": [
+       5
+      ],
+      "c3/strong": [
+       5
+      ],
+      "c4/weak": [
+       6
+      ],
+      "c4/avg": [
+       6
+      ],
+      "c4/strong": [
+       6
+      ]
+     },
+     "welfare_first": 3.7939999985413295,
+     "profiles": [
+      [
+       63,
+       63,
+       7,
+       7,
+       0,
+       0
+      ]
+     ],
+     "br_dynamics": {
+      "n_converged": 8,
+      "n_distinct": 1
+     },
+     "bootstrap": {
+      "eps95": 0.0,
+      "frac_exact_bne": 1.0,
+      "R": 200
+     },
+     "replicator": [
+      {
+       "converged": true,
+       "exploitability": 4.660605235073945e-12,
+       "is_pure": true,
+       "iterations": 705,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 4.665490216382295e-12,
+       "is_pure": true,
+       "iterations": 533,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 4.653832874623731e-12,
+       "is_pure": true,
+       "iterations": 539,
+       "matches_bne": true
+      }
+     ]
+    },
+    {
+     "alpha": 0.475,
+     "n_bne": 1,
+     "n_eps_bne_1e-3": 1,
+     "min_exploitability_all": 0.0,
+     "sharing_rate_min": 0.9999999999999997,
+     "sharing_rate_max": 0.9999999999999997,
+     "sharing_rate_mean": 0.9999999999999997,
+     "cell_tells_first": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "cell_shares_all_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "cell_shares_some_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "first_bne": {
+      "c1/weak": [
+       3,
+       5
+      ],
+      "c1/avg": [
+       3,
+       5
+      ],
+      "c1/strong": [
+       3,
+       5
+      ],
+      "c2/weak": [
+       4,
+       6
+      ],
+      "c2/avg": [
+       4,
+       6
+      ],
+      "c2/strong": [
+       4,
+       6
+      ],
+      "c3/weak": [
+       5
+      ],
+      "c3/avg": [
+       5
+      ],
+      "c3/strong": [
+       5
+      ],
+      "c4/weak": [
+       6
+      ],
+      "c4/avg": [
+       6
+      ],
+      "c4/strong": [
+       6
+      ]
+     },
+     "welfare_first": 3.8939999985029434,
+     "profiles": [
+      [
+       63,
+       63,
+       7,
+       7,
+       0,
+       0
+      ]
+     ],
+     "br_dynamics": {
+      "n_converged": 8,
+      "n_distinct": 1
+     },
+     "bootstrap": {
+      "eps95": 0.0,
+      "frac_exact_bne": 1.0,
+      "R": 200
+     },
+     "replicator": [
+      {
+       "converged": true,
+       "exploitability": 4.635070105507566e-12,
+       "is_pure": true,
+       "iterations": 482,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 4.5916603852447224e-12,
+       "is_pure": true,
+       "iterations": 362,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 4.569122857844832e-12,
+       "is_pure": true,
+       "iterations": 362,
+       "matches_bne": true
+      }
+     ]
+    },
+    {
+     "alpha": 0.5,
+     "n_bne": 1,
+     "n_eps_bne_1e-3": 1,
+     "min_exploitability_all": 0.0,
+     "sharing_rate_min": 0.9999999999999997,
+     "sharing_rate_max": 0.9999999999999997,
+     "sharing_rate_mean": 0.9999999999999997,
+     "cell_tells_first": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "cell_shares_all_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "cell_shares_some_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "first_bne": {
+      "c1/weak": [
+       3,
+       5
+      ],
+      "c1/avg": [
+       3,
+       5
+      ],
+      "c1/strong": [
+       3,
+       5
+      ],
+      "c2/weak": [
+       4,
+       6
+      ],
+      "c2/avg": [
+       4,
+       6
+      ],
+      "c2/strong": [
+       4,
+       6
+      ],
+      "c3/weak": [
+       5
+      ],
+      "c3/avg": [
+       5
+      ],
+      "c3/strong": [
+       5
+      ],
+      "c4/weak": [
+       6
+      ],
+      "c4/avg": [
+       6
+      ],
+      "c4/strong": [
+       6
+      ]
+     },
+     "welfare_first": 3.9939999984645573,
+     "profiles": [
+      [
+       63,
+       63,
+       7,
+       7,
+       0,
+       0
+      ]
+     ],
+     "br_dynamics": {
+      "n_converged": 8,
+      "n_distinct": 1
+     },
+     "bootstrap": {
+      "eps95": 0.0,
+      "frac_exact_bne": 1.0,
+      "R": 200
+     },
+     "replicator": [
+      {
+       "converged": true,
+       "exploitability": 4.441669254617864e-12,
+       "is_pure": true,
+       "iterations": 370,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 4.355849014814339e-12,
+       "is_pure": true,
+       "iterations": 276,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 4.394928865281145e-12,
+       "is_pure": true,
+       "iterations": 274,
+       "matches_bne": true
+      }
+     ]
+    }
+   ],
+   "loss_gain": {
+    "c1/weak": {
+     "ell": 0.007415637826890044,
+     "G": 0.09000206028720663,
+     "alpha_star_local": 0.09350494644272368
+    },
+    "c1/avg": {
+     "ell": 0.02960699591249105,
+     "G": 0.09637242589153563,
+     "alpha_star_local": 0.31759080078505375
+    },
+    "c1/strong": {
+     "ell": 0.031808640608571685,
+     "G": 0.0878168699665018,
+     "alpha_star_local": 0.373602937807812
+    },
+    "c2/weak": {
+     "ell": 0.007549382880121209,
+     "G": 0.08927777867070534,
+     "alpha_star_local": 0.09576159944183864
+    },
+    "c2/avg": {
+     "ell": 0.029382716450426314,
+     "G": 0.09587860153796374,
+     "alpha_star_local": 0.31688735508304305
+    },
+    "c2/strong": {
+     "ell": 0.0321481481746391,
+     "G": 0.0894588482948959,
+     "alpha_star_local": 0.3705407436653796
+    },
+    "c3/weak": {
+     "ell": 0.004104938073497679,
+     "G": 0.04572839287771755,
+     "alpha_star_local": 0.11163607011400578
+    },
+    "c3/avg": {
+     "ell": 0.014942387011622696,
+     "G": 0.04879218012040841,
+     "alpha_star_local": 0.3267406164733852
+    },
+    "c3/strong": {
+     "ell": 0.01602674928712256,
+     "G": 0.044748971231546204,
+     "alpha_star_local": 0.38049476487449163
+    },
+    "c4/weak": {
+     "ell": 0.003981481774551066,
+     "G": 0.04491769500391044,
+     "alpha_star_local": 0.11090243553497989
+    },
+    "c4/avg": {
+     "ell": 0.01517283962464627,
+     "G": 0.048967077086369194,
+     "alpha_star_local": 0.33027986530869025
+    },
+    "c4/strong": {
+     "ell": 0.016121399991306257,
+     "G": 0.04508436311955215,
+     "alpha_star_local": 0.3797635988758387
+    }
+   },
+   "alpha_star": {
+    "c1/weak": {
+     "alpha_star_all": 0.125,
+     "alpha_star_some": 0.125
+    },
+    "c1/avg": {
+     "alpha_star_all": 0.325,
+     "alpha_star_some": 0.325
+    },
+    "c1/strong": {
+     "alpha_star_all": 0.4,
+     "alpha_star_some": 0.4
+    },
+    "c2/weak": {
+     "alpha_star_all": 0.125,
+     "alpha_star_some": 0.125
+    },
+    "c2/avg": {
+     "alpha_star_all": 0.325,
+     "alpha_star_some": 0.325
+    },
+    "c2/strong": {
+     "alpha_star_all": 0.4,
+     "alpha_star_some": 0.4
+    },
+    "c3/weak": {
+     "alpha_star_all": 0.125,
+     "alpha_star_some": 0.125
+    },
+    "c3/avg": {
+     "alpha_star_all": 0.35,
+     "alpha_star_some": 0.35
+    },
+    "c3/strong": {
+     "alpha_star_all": 0.4,
+     "alpha_star_some": 0.4
+    },
+    "c4/weak": {
+     "alpha_star_all": 0.125,
+     "alpha_star_some": 0.125
+    },
+    "c4/avg": {
+     "alpha_star_all": 0.35,
+     "alpha_star_some": 0.35
+    },
+    "c4/strong": {
+     "alpha_star_all": 0.4,
+     "alpha_star_some": 0.4
+    }
+   }
+  },
+  "BAR": {
+   "rule": "BAR",
+   "network": "two_groups",
+   "env": "E2",
+   "cells": [
+    "c1/weak",
+    "c1/avg",
+    "c1/strong",
+    "c2/weak",
+    "c2/avg",
+    "c2/strong",
+    "c3/weak",
+    "c3/avg",
+    "c3/strong",
+    "c4/weak",
+    "c4/avg",
+    "c4/strong"
+   ],
+   "records": [
+    {
+     "alpha": 0.0,
+     "n_bne": 1,
+     "n_eps_bne_1e-3": 1156,
+     "min_exploitability_all": 0.0,
+     "sharing_rate_min": 0.0,
+     "sharing_rate_max": 0.0,
+     "sharing_rate_mean": 0.0,
+     "cell_tells_first": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "cell_shares_all_bne": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     "cell_shares_some_bne": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     "first_bne": {
+      "c1/weak": [],
+      "c1/avg": [],
+      "c1/strong": [],
+      "c2/weak": [],
+      "c2/avg": [],
+      "c2/strong": [],
+      "c3/weak": [],
+      "c3/avg": [],
+      "c3/strong": [],
+      "c4/weak": [],
+      "c4/avg": [],
+      "c4/strong": []
+     },
+     "welfare_first": 2.000973935763445,
+     "profiles": [
+      [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ]
+     ],
+     "br_dynamics": {
+      "n_converged": 8,
+      "n_distinct": 1
+     },
+     "bootstrap": {
+      "eps95": 0.0,
+      "frac_exact_bne": 1.0,
+      "R": 200
+     },
+     "replicator": [
+      {
+       "converged": true,
+       "exploitability": 4.8870907320974766e-12,
+       "is_pure": true,
+       "iterations": 1122,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 4.866884673049299e-12,
+       "is_pure": true,
+       "iterations": 1155,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 4.806710585114615e-12,
+       "is_pure": true,
+       "iterations": 1117,
+       "matches_bne": true
+      }
+     ]
+    },
+    {
+     "alpha": 0.025,
+     "n_bne": 1,
+     "n_eps_bne_1e-3": 50625,
+     "min_exploitability_all": 0.0,
+     "sharing_rate_min": 0.9999999999999997,
+     "sharing_rate_max": 0.9999999999999997,
+     "sharing_rate_mean": 0.9999999999999997,
+     "cell_tells_first": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "cell_shares_all_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "cell_shares_some_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "first_bne": {
+      "c1/weak": [
+       3,
+       5
+      ],
+      "c1/avg": [
+       3,
+       5
+      ],
+      "c1/strong": [
+       3,
+       5
+      ],
+      "c2/weak": [
+       4,
+       6
+      ],
+      "c2/avg": [
+       4,
+       6
+      ],
+      "c2/strong": [
+       4,
+       6
+      ],
+      "c3/weak": [
+       5
+      ],
+      "c3/avg": [
+       5
+      ],
+      "c3/strong": [
+       5
+      ],
+      "c4/weak": [
+       6
+      ],
+      "c4/avg": [
+       6
+      ],
+      "c4/strong": [
+       6
+      ]
+     },
+     "welfare_first": 2.4873171786662964,
+     "profiles": [
+      [
+       63,
+       63,
+       7,
+       7,
+       0,
+       0
+      ]
+     ],
+     "br_dynamics": {
+      "n_converged": 8,
+      "n_distinct": 1
+     },
+     "bootstrap": {
+      "eps95": 0.0,
+      "frac_exact_bne": 1.0,
+      "R": 200
+     },
+     "replicator": [
+      {
+       "converged": false,
+       "exploitability": 9.043397142249887e-10,
+       "is_pure": true,
+       "iterations": 3000,
+       "matches_bne": true
+      },
+      {
+       "converged": false,
+       "exploitability": 7.460032591666277e-12,
+       "is_pure": true,
+       "iterations": 3000,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 4.935801767302905e-12,
+       "is_pure": true,
+       "iterations": 2854,
+       "matches_bne": true
+      }
+     ]
+    },
+    {
+     "alpha": 0.05,
+     "n_bne": 1,
+     "n_eps_bne_1e-3": 1,
+     "min_exploitability_all": 0.0,
+     "sharing_rate_min": 0.9999999999999997,
+     "sharing_rate_max": 0.9999999999999997,
+     "sharing_rate_mean": 0.9999999999999997,
+     "cell_tells_first": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "cell_shares_all_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "cell_shares_some_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "first_bne": {
+      "c1/weak": [
+       3,
+       5
+      ],
+      "c1/avg": [
+       3,
+       5
+      ],
+      "c1/strong": [
+       3,
+       5
+      ],
+      "c2/weak": [
+       4,
+       6
+      ],
+      "c2/avg": [
+       4,
+       6
+      ],
+      "c2/strong": [
+       4,
+       6
+      ],
+      "c3/weak": [
+       5
+      ],
+      "c3/avg": [
+       5
+      ],
+      "c3/strong": [
+       5
+      ],
+      "c4/weak": [
+       6
+      ],
+      "c4/avg": [
+       6
+      ],
+      "c4/strong": [
+       6
+      ]
+     },
+     "welfare_first": 2.606046568126596,
+     "profiles": [
+      [
+       63,
+       63,
+       7,
+       7,
+       0,
+       0
+      ]
+     ],
+     "br_dynamics": {
+      "n_converged": 8,
+      "n_distinct": 1
+     },
+     "bootstrap": {
+      "eps95": 0.0,
+      "frac_exact_bne": 1.0,
+      "R": 200
+     },
+     "replicator": [
+      {
+       "converged": true,
+       "exploitability": 4.827027666465256e-12,
+       "is_pure": true,
+       "iterations": 818,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 4.71422900716334e-12,
+       "is_pure": true,
+       "iterations": 673,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 4.7204462561012406e-12,
+       "is_pure": true,
+       "iterations": 644,
+       "matches_bne": true
+      }
+     ]
+    },
+    {
+     "alpha": 0.075,
+     "n_bne": 1,
+     "n_eps_bne_1e-3": 1,
+     "min_exploitability_all": 0.0,
+     "sharing_rate_min": 0.9999999999999997,
+     "sharing_rate_max": 0.9999999999999997,
+     "sharing_rate_mean": 0.9999999999999997,
+     "cell_tells_first": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "cell_shares_all_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "cell_shares_some_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "first_bne": {
+      "c1/weak": [
+       3,
+       5
+      ],
+      "c1/avg": [
+       3,
+       5
+      ],
+      "c1/strong": [
+       3,
+       5
+      ],
+      "c2/weak": [
+       4,
+       6
+      ],
+      "c2/avg": [
+       4,
+       6
+      ],
+      "c2/strong": [
+       4,
+       6
+      ],
+      "c3/weak": [
+       5
+      ],
+      "c3/avg": [
+       5
+      ],
+      "c3/strong": [
+       5
+      ],
+      "c4/weak": [
+       6
+      ],
+      "c4/avg": [
+       6
+      ],
+      "c4/strong": [
+       6
+      ]
+     },
+     "welfare_first": 2.724775957586896,
+     "profiles": [
+      [
+       63,
+       63,
+       7,
+       7,
+       0,
+       0
+      ]
+     ],
+     "br_dynamics": {
+      "n_converged": 8,
+      "n_distinct": 1
+     },
+     "bootstrap": {
+      "eps95": 0.0,
+      "frac_exact_bne": 1.0,
+      "R": 200
+     },
+     "replicator": [
+      {
+       "converged": true,
+       "exploitability": 4.629741034989365e-12,
+       "is_pure": true,
+       "iterations": 464,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 4.442224366130176e-12,
+       "is_pure": true,
+       "iterations": 382,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 4.660050123561632e-12,
+       "is_pure": true,
+       "iterations": 366,
+       "matches_bne": true
+      }
+     ]
+    },
+    {
+     "alpha": 0.1,
+     "n_bne": 1,
+     "n_eps_bne_1e-3": 1,
+     "min_exploitability_all": 0.0,
+     "sharing_rate_min": 0.9999999999999997,
+     "sharing_rate_max": 0.9999999999999997,
+     "sharing_rate_mean": 0.9999999999999997,
+     "cell_tells_first": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "cell_shares_all_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "cell_shares_some_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "first_bne": {
+      "c1/weak": [
+       3,
+       5
+      ],
+      "c1/avg": [
+       3,
+       5
+      ],
+      "c1/strong": [
+       3,
+       5
+      ],
+      "c2/weak": [
+       4,
+       6
+      ],
+      "c2/avg": [
+       4,
+       6
+      ],
+      "c2/strong": [
+       4,
+       6
+      ],
+      "c3/weak": [
+       5
+      ],
+      "c3/avg": [
+       5
+      ],
+      "c3/strong": [
+       5
+      ],
+      "c4/weak": [
+       6
+      ],
+      "c4/avg": [
+       6
+      ],
+      "c4/strong": [
+       6
+      ]
+     },
+     "welfare_first": 2.8435053470471967,
+     "profiles": [
+      [
+       63,
+       63,
+       7,
+       7,
+       0,
+       0
+      ]
+     ],
+     "br_dynamics": {
+      "n_converged": 8,
+      "n_distinct": 1
+     },
+     "bootstrap": {
+      "eps95": 0.0,
+      "frac_exact_bne": 1.0,
+      "R": 200
+     },
+     "replicator": [
+      {
+       "converged": true,
+       "exploitability": 4.243716489327198e-12,
+       "is_pure": true,
+       "iterations": 325,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 4.533484698754364e-12,
+       "is_pure": true,
+       "iterations": 266,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 4.41280345597761e-12,
+       "is_pure": true,
+       "iterations": 256,
+       "matches_bne": true
+      }
+     ]
+    },
+    {
+     "alpha": 0.125,
+     "n_bne": 1,
+     "n_eps_bne_1e-3": 1,
+     "min_exploitability_all": 0.0,
+     "sharing_rate_min": 0.9999999999999997,
+     "sharing_rate_max": 0.9999999999999997,
+     "sharing_rate_mean": 0.9999999999999997,
+     "cell_tells_first": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "cell_shares_all_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "cell_shares_some_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "first_bne": {
+      "c1/weak": [
+       3,
+       5
+      ],
+      "c1/avg": [
+       3,
+       5
+      ],
+      "c1/strong": [
+       3,
+       5
+      ],
+      "c2/weak": [
+       4,
+       6
+      ],
+      "c2/avg": [
+       4,
+       6
+      ],
+      "c2/strong": [
+       4,
+       6
+      ],
+      "c3/weak": [
+       5
+      ],
+      "c3/avg": [
+       5
+      ],
+      "c3/strong": [
+       5
+      ],
+      "c4/weak": [
+       6
+      ],
+      "c4/avg": [
+       6
+      ],
+      "c4/strong": [
+       6
+      ]
+     },
+     "welfare_first": 2.9622347365074964,
+     "profiles": [
+      [
+       63,
+       63,
+       7,
+       7,
+       0,
+       0
+      ]
+     ],
+     "br_dynamics": {
+      "n_converged": 8,
+      "n_distinct": 1
+     },
+     "bootstrap": {
+      "eps95": 0.0,
+      "frac_exact_bne": 1.0,
+      "R": 200
+     },
+     "replicator": [
+      {
+       "converged": true,
+       "exploitability": 4.027667088735143e-12,
+       "is_pure": true,
+       "iterations": 250,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 4.368505557295066e-12,
+       "is_pure": true,
+       "iterations": 204,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 3.985034524589537e-12,
+       "is_pure": true,
+       "iterations": 197,
+       "matches_bne": true
+      }
+     ]
+    },
+    {
+     "alpha": 0.15,
+     "n_bne": 1,
+     "n_eps_bne_1e-3": 1,
+     "min_exploitability_all": 0.0,
+     "sharing_rate_min": 0.9999999999999997,
+     "sharing_rate_max": 0.9999999999999997,
+     "sharing_rate_mean": 0.9999999999999997,
+     "cell_tells_first": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "cell_shares_all_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "cell_shares_some_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "first_bne": {
+      "c1/weak": [
+       3,
+       5
+      ],
+      "c1/avg": [
+       3,
+       5
+      ],
+      "c1/strong": [
+       3,
+       5
+      ],
+      "c2/weak": [
+       4,
+       6
+      ],
+      "c2/avg": [
+       4,
+       6
+      ],
+      "c2/strong": [
+       4,
+       6
+      ],
+      "c3/weak": [
+       5
+      ],
+      "c3/avg": [
+       5
+      ],
+      "c3/strong": [
+       5
+      ],
+      "c4/weak": [
+       6
+      ],
+      "c4/avg": [
+       6
+      ],
+      "c4/strong": [
+       6
+      ]
+     },
+     "welfare_first": 3.080964125967796,
+     "profiles": [
+      [
+       63,
+       63,
+       7,
+       7,
+       0,
+       0
+      ]
+     ],
+     "br_dynamics": {
+      "n_converged": 8,
+      "n_distinct": 1
+     },
+     "bootstrap": {
+      "eps95": 0.0,
+      "frac_exact_bne": 1.0,
+      "R": 200
+     },
+     "replicator": [
+      {
+       "converged": true,
+       "exploitability": 3.8514746947271306e-12,
+       "is_pure": true,
+       "iterations": 203,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 4.286127008867879e-12,
+       "is_pure": true,
+       "iterations": 165,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 4.1537329131813294e-12,
+       "is_pure": true,
+       "iterations": 159,
+       "matches_bne": true
+      }
+     ]
+    },
+    {
+     "alpha": 0.175,
+     "n_bne": 1,
+     "n_eps_bne_1e-3": 1,
+     "min_exploitability_all": 0.0,
+     "sharing_rate_min": 0.9999999999999997,
+     "sharing_rate_max": 0.9999999999999997,
+     "sharing_rate_mean": 0.9999999999999997,
+     "cell_tells_first": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "cell_shares_all_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "cell_shares_some_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "first_bne": {
+      "c1/weak": [
+       3,
+       5
+      ],
+      "c1/avg": [
+       3,
+       5
+      ],
+      "c1/strong": [
+       3,
+       5
+      ],
+      "c2/weak": [
+       4,
+       6
+      ],
+      "c2/avg": [
+       4,
+       6
+      ],
+      "c2/strong": [
+       4,
+       6
+      ],
+      "c3/weak": [
+       5
+      ],
+      "c3/avg": [
+       5
+      ],
+      "c3/strong": [
+       5
+      ],
+      "c4/weak": [
+       6
+      ],
+      "c4/avg": [
+       6
+      ],
+      "c4/strong": [
+       6
+      ]
+     },
+     "welfare_first": 3.199693515428096,
+     "profiles": [
+      [
+       63,
+       63,
+       7,
+       7,
+       0,
+       0
+      ]
+     ],
+     "br_dynamics": {
+      "n_converged": 8,
+      "n_distinct": 1
+     },
+     "bootstrap": {
+      "eps95": 0.0,
+      "frac_exact_bne": 1.0,
+      "R": 200
+     },
+     "replicator": [
+      {
+       "converged": true,
+       "exploitability": 3.517630631222346e-12,
+       "is_pure": true,
+       "iterations": 171,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 3.630207245919337e-12,
+       "is_pure": true,
+       "iterations": 139,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 3.5198510772715963e-12,
+       "is_pure": true,
+       "iterations": 134,
+       "matches_bne": true
+      }
+     ]
+    },
+    {
+     "alpha": 0.2,
+     "n_bne": 1,
+     "n_eps_bne_1e-3": 1,
+     "min_exploitability_all": 0.0,
+     "sharing_rate_min": 0.9999999999999997,
+     "sharing_rate_max": 0.9999999999999997,
+     "sharing_rate_mean": 0.9999999999999997,
+     "cell_tells_first": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "cell_shares_all_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "cell_shares_some_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "first_bne": {
+      "c1/weak": [
+       3,
+       5
+      ],
+      "c1/avg": [
+       3,
+       5
+      ],
+      "c1/strong": [
+       3,
+       5
+      ],
+      "c2/weak": [
+       4,
+       6
+      ],
+      "c2/avg": [
+       4,
+       6
+      ],
+      "c2/strong": [
+       4,
+       6
+      ],
+      "c3/weak": [
+       5
+      ],
+      "c3/avg": [
+       5
+      ],
+      "c3/strong": [
+       5
+      ],
+      "c4/weak": [
+       6
+      ],
+      "c4/avg": [
+       6
+      ],
+      "c4/strong": [
+       6
+      ]
+     },
+     "welfare_first": 3.3184229048883966,
+     "profiles": [
+      [
+       63,
+       63,
+       7,
+       7,
+       0,
+       0
+      ]
+     ],
+     "br_dynamics": {
+      "n_converged": 8,
+      "n_distinct": 1
+     },
+     "bootstrap": {
+      "eps95": 0.0,
+      "frac_exact_bne": 1.0,
+      "R": 200
+     },
+     "replicator": [
+      {
+       "converged": true,
+       "exploitability": 3.683275906496419e-12,
+       "is_pure": true,
+       "iterations": 147,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 3.801625680921461e-12,
+       "is_pure": true,
+       "iterations": 119,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 3.4701130857683893e-12,
+       "is_pure": true,
+       "iterations": 115,
+       "matches_bne": true
+      }
+     ]
+    },
+    {
+     "alpha": 0.225,
+     "n_bne": 1,
+     "n_eps_bne_1e-3": 1,
+     "min_exploitability_all": 0.0,
+     "sharing_rate_min": 0.9999999999999997,
+     "sharing_rate_max": 0.9999999999999997,
+     "sharing_rate_mean": 0.9999999999999997,
+     "cell_tells_first": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "cell_shares_all_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "cell_shares_some_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "first_bne": {
+      "c1/weak": [
+       3,
+       5
+      ],
+      "c1/avg": [
+       3,
+       5
+      ],
+      "c1/strong": [
+       3,
+       5
+      ],
+      "c2/weak": [
+       4,
+       6
+      ],
+      "c2/avg": [
+       4,
+       6
+      ],
+      "c2/strong": [
+       4,
+       6
+      ],
+      "c3/weak": [
+       5
+      ],
+      "c3/avg": [
+       5
+      ],
+      "c3/strong": [
+       5
+      ],
+      "c4/weak": [
+       6
+      ],
+      "c4/avg": [
+       6
+      ],
+      "c4/strong": [
+       6
+      ]
+     },
+     "welfare_first": 3.4371522943486963,
+     "profiles": [
+      [
+       63,
+       63,
+       7,
+       7,
+       0,
+       0
+      ]
+     ],
+     "br_dynamics": {
+      "n_converged": 8,
+      "n_distinct": 1
+     },
+     "bootstrap": {
+      "eps95": 0.0,
+      "frac_exact_bne": 1.0,
+      "R": 200
+     },
+     "replicator": [
+      {
+       "converged": true,
+       "exploitability": 3.5819125443481425e-12,
+       "is_pure": true,
+       "iterations": 129,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 3.7274627828765006e-12,
+       "is_pure": true,
+       "iterations": 104,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 3.862743458427076e-12,
+       "is_pure": true,
+       "iterations": 100,
+       "matches_bne": true
+      }
+     ]
+    },
+    {
+     "alpha": 0.25,
+     "n_bne": 1,
+     "n_eps_bne_1e-3": 1,
+     "min_exploitability_all": 0.0,
+     "sharing_rate_min": 0.9999999999999997,
+     "sharing_rate_max": 0.9999999999999997,
+     "sharing_rate_mean": 0.9999999999999997,
+     "cell_tells_first": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "cell_shares_all_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "cell_shares_some_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "first_bne": {
+      "c1/weak": [
+       3,
+       5
+      ],
+      "c1/avg": [
+       3,
+       5
+      ],
+      "c1/strong": [
+       3,
+       5
+      ],
+      "c2/weak": [
+       4,
+       6
+      ],
+      "c2/avg": [
+       4,
+       6
+      ],
+      "c2/strong": [
+       4,
+       6
+      ],
+      "c3/weak": [
+       5
+      ],
+      "c3/avg": [
+       5
+      ],
+      "c3/strong": [
+       5
+      ],
+      "c4/weak": [
+       6
+      ],
+      "c4/avg": [
+       6
+      ],
+      "c4/strong": [
+       6
+      ]
+     },
+     "welfare_first": 3.5558816838089955,
+     "profiles": [
+      [
+       63,
+       63,
+       7,
+       7,
+       0,
+       0
+      ]
+     ],
+     "br_dynamics": {
+      "n_converged": 8,
+      "n_distinct": 1
+     },
+     "bootstrap": {
+      "eps95": 0.0,
+      "frac_exact_bne": 1.0,
+      "R": 200
+     },
+     "replicator": [
+      {
+       "converged": true,
+       "exploitability": 3.2925884241308268e-12,
+       "is_pure": true,
+       "iterations": 115,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 2.871036741680655e-12,
+       "is_pure": true,
+       "iterations": 93,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 3.3894553830293717e-12,
+       "is_pure": true,
+       "iterations": 89,
+       "matches_bne": true
+      }
+     ]
+    },
+    {
+     "alpha": 0.275,
+     "n_bne": 1,
+     "n_eps_bne_1e-3": 1,
+     "min_exploitability_all": 0.0,
+     "sharing_rate_min": 0.9999999999999997,
+     "sharing_rate_max": 0.9999999999999997,
+     "sharing_rate_mean": 0.9999999999999997,
+     "cell_tells_first": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "cell_shares_all_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "cell_shares_some_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "first_bne": {
+      "c1/weak": [
+       3,
+       5
+      ],
+      "c1/avg": [
+       3,
+       5
+      ],
+      "c1/strong": [
+       3,
+       5
+      ],
+      "c2/weak": [
+       4,
+       6
+      ],
+      "c2/avg": [
+       4,
+       6
+      ],
+      "c2/strong": [
+       4,
+       6
+      ],
+      "c3/weak": [
+       5
+      ],
+      "c3/avg": [
+       5
+      ],
+      "c3/strong": [
+       5
+      ],
+      "c4/weak": [
+       6
+      ],
+      "c4/avg": [
+       6
+      ],
+      "c4/strong": [
+       6
+      ]
+     },
+     "welfare_first": 3.6746110732692965,
+     "profiles": [
+      [
+       63,
+       63,
+       7,
+       7,
+       0,
+       0
+      ]
+     ],
+     "br_dynamics": {
+      "n_converged": 8,
+      "n_distinct": 1
+     },
+     "bootstrap": {
+      "eps95": 0.0,
+      "frac_exact_bne": 1.0,
+      "R": 200
+     },
+     "replicator": [
+      {
+       "converged": true,
+       "exploitability": 2.7136071167888076e-12,
+       "is_pure": true,
+       "iterations": 104,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 3.107514245925813e-12,
+       "is_pure": true,
+       "iterations": 83,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 3.039679619121216e-12,
+       "is_pure": true,
+       "iterations": 80,
+       "matches_bne": true
+      }
+     ]
+    },
+    {
+     "alpha": 0.3,
+     "n_bne": 1,
+     "n_eps_bne_1e-3": 1,
+     "min_exploitability_all": 0.0,
+     "sharing_rate_min": 0.9999999999999997,
+     "sharing_rate_max": 0.9999999999999997,
+     "sharing_rate_mean": 0.9999999999999997,
+     "cell_tells_first": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "cell_shares_all_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "cell_shares_some_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "first_bne": {
+      "c1/weak": [
+       3,
+       5
+      ],
+      "c1/avg": [
+       3,
+       5
+      ],
+      "c1/strong": [
+       3,
+       5
+      ],
+      "c2/weak": [
+       4,
+       6
+      ],
+      "c2/avg": [
+       4,
+       6
+      ],
+      "c2/strong": [
+       4,
+       6
+      ],
+      "c3/weak": [
+       5
+      ],
+      "c3/avg": [
+       5
+      ],
+      "c3/strong": [
+       5
+      ],
+      "c4/weak": [
+       6
+      ],
+      "c4/avg": [
+       6
+      ],
+      "c4/strong": [
+       6
+      ]
+     },
+     "welfare_first": 3.793340462729596,
+     "profiles": [
+      [
+       63,
+       63,
+       7,
+       7,
+       0,
+       0
+      ]
+     ],
+     "br_dynamics": {
+      "n_converged": 8,
+      "n_distinct": 1
+     },
+     "bootstrap": {
+      "eps95": 0.0,
+      "frac_exact_bne": 1.0,
+      "R": 200
+     },
+     "replicator": [
+      {
+       "converged": true,
+       "exploitability": 3.057332165212756e-12,
+       "is_pure": true,
+       "iterations": 94,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 3.056443986793056e-12,
+       "is_pure": true,
+       "iterations": 75,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 3.3051894554603223e-12,
+       "is_pure": true,
+       "iterations": 72,
+       "matches_bne": true
+      }
+     ]
+    },
+    {
+     "alpha": 0.325,
+     "n_bne": 1,
+     "n_eps_bne_1e-3": 1,
+     "min_exploitability_all": 0.0,
+     "sharing_rate_min": 0.9999999999999997,
+     "sharing_rate_max": 0.9999999999999997,
+     "sharing_rate_mean": 0.9999999999999997,
+     "cell_tells_first": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "cell_shares_all_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "cell_shares_some_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "first_bne": {
+      "c1/weak": [
+       3,
+       5
+      ],
+      "c1/avg": [
+       3,
+       5
+      ],
+      "c1/strong": [
+       3,
+       5
+      ],
+      "c2/weak": [
+       4,
+       6
+      ],
+      "c2/avg": [
+       4,
+       6
+      ],
+      "c2/strong": [
+       4,
+       6
+      ],
+      "c3/weak": [
+       5
+      ],
+      "c3/avg": [
+       5
+      ],
+      "c3/strong": [
+       5
+      ],
+      "c4/weak": [
+       6
+      ],
+      "c4/avg": [
+       6
+      ],
+      "c4/strong": [
+       6
+      ]
+     },
+     "welfare_first": 3.9120698521898962,
+     "profiles": [
+      [
+       63,
+       63,
+       7,
+       7,
+       0,
+       0
+      ]
+     ],
+     "br_dynamics": {
+      "n_converged": 8,
+      "n_distinct": 1
+     },
+     "bootstrap": {
+      "eps95": 0.0,
+      "frac_exact_bne": 1.0,
+      "R": 200
+     },
+     "replicator": [
+      {
+       "converged": true,
+       "exploitability": 2.943423282886215e-12,
+       "is_pure": true,
+       "iterations": 86,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 3.339550858072471e-12,
+       "is_pure": true,
+       "iterations": 68,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 2.6903479444229106e-12,
+       "is_pure": true,
+       "iterations": 66,
+       "matches_bne": true
+      }
+     ]
+    },
+    {
+     "alpha": 0.35,
+     "n_bne": 1,
+     "n_eps_bne_1e-3": 1,
+     "min_exploitability_all": 0.0,
+     "sharing_rate_min": 0.9999999999999997,
+     "sharing_rate_max": 0.9999999999999997,
+     "sharing_rate_mean": 0.9999999999999997,
+     "cell_tells_first": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "cell_shares_all_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "cell_shares_some_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "first_bne": {
+      "c1/weak": [
+       3,
+       5
+      ],
+      "c1/avg": [
+       3,
+       5
+      ],
+      "c1/strong": [
+       3,
+       5
+      ],
+      "c2/weak": [
+       4,
+       6
+      ],
+      "c2/avg": [
+       4,
+       6
+      ],
+      "c2/strong": [
+       4,
+       6
+      ],
+      "c3/weak": [
+       5
+      ],
+      "c3/avg": [
+       5
+      ],
+      "c3/strong": [
+       5
+      ],
+      "c4/weak": [
+       6
+      ],
+      "c4/avg": [
+       6
+      ],
+      "c4/strong": [
+       6
+      ]
+     },
+     "welfare_first": 4.030799241650197,
+     "profiles": [
+      [
+       63,
+       63,
+       7,
+       7,
+       0,
+       0
+      ]
+     ],
+     "br_dynamics": {
+      "n_converged": 8,
+      "n_distinct": 1
+     },
+     "bootstrap": {
+      "eps95": 0.0,
+      "frac_exact_bne": 1.0,
+      "R": 200
+     },
+     "replicator": [
+      {
+       "converged": true,
+       "exploitability": 3.0451197119418794e-12,
+       "is_pure": true,
+       "iterations": 79,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 2.3778756741421603e-12,
+       "is_pure": true,
+       "iterations": 63,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 3.177014207267348e-12,
+       "is_pure": true,
+       "iterations": 60,
+       "matches_bne": true
+      }
+     ]
+    },
+    {
+     "alpha": 0.375,
+     "n_bne": 1,
+     "n_eps_bne_1e-3": 1,
+     "min_exploitability_all": 0.0,
+     "sharing_rate_min": 0.9999999999999997,
+     "sharing_rate_max": 0.9999999999999997,
+     "sharing_rate_mean": 0.9999999999999997,
+     "cell_tells_first": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "cell_shares_all_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "cell_shares_some_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "first_bne": {
+      "c1/weak": [
+       3,
+       5
+      ],
+      "c1/avg": [
+       3,
+       5
+      ],
+      "c1/strong": [
+       3,
+       5
+      ],
+      "c2/weak": [
+       4,
+       6
+      ],
+      "c2/avg": [
+       4,
+       6
+      ],
+      "c2/strong": [
+       4,
+       6
+      ],
+      "c3/weak": [
+       5
+      ],
+      "c3/avg": [
+       5
+      ],
+      "c3/strong": [
+       5
+      ],
+      "c4/weak": [
+       6
+      ],
+      "c4/avg": [
+       6
+      ],
+      "c4/strong": [
+       6
+      ]
+     },
+     "welfare_first": 4.1495286311104955,
+     "profiles": [
+      [
+       63,
+       63,
+       7,
+       7,
+       0,
+       0
+      ]
+     ],
+     "br_dynamics": {
+      "n_converged": 8,
+      "n_distinct": 1
+     },
+     "bootstrap": {
+      "eps95": 0.0,
+      "frac_exact_bne": 1.0,
+      "R": 200
+     },
+     "replicator": [
+      {
+       "converged": true,
+       "exploitability": 3.0802027595200343e-12,
+       "is_pure": true,
+       "iterations": 73,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 2.311040248059726e-12,
+       "is_pure": true,
+       "iterations": 58,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 2.1400659022674517e-12,
+       "is_pure": true,
+       "iterations": 56,
+       "matches_bne": true
+      }
+     ]
+    },
+    {
+     "alpha": 0.4,
+     "n_bne": 1,
+     "n_eps_bne_1e-3": 1,
+     "min_exploitability_all": 0.0,
+     "sharing_rate_min": 0.9999999999999997,
+     "sharing_rate_max": 0.9999999999999997,
+     "sharing_rate_mean": 0.9999999999999997,
+     "cell_tells_first": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "cell_shares_all_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "cell_shares_some_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "first_bne": {
+      "c1/weak": [
+       3,
+       5
+      ],
+      "c1/avg": [
+       3,
+       5
+      ],
+      "c1/strong": [
+       3,
+       5
+      ],
+      "c2/weak": [
+       4,
+       6
+      ],
+      "c2/avg": [
+       4,
+       6
+      ],
+      "c2/strong": [
+       4,
+       6
+      ],
+      "c3/weak": [
+       5
+      ],
+      "c3/avg": [
+       5
+      ],
+      "c3/strong": [
+       5
+      ],
+      "c4/weak": [
+       6
+      ],
+      "c4/avg": [
+       6
+      ],
+      "c4/strong": [
+       6
+      ]
+     },
+     "welfare_first": 4.268258020570796,
+     "profiles": [
+      [
+       63,
+       63,
+       7,
+       7,
+       0,
+       0
+      ]
+     ],
+     "br_dynamics": {
+      "n_converged": 8,
+      "n_distinct": 1
+     },
+     "bootstrap": {
+      "eps95": 0.0,
+      "frac_exact_bne": 1.0,
+      "R": 200
+     },
+     "replicator": [
+      {
+       "converged": true,
+       "exploitability": 2.751354699626063e-12,
+       "is_pure": true,
+       "iterations": 68,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 1.843192265482685e-12,
+       "is_pure": true,
+       "iterations": 54,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 1.8403056856186595e-12,
+       "is_pure": true,
+       "iterations": 52,
+       "matches_bne": true
+      }
+     ]
+    },
+    {
+     "alpha": 0.425,
+     "n_bne": 1,
+     "n_eps_bne_1e-3": 1,
+     "min_exploitability_all": 0.0,
+     "sharing_rate_min": 0.9999999999999997,
+     "sharing_rate_max": 0.9999999999999997,
+     "sharing_rate_mean": 0.9999999999999997,
+     "cell_tells_first": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "cell_shares_all_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "cell_shares_some_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "first_bne": {
+      "c1/weak": [
+       3,
+       5
+      ],
+      "c1/avg": [
+       3,
+       5
+      ],
+      "c1/strong": [
+       3,
+       5
+      ],
+      "c2/weak": [
+       4,
+       6
+      ],
+      "c2/avg": [
+       4,
+       6
+      ],
+      "c2/strong": [
+       4,
+       6
+      ],
+      "c3/weak": [
+       5
+      ],
+      "c3/avg": [
+       5
+      ],
+      "c3/strong": [
+       5
+      ],
+      "c4/weak": [
+       6
+      ],
+      "c4/avg": [
+       6
+      ],
+      "c4/strong": [
+       6
+      ]
+     },
+     "welfare_first": 4.386987410031095,
+     "profiles": [
+      [
+       63,
+       63,
+       7,
+       7,
+       0,
+       0
+      ]
+     ],
+     "br_dynamics": {
+      "n_converged": 8,
+      "n_distinct": 1
+     },
+     "bootstrap": {
+      "eps95": 0.0,
+      "frac_exact_bne": 1.0,
+      "R": 200
+     },
+     "replicator": [
+      {
+       "converged": true,
+       "exploitability": 1.94932958663685e-12,
+       "is_pure": true,
+       "iterations": 64,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 1.9044765764419935e-12,
+       "is_pure": true,
+       "iterations": 50,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 2.042366276100438e-12,
+       "is_pure": true,
+       "iterations": 48,
+       "matches_bne": true
+      }
+     ]
+    },
+    {
+     "alpha": 0.45,
+     "n_bne": 1,
+     "n_eps_bne_1e-3": 1,
+     "min_exploitability_all": 0.0,
+     "sharing_rate_min": 0.9999999999999997,
+     "sharing_rate_max": 0.9999999999999997,
+     "sharing_rate_mean": 0.9999999999999997,
+     "cell_tells_first": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "cell_shares_all_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "cell_shares_some_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "first_bne": {
+      "c1/weak": [
+       3,
+       5
+      ],
+      "c1/avg": [
+       3,
+       5
+      ],
+      "c1/strong": [
+       3,
+       5
+      ],
+      "c2/weak": [
+       4,
+       6
+      ],
+      "c2/avg": [
+       4,
+       6
+      ],
+      "c2/strong": [
+       4,
+       6
+      ],
+      "c3/weak": [
+       5
+      ],
+      "c3/avg": [
+       5
+      ],
+      "c3/strong": [
+       5
+      ],
+      "c4/weak": [
+       6
+      ],
+      "c4/avg": [
+       6
+      ],
+      "c4/strong": [
+       6
+      ]
+     },
+     "welfare_first": 4.505716799491395,
+     "profiles": [
+      [
+       63,
+       63,
+       7,
+       7,
+       0,
+       0
+      ]
+     ],
+     "br_dynamics": {
+      "n_converged": 8,
+      "n_distinct": 1
+     },
+     "bootstrap": {
+      "eps95": 0.0,
+      "frac_exact_bne": 1.0,
+      "R": 200
+     },
+     "replicator": [
+      {
+       "converged": true,
+       "exploitability": 1.7750245717707003e-12,
+       "is_pure": true,
+       "iterations": 60,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 2.594369163944066e-12,
+       "is_pure": true,
+       "iterations": 46,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 1.6224799281872038e-12,
+       "is_pure": true,
+       "iterations": 45,
+       "matches_bne": true
+      }
+     ]
+    },
+    {
+     "alpha": 0.475,
+     "n_bne": 1,
+     "n_eps_bne_1e-3": 1,
+     "min_exploitability_all": 0.0,
+     "sharing_rate_min": 0.9999999999999997,
+     "sharing_rate_max": 0.9999999999999997,
+     "sharing_rate_mean": 0.9999999999999997,
+     "cell_tells_first": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "cell_shares_all_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "cell_shares_some_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "first_bne": {
+      "c1/weak": [
+       3,
+       5
+      ],
+      "c1/avg": [
+       3,
+       5
+      ],
+      "c1/strong": [
+       3,
+       5
+      ],
+      "c2/weak": [
+       4,
+       6
+      ],
+      "c2/avg": [
+       4,
+       6
+      ],
+      "c2/strong": [
+       4,
+       6
+      ],
+      "c3/weak": [
+       5
+      ],
+      "c3/avg": [
+       5
+      ],
+      "c3/strong": [
+       5
+      ],
+      "c4/weak": [
+       6
+      ],
+      "c4/avg": [
+       6
+      ],
+      "c4/strong": [
+       6
+      ]
+     },
+     "welfare_first": 4.624446188951696,
+     "profiles": [
+      [
+       63,
+       63,
+       7,
+       7,
+       0,
+       0
+      ]
+     ],
+     "br_dynamics": {
+      "n_converged": 8,
+      "n_distinct": 1
+     },
+     "bootstrap": {
+      "eps95": 0.0,
+      "frac_exact_bne": 1.0,
+      "R": 200
+     },
+     "replicator": [
+      {
+       "converged": true,
+       "exploitability": 2.1032064978498966e-12,
+       "is_pure": true,
+       "iterations": 56,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 2.417177569213891e-12,
+       "is_pure": true,
+       "iterations": 43,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 1.5587531265737198e-12,
+       "is_pure": true,
+       "iterations": 42,
+       "matches_bne": true
+      }
+     ]
+    },
+    {
+     "alpha": 0.5,
+     "n_bne": 1,
+     "n_eps_bne_1e-3": 1,
+     "min_exploitability_all": 0.0,
+     "sharing_rate_min": 0.9999999999999997,
+     "sharing_rate_max": 0.9999999999999997,
+     "sharing_rate_mean": 0.9999999999999997,
+     "cell_tells_first": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "cell_shares_all_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "cell_shares_some_bne": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "first_bne": {
+      "c1/weak": [
+       3,
+       5
+      ],
+      "c1/avg": [
+       3,
+       5
+      ],
+      "c1/strong": [
+       3,
+       5
+      ],
+      "c2/weak": [
+       4,
+       6
+      ],
+      "c2/avg": [
+       4,
+       6
+      ],
+      "c2/strong": [
+       4,
+       6
+      ],
+      "c3/weak": [
+       5
+      ],
+      "c3/avg": [
+       5
+      ],
+      "c3/strong": [
+       5
+      ],
+      "c4/weak": [
+       6
+      ],
+      "c4/avg": [
+       6
+      ],
+      "c4/strong": [
+       6
+      ]
+     },
+     "welfare_first": 4.7431755784119956,
+     "profiles": [
+      [
+       63,
+       63,
+       7,
+       7,
+       0,
+       0
+      ]
+     ],
+     "br_dynamics": {
+      "n_converged": 8,
+      "n_distinct": 1
+     },
+     "bootstrap": {
+      "eps95": 0.0,
+      "frac_exact_bne": 1.0,
+      "R": 200
+     },
+     "replicator": [
+      {
+       "converged": true,
+       "exploitability": 1.6482371023585074e-12,
+       "is_pure": true,
+       "iterations": 53,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 1.3378187446733136e-12,
+       "is_pure": true,
+       "iterations": 41,
+       "matches_bne": true
+      },
+      {
+       "converged": true,
+       "exploitability": 1.8308687899093457e-12,
+       "is_pure": true,
+       "iterations": 39,
+       "matches_bne": true
+      }
+     ]
+    }
+   ],
+   "loss_gain": {
+    "c1/weak": {
+     "ell": 0.0,
+     "G": 0.13231893151676583,
+     "alpha_star_local": 0.0075574975442821825
+    },
+    "c1/avg": {
+     "ell": 0.0,
+     "G": 0.1330226328676191,
+     "alpha_star_local": 0.0075175177219291385
+    },
+    "c1/strong": {
+     "ell": 0.0,
+     "G": 0.13347530583256986,
+     "alpha_star_local": 0.007492022541266101
+    },
+    "c2/weak": {
+     "ell": 0.0,
+     "G": 0.13291152166355968,
+     "alpha_star_local": 0.007523802206789193
+    },
+    "c2/avg": {
+     "ell": 0.0,
+     "G": 0.13241975444825096,
+     "alpha_star_local": 0.007551743349522638
+    },
+    "c2/strong": {
+     "ell": 0.0,
+     "G": 0.13395473281872064,
+     "alpha_star_local": 0.007465208424948211
+    },
+    "c3/weak": {
+     "ell": 0.0,
+     "G": 0.06697942452014657,
+     "alpha_star_local": 0.014929958075396908
+    },
+    "c3/avg": {
+     "ell": 0.0,
+     "G": 0.06655144019037056,
+     "alpha_star_local": 0.015025970845101136
+    },
+    "c3/strong": {
+     "ell": 0.0,
+     "G": 0.06613991773062589,
+     "alpha_star_local": 0.01511946241107816
+    },
+    "c4/weak": {
+     "ell": 0.0,
+     "G": 0.0663374501200002,
+     "alpha_star_local": 0.01507444133277755
+    },
+    "c4/avg": {
+     "ell": 0.0,
+     "G": 0.0667407404604548,
+     "alpha_star_local": 0.014983351894222983
+    },
+    "c4/strong": {
+     "ell": 0.0,
+     "G": 0.06705349881140661,
+     "alpha_star_local": 0.014913464885890309
+    }
+   },
+   "alpha_star": {
+    "c1/weak": {
+     "alpha_star_all": 0.025,
+     "alpha_star_some": 0.025
+    },
+    "c1/avg": {
+     "alpha_star_all": 0.025,
+     "alpha_star_some": 0.025
+    },
+    "c1/strong": {
+     "alpha_star_all": 0.025,
+     "alpha_star_some": 0.025
+    },
+    "c2/weak": {
+     "alpha_star_all": 0.025,
+     "alpha_star_some": 0.025
+    },
+    "c2/avg": {
+     "alpha_star_all": 0.025,
+     "alpha_star_some": 0.025
+    },
+    "c2/strong": {
+     "alpha_star_all": 0.025,
+     "alpha_star_some": 0.025
+    },
+    "c3/weak": {
+     "alpha_star_all": 0.025,
+     "alpha_star_some": 0.025
+    },
+    "c3/avg": {
+     "alpha_star_all": 0.025,
+     "alpha_star_some": 0.025
+    },
+    "c3/strong": {
+     "alpha_star_all": 0.025,
+     "alpha_star_some": 0.025
+    },
+    "c4/weak": {
+     "alpha_star_all": 0.025,
+     "alpha_star_some": 0.025
+    },
+    "c4/avg": {
+     "alpha_star_all": 0.025,
+     "alpha_star_some": 0.025
+    },
+    "c4/strong": {
+     "alpha_star_all": 0.025,
+     "alpha_star_some": 0.025
+    }
+   }
+  }
+ },
+ "seconds": 1222.3314130306244
+}

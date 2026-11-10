@@ -1,0 +1,11 @@
+  [model-based] t=  22000  agree=0.801  cce_gap=0.01134    32.7s
+  [model-based] t=  47000  agree=0.861  cce_gap=0.00964    75.2s
+  [model-based] t=  72000  agree=0.891  cce_gap=0.00865   113.7s
+  [model-based] t=  97000  agree=0.903  cce_gap=0.00787   156.1s
+  [model-based] t= 122000  agree=0.915  cce_gap=0.00728   193.2s
+  [model-based] t= 147000  agree=0.916  cce_gap=0.00677   227.6s
+  [model-based] t= 172000  agree=0.919  cce_gap=0.00638   264.6s
+  [model-based] t= 197000  agree=0.919  cce_gap=0.00602   300.0s
+  [model-based] t= 200000  agree=0.920  cce_gap=0.00599   304.0s
+finished model-based in 304s
+X3 done in 323s

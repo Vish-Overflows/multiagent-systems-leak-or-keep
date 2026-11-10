@@ -1,0 +1,348 @@
+{
+ "C1_worked_example": {
+  "P(friend sees >=1 question)": {
+   "exact": 0.7083333333333333,
+   "sim_kabir": 0.708485,
+   "sim_diya": 0.7087525,
+   "se": 0.0007186745129441809
+  },
+  "P(someone overtakes Aarav)": {
+   "exact": 0.9149305555555556,
+   "sim": 0.9157025,
+   "se": 0.00044111402739642616
+  },
+  "P(Aarav hired | shares, SEATS)": {
+   "exact": 0.08506944444444446,
+   "sim": 0.0842975,
+   "se": 0.00044111402739642627
+  },
+  "P(Diya hired | shares, BAR at 20)": {
+   "exact": 0.7083333333333333,
+   "sim": 0.7087525,
+   "se": 0.0007186745129441809
+  },
+  "n_days": 400000
+ },
+ "C2_lemma1": {
+  "E0": {
+   "min_dY_j": 0.0,
+   "frac_strict_increase": 0.2426,
+   "max_|dY_other|": 0.0,
+   "pass": true
+  },
+  "E1": {
+   "min_dY_j": 0.0,
+   "frac_strict_increase": 0.3826,
+   "max_|dY_other|": 0.0,
+   "pass": true
+  },
+  "E2": {
+   "min_dY_j": 0.0,
+   "frac_strict_increase": 0.4026,
+   "max_|dY_other|": 0.0,
+   "pass": true
+  }
+ },
+ "C3_prop3": {
+  "E1": {
+   "n_j=1": {
+    "exact": 0.19999999999999996,
+    "sim": 0.19995166666666667,
+    "se": 0.0005161282027294941
+   },
+   "n_j=2": {
+    "exact": 0.3599999999999999,
+    "sim": 0.3594466666666667,
+    "se": 0.0006195665350334324
+   },
+   "n_j=3": {
+    "exact": 0.4879999999999999,
+    "sim": 0.48739333333333335,
+    "se": 0.0006446099800999396
+   }
+  },
+  "E2": {
+   "n_j=1": {
+    "exact": 0.19999999999999996,
+    "sim": 0.19934,
+    "se": 0.00047675528290494886
+   },
+   "n_j=2": {
+    "exact": 0.3599999999999999,
+    "sim": 0.35884,
+    "se": 0.0005797771073630126
+   },
+   "n_j=3": {
+    "exact": 0.4879999999999999,
+    "sim": 0.48666499999999996,
+    "se": 0.0006097037531890202
+   }
+  },
+  "bound": {
+   "n_j=1,eps=0.1": {
+    "Q": 30,
+    "leaked_fraction": 0.09999999999999998,
+    "holds": true
+   },
+   "n_j=2,eps=0.1": {
+    "Q": 60,
+    "leaked_fraction": 0.09750000000000003,
+    "holds": true
+   },
+   "n_j=3,eps=0.05": {
+    "Q": 180,
+    "leaked_fraction": 0.04917129629629646,
+    "holds": true
+   }
+  }
+ },
+ "C4_prop2": {
+  "E0": {
+   "max_|dP(own hire)| over own row": 0.0,
+   "pass_a": true,
+   "friends_gain": {
+    "c1": {
+     "gain_by_type": [
+      0.5026491784438905,
+      0.5032222206002952,
+      0.5015421813562773
+     ],
+     "spread": 0.001680039244017939
+    },
+    "c2": {
+     "gain_by_type": [
+      0.501171811627523,
+      0.5017973262809002,
+      0.5040884783890083
+     ],
+     "spread": 0.002916666761485276
+    },
+    "c3": {
+     "gain_by_type": [
+      0.16754732524148291,
+      0.16798353859188933,
+      0.16747736566366606
+     ],
+     "spread": 0.0005061729282232752
+    },
+    "c4": {
+     "gain_by_type": [
+      0.16725822935770016,
+      0.16794444420547397,
+      0.16707304547782298
+     ],
+     "spread": 0.0008713987276509905
+    }
+   }
+  },
+  "E1": {
+   "max_|dP(own hire)| over own row": 0.0,
+   "pass_a": true,
+   "friends_gain": {
+    "c1": {
+     "gain_by_type": [
+      0.12701337516150693,
+      0.1282078173440793,
+      0.12596090731820392
+     ],
+     "spread": 0.002246910025875376
+    },
+    "c2": {
+     "gain_by_type": [
+      0.12676543232682067,
+      0.12703806772701626,
+      0.12691357799272968
+     ],
+     "spread": 0.0002726354001955922
+    },
+    "c3": {
+     "gain_by_type": [
+      0.06084156328900391,
+      0.060085389770782045,
+      0.060534978501973945
+     ],
+     "spread": 0.0007561735182218671
+    },
+    "c4": {
+     "gain_by_type": [
+      0.06028600697168015,
+      0.06020679000243851,
+      0.05973250921164091
+     ],
+     "spread": 0.0005534977600392399
+    }
+   }
+  },
+  "E2": {
+   "max_|dP(own hire)| over own row": 0.0,
+   "pass_a": true,
+   "friends_gain": {
+    "c1": {
+     "gain_by_type": [
+      0.1260174915985944,
+      0.12657201555921646,
+      0.12704423574324497
+     ],
+     "spread": 0.0010267441446505654
+    },
+    "c2": {
+     "gain_by_type": [
+      0.1264660474978418,
+      0.12603189318092087,
+      0.1274393002412554
+     ],
+     "spread": 0.0014074070603345423
+    },
+    "c3": {
+     "gain_by_type": [
+      0.060479424655276504,
+      0.06003703673968069,
+      0.05997119373028691
+     ],
+     "spread": 0.0005082309249895903
+    },
+    "c4": {
+     "gain_by_type": [
+      0.059852881322580355,
+      0.06047428003895583,
+      0.0604557600198122
+     ],
+     "spread": 0.000621398716375475
+    }
+   }
+  }
+ },
+ "C5_prop1_n4": {
+  "alpha=0.2,SEATS": {
+   "n_bne": 1,
+   "sharing_rates": [
+    0.0
+   ],
+   "all_no_sharing": true
+  },
+  "alpha=0.2,BAR": {
+   "n_bne": 1,
+   "sharing_rates": [
+    0.9999999999999999
+   ],
+   "all_no_sharing": false
+  },
+  "alpha=0.5,SEATS": {
+   "n_bne": 1,
+   "sharing_rates": [
+    0.0
+   ],
+   "all_no_sharing": true
+  },
+  "alpha=0.5,BAR": {
+   "n_bne": 1,
+   "sharing_rates": [
+    0.9999999999999999
+   ],
+   "all_no_sharing": false
+  },
+  "alpha=1.0,SEATS": {
+   "n_bne": 1,
+   "sharing_rates": [
+    0.0
+   ],
+   "all_no_sharing": true
+  },
+  "alpha=1.0,BAR": {
+   "n_bne": 1,
+   "sharing_rates": [
+    0.9999999999999999
+   ],
+   "all_no_sharing": false
+  }
+ },
+ "C5_prop1_n6_local": {
+  "alpha=0.2": {
+   "SEATS": {
+    "others_silent": {
+     "max_gain": -0.003903704142769024,
+     "n_positive": 0,
+     "n_total": 171
+    },
+    "others_share_all": {
+     "max_gain": -0.0016979425396547948,
+     "n_positive": 0,
+     "n_total": 171
+    }
+   },
+   "BAR": {
+    "others_silent": {
+     "max_gain": 0.06215308604953588,
+     "n_positive": 171,
+     "n_total": 171
+    },
+    "others_share_all": {
+     "max_gain": 0.04042716073615806,
+     "n_positive": 171,
+     "n_total": 171
+    }
+   },
+   "alpha": 0.2
+  },
+  "alpha=1.0": {
+   "SEATS": {
+    "others_silent": {
+     "max_gain": -0.0009999967418082155,
+     "n_positive": 0,
+     "n_total": 171
+    },
+    "others_share_all": {
+     "max_gain": -0.000999996954038617,
+     "n_positive": 0,
+     "n_total": 171
+    }
+   },
+   "BAR": {
+    "others_silent": {
+     "max_gain": 0.3307654302476794,
+     "n_positive": 171,
+     "n_total": 171
+    },
+    "others_share_all": {
+     "max_gain": 0.2221358036807904,
+     "n_positive": 171,
+     "n_total": 171
+    }
+   },
+   "alpha": 1.0
+  }
+ },
+ "C6_alpha0": {
+  "E0/SEATS": {
+   "n_bne": 1,
+   "max_sharing_rate": 0.0,
+   "pass": true
+  },
+  "E0/BAR": {
+   "n_bne": 1,
+   "max_sharing_rate": 0.0,
+   "pass": true
+  },
+  "E1/SEATS": {
+   "n_bne": 1,
+   "max_sharing_rate": 0.0,
+   "pass": true
+  },
+  "E1/BAR": {
+   "n_bne": 1,
+   "max_sharing_rate": 0.0,
+   "pass": true
+  },
+  "E2/SEATS": {
+   "n_bne": 1,
+   "max_sharing_rate": 0.0,
+   "pass": true
+  },
+  "E2/BAR": {
+   "n_bne": 1,
+   "max_sharing_rate": 0.0,
+   "pass": true
+  }
+ },
+ "seconds": 7.3864970207214355
+}
