@@ -13,6 +13,9 @@ Stored statistics (rule axis: 0 = SEATS, 1 = BAR):
   Ek        (T, M, n)         E[k_j]                             (leak counts, Prop. 3 check)
   Px_blocks (T, M, 2, n, nblk) block means of x over nblk consecutive blocks of days
                               (for the block bootstrap of exploitability).
+  Pxx_blocks (T, M, 2, n(n-1)/2, nblk)  block means of x_i x_j for the pairs i < j (same blocks), so that
+                              utilities with a pairwise term (FAIR) are bootstrapped with the same
+                              resampled days as the hiring probabilities.
   V_blocks  (T, M, 2, nblk)    block means of the company value (bootstrap CI of Lambda).
 """
 from __future__ import annotations
@@ -30,6 +33,11 @@ from .config import GameConfig
 from .env import company_value, draw_days, hire_bar, hire_seats, leak_counts_table, scores
 
 TABLE_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "results", "tables")
+
+
+def pair_index(n: int):
+    """Row/column indices (i < j) of the n(n-1)/2 pairs stored in Pxx_blocks."""
+    return np.triu_indices(n, 1)
 
 
 def type_profiles(n: int) -> np.ndarray:
@@ -85,6 +93,7 @@ class PayoffTable:
     seed: int
     build_seconds: float = 0.0
     V_blocks: np.ndarray | None = None
+    Pxx_blocks: np.ndarray | None = None
 
     @property
     def n_profiles(self) -> int:
@@ -100,6 +109,26 @@ class PayoffTable:
         pick = rng.integers(0, nblk, size=nblk)
         return self.Px_blocks[..., pick].mean(axis=-1)
 
+    def resample_tables(self, rng: np.random.Generator):
+        """Block-bootstrap replicate of (Px, Pxx) from ONE draw of blocks, so that the pairwise table is
+        resampled with exactly the same days as Px.  Consumes the same random numbers as resample_blocks,
+        and returns the same Px for the same generator state.  Pxx has the full (T, M, 2, n, n) layout
+        (diagonal = P(x_i), the other entries symmetric)."""
+        if self.Pxx_blocks is None:
+            raise ValueError("this table has no Pxx_blocks (built before they were stored); rebuild it")
+        nblk = self.Px_blocks.shape[-1]
+        pick = rng.integers(0, nblk, size=nblk)
+        Px = self.Px_blocks[..., pick].mean(axis=-1)
+        pairs = self.Pxx_blocks[..., pick].mean(axis=-1)                    # (T, M, 2, n_pairs)
+        n = self.cfg.n
+        iu, ju = pair_index(n)
+        Pxx = np.zeros(Px.shape + (n,), dtype=Px.dtype)                      # (T, M, 2, n, n)
+        Pxx[..., iu, ju] = pairs
+        Pxx[..., ju, iu] = pairs
+        d = np.arange(n)
+        Pxx[..., d, d] = Px
+        return Px, Pxx
+
     def resample_V_blocks(self, rng: np.random.Generator) -> np.ndarray:
         nblk = self.V_blocks.shape[-1]
         pick = rng.integers(0, nblk, size=nblk)
@@ -110,7 +139,7 @@ def _cache_key(cfg: GameConfig, S_list: np.ndarray, n_days: int, seed: int, n_bl
     payload = {
         "cfg": {k: (v if not isinstance(v, tuple) else [list(r) for r in v]) for k, v in cfg.__dict__.items()},
         "S": hashlib.md5(np.ascontiguousarray(S_list).tobytes()).hexdigest(),
-        "n_days": n_days, "seed": seed, "n_blocks": n_blocks, "v": 4,
+        "n_days": n_days, "seed": seed, "n_blocks": n_blocks, "v": 5,
     }
     return hashlib.md5(json.dumps(payload, sort_keys=True).encode()).hexdigest()[:16]
 
@@ -126,7 +155,7 @@ def build_table(cfg: GameConfig, S_list: np.ndarray | None = None, n_days: int =
     if path and os.path.exists(path):
         z = np.load(path)
         return PayoffTable(cfg, S_list, z["Px"], z["Pxx"], z["V"], z["Ek"], z["Px_blocks"], n_days, seed,
-                           float(z["build_seconds"]), z["V_blocks"])
+                           float(z["build_seconds"]), z["V_blocks"], z["Pxx_blocks"])
 
     t0 = time.time()
     n, K = cfg.n, cfg.K
@@ -141,6 +170,8 @@ def build_table(cfg: GameConfig, S_list: np.ndarray | None = None, n_days: int =
     Ek = np.zeros((T, M, n), dtype=np.float32)
     Px_blocks = np.zeros((T, M, 2, n, n_blocks), dtype=np.float32)
     V_blocks = np.zeros((T, M, 2, n_blocks), dtype=np.float32)
+    iu, ju = pair_index(n)
+    Pxx_blocks = np.zeros((T, M, 2, len(iu), n_blocks), dtype=np.float32)
 
     P = max(1, chunk_days // n_days)         # profiles per chunk
     for start in range(0, T, P):
@@ -163,16 +194,20 @@ def build_table(cfg: GameConfig, S_list: np.ndarray | None = None, n_days: int =
         Ek[idx] = k.reshape(p, n_days, M, n).mean(axis=1)
         Px_blocks[idx] = np.moveaxis(xf.reshape(p, n_blocks, n_days // n_blocks, M, 2, n).mean(axis=2), 1, -1)
         V_blocks[idx] = np.moveaxis(v.reshape(p, n_blocks, n_days // n_blocks, M, 2).mean(axis=2), 1, -1)
+        for q, (a, b) in enumerate(zip(iu, ju)):
+            prod = xf[..., a] * xf[..., b]                               # (p, n_days, M, 2)
+            Pxx_blocks[start:start + p, :, :, q, :] = np.moveaxis(
+                prod.reshape(p, n_blocks, n_days // n_blocks, M, 2).mean(axis=2), 1, -1)
         if verbose and (start // P) % 10 == 0:
             print(f"  [table {cfg.network}/{cfg.env} Q={cfg.Q}] profiles {start + p}/{T}  "
                   f"{time.time() - t0:6.1f}s", flush=True)
 
     secs = time.time() - t0
-    tab = PayoffTable(cfg, S_list, Px, Pxx, V, Ek, Px_blocks, n_days, seed, secs, V_blocks)
+    tab = PayoffTable(cfg, S_list, Px, Pxx, V, Ek, Px_blocks, n_days, seed, secs, V_blocks, Pxx_blocks)
     if path:
         os.makedirs(cache_dir, exist_ok=True)
         np.savez_compressed(path, Px=Px, Pxx=Pxx, V=V, Ek=Ek, Px_blocks=Px_blocks, V_blocks=V_blocks,
-                            build_seconds=secs)
+                            Pxx_blocks=Pxx_blocks, build_seconds=secs)
     if verbose:
         print(f"  built table {cfg.network}/{cfg.env} Q={cfg.Q}: T={T} profiles x M={M} matrices x "
               f"{n_days} days in {secs:.1f}s", flush=True)
