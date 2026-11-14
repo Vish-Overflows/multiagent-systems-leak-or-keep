@@ -38,7 +38,8 @@ def main():
     os.makedirs(OUT, exist_ok=True)
     t0 = time.time()
     names = sys.argv[1:] or LEARNERS
-    with get_context("spawn").Pool(processes=len(names)) as pool:
+    workers = int(os.environ.get("X3_WORKERS", len(names)))             # one learner needs ~1.5 GB while tables build
+    with get_context("spawn").Pool(processes=workers) as pool:
         for name, secs in pool.imap_unordered(task, names):
             print(f"finished {name} in {secs:.0f}s", flush=True)
     print(f"X3 done in {time.time() - t0:.0f}s")

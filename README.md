@@ -103,13 +103,20 @@ Unit tests:
 
 ## Reproducing the results
 
-Requirements: Python 3.10 or newer and NumPy 2.0 or newer (the code uses `np.bitwise_count`; `pip install -e .`
-pulls the right version). No GPU is needed. Everything ran on a 10-core laptop.
+Requirements: Python 3.10 or newer and NumPy 2.0 or newer (the code uses `np.bitwise_count`). No GPU is needed.
+Everything ran on a laptop with 16 GB of RAM; a two-friend-group CCE program needs about 4 GB, so do not run
+several of them at once (see the worker settings below).
 
 ```bash
-uv venv .venv
-uv pip install --python .venv/bin/python -e ".[dev]"      # Windows: .venv\Scripts\python.exe
+uv sync --frozen --extra dev          # exact versions from uv.lock; creates .venv
 ```
+
+The committed results were produced with Python 3.10.19, NumPy 2.2.6, SciPy 1.15.3 and matplotlib 3.10.9
+(`uv.lock` pins these for Python 3.10). Other versions agree to about 1e-14 in the stored numbers. Without `uv`:
+`python -m venv .venv && .venv/bin/pip install -e ".[dev]"`.
+
+Line endings are fixed by `.gitattributes` (shell scripts are always LF), so `run_all.sh` also works from a Windows
+checkout in Git Bash.
 
 (`python -m venv .venv && .venv/bin/pip install -e ".[dev]"` works too.)
 
@@ -138,6 +145,9 @@ Or step by step:
 
 Notes:
 
+- Worker counts: `run_x1.py` uses 9 processes unless `X1_WORKERS=<n>` is set, `run_x3.py` one process per learner
+  unless `X3_WORKERS=<n>` is set, and `run_cce.py` takes the number of workers as its first argument
+  (`CCE_WORKERS` in `run_all.sh`). With 16 GB of RAM use about `X1_WORKERS=3 X3_WORKERS=2 CCE_WORKERS=1`.
 - All seeds are fixed, so re-running reproduces the committed result files.
 - Payoff tables are cached in `results/tables/` (not committed). They are rebuilt automatically on first use, 15 to
   40 seconds each. The full set took 263 MB before the tables also stored block means of the pairwise hiring
