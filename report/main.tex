@@ -70,7 +70,7 @@ friend's offer at \AstarLocalSeatsWeak{} of their own), strong ones last (\Astar
 everyone never.
 (2)~Disliking outsiders makes candidates tell \emph{more} under fixed seats and changes nothing under a cut-off, as our theory predicts.
 (3)~Learners who see only their own outcome find this equilibrium: UCB1 ends with \AgreeUcbEoneSeats--\AgreeUcbEoneBar\% of decisions
-correct, and a learner that uses one fact about leaks (a tell that did not land is the same as no tell) gets there two to three times sooner.
+correct, and learners that use how leaks work (a tell that did not land is the same as no tell; or an estimated leak rate and value per leaked question) get there two to five times sooner.
 (4)~At friendliness 0.2, leaks cost a cut-off company \LamRatioMin--\LamRatioMax{} times more hiring value than a fixed-seats company: it needs a
 bank of \QFiveBar{} questions, against \QFiveSeats, to keep the loss under 5\%. Most of that gap is \emph{who} tells (everyone under a cut-off, only weak
 candidates under fixed seats): if everyone told under both rules, the cut-off would lose \LamAllRatioMin--\LamAllRatioMax{} times more and need \QFiveAllBar{}
@@ -217,11 +217,16 @@ the expected utility of type $\theta_i$ of candidate $i$ from row $a$ when the o
 and keep the profiles with value 0. The list of pure BNEs is therefore complete, not a sample from a search.
 \item \textbf{Independent checks.} Best-response dynamics from 8 starting profiles (nobody shares, everybody shares, 6 random) must end in an enumerated equilibrium.
 To look for mixed equilibria we run replicator dynamics on the 12 (candidate, type) agents from 3 random interior starts.
+\item \textbf{Mixed equilibria: dominance and support enumeration.} Replicator dynamics only finds \emph{stable} mixed equilibria, so on its own it says little about whether others exist.
+We therefore apply iterated strict dominance to every game: an action that loses against every surviving pure profile of the others also loses against every mixed profile, so no equilibrium
+(pure or mixed) uses it. If every (candidate, type) keeps a single action, that profile is the game's only equilibrium of any kind, and it is checked to be an exact pure equilibrium of the table.
+On the pairs network, where every agent has two actions, we then enumerate the supports of what dominance leaves and solve the indifference conditions (exactly when at most two agents mix; by multi-start root
+finding, which is \emph{not} exhaustive, when three do), checking every candidate against all deviations of all agents. On the other two networks we run only the dominance step.
 \item \textbf{All CCEs at once.} A CCE is a distribution over the profiles satisfying one linear inequality per (candidate, alternative strategy) pair.
-We solve two linear programs (HiGHS): maximise and minimise the expected share of tells. If the two optima coincide, \emph{every} CCE --- hence every mixed
+We solve two linear programs (HiGHS) for each of the three leak models: maximise and minimise the expected share of tells. If the two optima coincide, \emph{every} CCE --- hence every mixed
 equilibrium and every limit of no-regret learning --- produces the same amount of sharing.
 \item \textbf{How sure are we? Bootstrap $\varepsilon$.} The table is an estimate. We resample its 20 blocks of days with replacement (200 times; 100 for the two smaller networks), rebuild the
-utilities, and recompute the exploitability of the reported equilibrium. We report the share of replicates in which it is still an exact equilibrium, and the 95th percentile of $\varepsilon$.
+utilities (resampling the table of pairwise hiring probabilities with the same blocks when a utility needs it, as the fairness utility does), and recompute the exploitability of the reported equilibrium. We report the share of replicates in which it is still an exact equilibrium, and the 95th percentile of $\varepsilon$.
 \item \textbf{Break-even friendliness} is measured twice: by the formula $\alpha^\star=(\ell_i+c)/G_i$ from the table, and directly as the smallest $\alpha$ on a
 grid of step 0.025 at which that type tells in every equilibrium.
 \end{itemize}
@@ -230,18 +235,26 @@ profiles ``nobody shares'' and ``everybody shares'' against every deviation of e
 
 \subsection{Stage 3 (Level 2): learning the unknown game}
 Each (candidate, type) pair is one bandit learner whose arms are that candidate's rows; with two friend groups there are 12 learners with 4 or 2 arms. Each round draws fresh skills, the realised
-types' learners choose, the simulator runs one day, and each learner receives only its own realised utility (rescaled to $[0,1]$). We compare five learners:
+types' learners choose, the simulator runs one day, and each learner receives only its own realised utility (rescaled to $[0,1]$). We compare six learners:
 \begin{itemize}
 \item \textbf{$\varepsilon$-greedy}: explore uniformly with probability $\varepsilon_t=t^{-1/3}$, else play the best arm so far.
 \textbf{UCB1}~\cite{ucb}: play $\arg\max_a\hat\mu_a+\sqrt{2\ln t/n_a}$.
 \textbf{Thompson sampling}~\cite{thompson}: sample each arm's mean from a Gaussian posterior, play the largest.
 \textbf{EXP3}~\cite{exp3}: exponential weights on importance-weighted rewards; assumes nothing about how rewards are generated.
 \item \textbf{Leak-aware UCB} (ours; Algorithm~\ref{alg:mb}). The review promised a ``model-based'' learner that estimates the leak rate and $\Delta$ and best-responds in its
-estimated game. Best-responding needs the other candidates' strategies, which nobody observes, so we kept the idea --- \emph{learn how the environment works, not only what each
-arm pays} --- in a form that does not. It uses one fact: \emph{a tell matters only through questions that actually come up.} If my friend reports that none of the questions I told her appeared, the day
+estimated game. Best-responding needs the other candidates' strategies, which nobody observes, so we split the idea in two. This first learner is the cheap half: UCB1 plus one fact about how
+leaks work, with no model of the environment that it plans with (the leak-rate estimate in Algorithm~\ref{alg:mb} is logged but never used to choose an arm). The fact is: \emph{a tell matters only through questions that actually come up.} If my friend reports that none of the questions I told her appeared, the day
 went exactly as if I had not told her, so the same observation is also a valid sample for the arm ``did not tell her'' (plus the small cost $c$ I would have saved).
 In E1/E2 about half of all tells do not land ($0.8^3=0.51$), so most pulls of a ``tell'' arm also teach about the ``silent'' arms. The price is one extra piece of feedback: how many of my questions
-came up for my friend. Under E0 every tell lands, and the learner is identical to UCB1.
+came up for my friend. Under E0 every tell lands, and the learner is identical to UCB1. In E1 the credited sample has exactly the distribution of a sample of the shorter arm; in E2 the day is identical,
+but keeping only days on which the two question sets are disjoint slightly changes the chance that other tellers' questions land, so there the credit is very slightly biased (we did not measure by how much;
+agreement is $100\%$ in E2 all the same).
+\item \textbf{Model-based UCB} (ours). The other half: a learner that estimates how leaks work and plans with the estimate. For each (candidate, type) it fits, by ridge regression on \emph{every} round
+whatever arm was played, the additive model $r+c_n|a|=\mu_0+\sum_{j\in a}\beta_j k_j+\text{noise}$, where $k_j$ is the number of the questions it told friend $j$ that came up (the same feedback as above, zero for friends not told),
+$c_n$ is the known cost of a tell in reward units, $\mu_0$ is the value of keeping quiet and $\beta_j$ the value to the teller of one leaked question reaching $j$. It also estimates the leak rate $\hat p$ from all observed $k_j/m$,
+and plays the arm with the highest predicted value $\mu_0+\sum_{j\in a}\beta_j\,m\hat p-c_n|a|$ plus a LinUCB bonus. The bonus is computed with an optimistic leak rate ($\hat p$ plus a Hoeffding radius): with the plug-in $\hat p$ alone, one
+tell that happens not to land gives $\hat p=0$, hence no exploration bonus on $\beta$, and the arm is never tried again (a unit test caught this). This is a reduced-form version of the learner in the review: $\beta_j$ is $\Delta$ passed through the hiring rule
+and the others' play rather than $\Delta$ itself, planning is single-agent rather than a best response in an estimated game of all candidates, and the model is additive across friends, so it cannot represent that a second teller of the same friend is redundant (E0).
 \end{itemize}
 
 \begin{algorithm}[t]
@@ -251,7 +264,7 @@ $D\leftarrow\{j\in a: k^{(i)}_j=0\}$ \tcp*{tells that did not land}
 \For{every $a'$ with $a\setminus D\subseteq a'\subseteq a$}{
  $n_{\theta,a'}\leftarrow n_{\theta,a'}+1$;\quad $\hat\mu_{\theta,a'}\leftarrow$ running mean with the new sample $r+c\,|a\setminus a'|$ \tcp*{refund cost of unmade tells}
 }
-update leak-rate estimate $\hat p\leftarrow$ mean of $k^{(i)}_j/m$ over all tells so far;\quad $t_\theta\leftarrow t_\theta+1$\;
+log leak-rate estimate $\hat p\leftarrow$ mean of $k^{(i)}_j/m$ over all tells so far (reporting only, not used to choose arms);\quad $t_\theta\leftarrow t_\theta+1$\;
 \end{algorithm}
 
 \textbf{What we measure.}
@@ -262,12 +275,13 @@ update leak-rate estimate $\hat p\leftarrow$ mean of $k^{(i)}_j/m$ over all tell
 \emph{Residual gain}: the exploitability of the profile of most-played arms --- what anyone could still gain by deviating from where the learners settled.
 
 \textbf{Experiments and statistics.} X1: rule $\times$ $\alpha\in\{0,0.025,\dots,0.5\}$ $\times$ four networks $\times$ E0--E2. X2: four utility families and five mixed populations.
-X3: five learners $\times$ two rules $\times$ E0--E2, $T=\XthreeT$ rounds, \XthreeSeeds{} seeds each. X4: bank size $Q\in\{4,\dots,64\}$ in E2, equilibrium re-solved for each $Q$.
+X3: six learners $\times$ two rules $\times$ E0--E2, $T=\XthreeT$ rounds, \XthreeSeeds{} seeds each. X4: bank size $Q\in\{4,\dots,64\}$ in E2, equilibrium re-solved for each $Q$.
 Runs that share a seed share every random draw of the environment across rules, leak models and learners, so comparisons are paired. We report 95\% bootstrap confidence intervals over seeds,
 two-sided sign-flip permutation tests on the paired differences, and Holm-corrected $p$-values within each family of tests~\cite{holm}.
 
 \textbf{Checks before any experiment} (Table~\ref{tab:checks}). The simulator must reproduce the worked example and every structural result of Section~3; all pass.
-A further 27 unit tests cover every module.
+A further 40 unit tests cover every module: the simulator and tables, the game and the solvers (including replicator dynamics, the CCE program and the bootstrap), support enumeration (against matching pennies,
+a coordination game and a dominance-solvable game), the learners, the learning loop (including that the leak-aware learner is identical to UCB1 under E0), the statistics and the parameter sweep.
 
 \begin{table}[t]\centering\small
 \caption{Verification checks. ``Deviations'' are all rows of every type of every candidate, against both ``nobody shares'' and ``everybody shares''.}\label{tab:checks}
@@ -319,8 +333,17 @@ within one grid step. Uniqueness is a statement about the estimated table, so we
 $\alpha\le0.025$, where a tell is worth about what it costs; \EpsBneEzero{} in E0, where a redundant tell costs exactly $c$; and \EpsBneStep{} on the steps of the
 fixed-seats staircase in E1/E2 (up to \EpsBneStepMax{} profiles), where one type is nearly indifferent. Away from these, every cut-off game in E1/E2 has a single
 near-equilibrium. Best-response dynamics converged in \XoneBrdOk{} of \XoneBrdTot{} runs, and replicator dynamics ended at an enumerated pure equilibrium in \XoneRepMatch{} of \XoneRepTot{} runs (the other \XoneRepRest{}, all in
-the most fragile game, had not settled after 3{,}000 steps). The CCE linear programs agree from the other side: maximum and minimum sharing over \emph{all} CCEs coincide in \CceSingle{} of \CceTot{} games,
-so no mixed or correlated equilibrium shares more or less than the pure one.
+the most fragile game, had not settled after 3{,}000 steps). 
+\finding{What about mixed and correlated equilibria?} The CCE linear programs bound what any mixed or correlated equilibrium can do. In E1 and E2 the maximum and minimum sharing over \emph{all} CCEs
+coincide in \CceSingleEone{} of \CceTotEone{} (E1) and \CceSingleEtwo{} of \CceTotEtwo{} (E2) games, so there no mixed or correlated equilibrium shares more or less than the pure one. E0 is the exception:
+the interval is a single point in only \CceSingleEzero{} of \CceTotEzero{} games, and in \CceWiderEzero{} of them it is wider than the range spanned by the pure equilibria (up to \CceMaxWidthEzero{} percentage points wide).
+For two friend groups at $\alpha=0.2$ under a cut-off, the \CceExN{} pure equilibria all share \CceExPure\% of the possible tells, while correlated play can share anywhere from \CceExLo\% to \CceExHi\%.
+A plausible reason, which we did not test: in E0 a second tell of the same friend is exactly redundant and costs only $c$, so candidates are nearly indifferent about who tells and a CCE can spread redundant tells almost freely.
+The pure-equilibrium statements of this section therefore describe E0 less completely than E1 and E2.
+Iterated strict dominance (Section~\ref{sec:method}) settles the rest: it solves \DomSolved{} of the \DomTot{} games (pairs \DomPairsSolved/\DomPairsTot, star \DomStarSolved/\DomStarTot, two friend groups \DomTwoGroupsSolved/\DomTwoGroupsTot),
+and in each of them the surviving profile is the game's only equilibrium of any kind. All but \DomOpenOutsideEzero{} of the games it leaves open are in E0 (the exception: \DomOpenWhere). On the pairs network, support enumeration finds exactly one mixed
+equilibrium in each of the \SuppPairsMixedGames{} games dominance leaves open (E0, fixed seats), next to the two pure ones, with sharing between theirs and inside the CCE interval; since three agents mix there and the root finding is not
+exhaustive, there may be more. On the other two networks nothing is claimed about mixed equilibria beyond the CCE bound.
 
 \begin{figure}[t]\centering
 \includegraphics[width=0.93\textwidth]{figures/fig3_sharing_vs_friendliness.pdf}
@@ -370,17 +393,23 @@ despite the lowest agreement. Plausible reasons, which we did not test: with pay
 while $\varepsilon$-greedy's remaining mistakes are on decisions where the wrong row costs little.
 
 \finding{A cut-off is easier to learn than fixed seats} whenever the equilibrium is unique: the gap is larger and the same for all types. In E1 and E2, agreement under a cut-off is at least as high for every learner and significantly higher
-(Holm-corrected $p<0.05$) in \BarSeatsSig{} of \BarSeatsTests{} paired tests (the exception: \BarSeatsNotSigLearners, at 100\% under both rules). Under fixed seats the slowest learners are the \emph{average} types (UCB1: \TypeUcbEoneSeatsWeak\% of weak, \TypeUcbEoneSeatsAvg\% of average,
+(Holm-corrected $p<0.05$) in \BarSeatsSig{} of \BarSeatsTests{} paired tests (the exceptions: \BarSeatsNotSigLearners, at 100\% under both rules). Under fixed seats the slowest learners are the \emph{average} types (UCB1: \TypeUcbEoneSeatsWeak\% of weak, \TypeUcbEoneSeatsAvg\% of average,
 \TypeUcbEoneSeatsStrong\% of strong decisions correct), although their gap is not the smallest (\PayGapTypeEoneSeatsWeak, \PayGapTypeEoneSeatsAvg, \PayGapTypeEoneSeatsStrong{} points). A plausible reason, which we did not test: a weak candidate is almost never hired, so her rewards are much less noisy.
 
-\finding{Knowing how leaks work is worth a factor of two to three.} Leak-aware UCB reaches 90\% agreement after \TninetyMbEoneSeats{} rounds under fixed seats and \TninetyMbEoneBar{} under a cut-off, against \TninetyUcbEoneSeats{} and
-\TninetyUcbEoneBar{} for UCB1, and ends at \AgreeMbEoneSeats\% and \AgreeMbEoneBar\%. At 20{,}000 rounds it is ahead of UCB1 by $\MbEarlyEoneSeats$ and $\MbEarlyEoneBar$ points (E1) and $\MbEarlyEtwoSeats$ and
-$\MbEarlyEtwoBar$ points (E2); all \MbEarlyTests{} differences are significant after Holm correction. Its settled profile is an exact equilibrium in \ExactEqMbEoneSeats\% (seats) and
-\ExactEqMbEoneBar\% (cut-off) of runs, against \ExactEqUcbEoneSeats\% and \ExactEqUcbEoneBar\% for UCB1, and it recovers the leak rate: $\hat p=\MbLeakHatEone$ in E1 and E2 (truth $m/Q=0.2$).
-The help is one-sided, which is instructive: against UCB1, cumulative regret changes by $\MbRegretEoneBar$ under a cut-off, where the best arm is ``tell everyone'' and each pull also informs every other arm, and by $\MbRegretEoneSeats$ under fixed
-seats, where the best arm for most types is silence --- and silence teaches nothing about telling.
+\finding{Knowing how leaks work is worth a factor of two to five.} Two learners use it. Leak-aware UCB (UCB1 plus credit for tells that did not land) reaches 90\% agreement in E1 after \TninetyMbEoneSeats{} rounds under fixed seats and
+\TninetyMbEoneBar{} under a cut-off, against \TninetyUcbEoneSeats{} and \TninetyUcbEoneBar{} for UCB1. Model-based UCB, which estimates the leak rate and the value of a leaked question and plans with them, needs
+\TninetyMuEoneSeats{} and \TninetyMuEoneBar. Both end at 100\% (rounded) in E1 and E2 under both rules. At 20{,}000 rounds Leak-aware UCB is ahead of UCB1 by
+$\MbEarlyEoneSeats$ and $\MbEarlyEoneBar$ points (E1) and $\MbEarlyEtwoSeats$ and $\MbEarlyEtwoBar$ points (E2), and Model-based UCB by $\MuEarlyEoneSeats$ and $\MuEarlyEoneBar$ (E1) and $\MuEarlyEtwoSeats$ and
+$\MuEarlyEtwoBar$ (E2); all \MbEarlyTests{} and all \MuEarlyTests{} differences are significant after Holm correction. The settled profile of Model-based UCB is an exact equilibrium in \ExactEqMuEoneSeats\% (seats) and
+\ExactEqMuEoneBar\% (cut-off) of E1 runs, of Leak-aware UCB in \ExactEqMbEoneSeats\% and \ExactEqMbEoneBar\%, and of UCB1 in \ExactEqUcbEoneSeats\% and \ExactEqUcbEoneBar\%.
+The two help in different ways. Against UCB1, the cumulative regret of Leak-aware UCB changes by $\MbRegretEoneBar$ under a cut-off, where the best arm is ``tell everyone'' and each pull also informs every other arm, and by
+$\MbRegretEoneSeats$ under fixed seats, where the best arm for most types is silence --- and silence teaches nothing about telling. Model-based UCB lowers regret in all four E1/E2 settings
+($\MuRegretEoneSeats$ and $\MuRegretEoneBar$ in E1, $\MuRegretEtwoSeats$ and $\MuRegretEtwoBar$ in E2; significant after Holm correction in \MuRegretSig{} of \MuRegretTests), and it is the only learner that improves on UCB1 in both
+regret and agreement under fixed seats ($\varepsilon$-greedy and Thompson sampling also have lower regret there, but lower agreement). A plausible reason, which we did not test: it learns the value of a leaked question from every round in which any arm that tells that friend was played, instead of treating each row of $S$ as a separate arm.
+Its leak-rate estimate is used to choose arms, and is right ($\hat p=\MuLeakHatEone$ in E1 and E2, truth $m/Q=0.2$; $\MuLeakHatEzero$ in E0, where every told question comes up). The model is additive across friends, so it cannot
+represent a redundant second tell. In E0 under a cut-off, where that matters, its agreement is \AgreeMuEzeroBar\% (UCB1: \AgreeUcbEzeroBar\%) --- see the caution below --- while its regret is still lower ($\MuRegretEzeroBar$).
 
-\finding{Play moves toward the CCE set, but is not yet close to it} (Figure~\ref{fig:learn}c). The CCE gap falls between 10{,}000 and \XthreeT{} rounds for all five learners (to \GapRatioMin--\GapRatioMax{} of its earlier value;
+\finding{Play moves toward the CCE set, but is not yet close to it} (Figure~\ref{fig:learn}c). The CCE gap falls between 10{,}000 and \XthreeT{} rounds for all six learners (to \GapRatioMin--\GapRatioMax{} of its earlier value;
 Holm-corrected $p<0.001$ in \GapFallSig{} of \GapFallTests{} tests) and ends at \GapFinalMin--\GapFinalMax{} percentage points. That is about the size of the payoff gaps the learners have to
 detect (\PayGapMinEoneSeats--\PayGapMaxEoneSeats{} points under fixed seats), so after \XthreeT{} rounds the history of play is measurably closer to a CCE but not yet near one:
 exploration is still being paid for.
@@ -419,21 +448,22 @@ Holds in all \HtwoCellsNoEzero{} E1/E2 comparisons. In E0 fails once (\HtwoViolW
 Refuted once (E0); holds in E1/E2\\
 H3 & Fixed seats: sharing rises with $\beta$; cut-off: no effect & No rise under fixed seats, or an effect under a cut-off & \ClanShareMinSeats\%$\to$\ClanShareMaxSeats\% (never falling) vs.\ constant \ClanShareMinBar\% & Supported\\
 H4 & No-regret play nears the CCE set; model-based learners are faster & CCE gap does not fall, or not faster &
-CCE gap falls for \GapFallSig{} of \GapFallTests{} learners but ends at \GapFinalMin--\GapFinalMax{} points, the size of the payoff gaps; leak-aware UCB reaches 90\% in \TninetyMbEoneSeats/\TninetyMbEoneBar{} rounds vs.\ \TninetyUcbEoneSeats/\TninetyUcbEoneBar{} for UCB1 & Not refuted; weak$^\ast$\\
+CCE gap falls for \GapFallSig{} of \GapFallTests{} learners but ends at \GapFinalMin--\GapFinalMax{} points, the size of the payoff gaps; Model-based UCB reaches 90\% in \TninetyMuEoneSeats/\TninetyMuEoneBar{} rounds (leak-aware UCB: \TninetyMbEoneSeats/\TninetyMbEoneBar) vs.\ \TninetyUcbEoneSeats/\TninetyUcbEoneBar{} for UCB1 & Faster: supported; nears the CCE set: weak$^\ast$\\
 H5 & $\Lambda_{\textsc{bar}}>\Lambda_{\textsc{seats}}$, and fixed seats need a smaller $Q$ for $\Lambda<5\%$ & CI includes 0, or order reversed &
 At $\alpha=0.2$: \LamRatioMin--\LamRatioMax$\times$ larger, disjoint CIs at every $Q$; $Q\ge\QFiveSeats$ vs.\ $Q\ge\QFiveBar$. If everyone told: \LamAllRatioMin--\LamAllRatioMax$\times$; $Q\ge\QFiveAllSeats$ vs.\ $Q\ge\QFiveAllBar$ & Supported\\
 \bottomrule
 \end{tabular}
 
-\raggedright\footnotesize $^\ast$ The CCE gap falls but is not yet small, and the ``model-based'' learner is the simpler leak-aware learner of Section~\ref{sec:method}; it is faster in agreement under both rules, but has lower regret only under a cut-off.
+\raggedright\footnotesize $^\ast$ The CCE gap falls but is not yet small. The model-based learner is a reduced-form version of the one in the review (it estimates the value $\beta$ of a leaked question, not $\Delta$, and plans alone rather than best-responding in an estimated game of all candidates); the leak-aware learner is only UCB1 with credit for tells that did not land (Section~\ref{sec:method}) and has lower regret only under a cut-off.
 \end{table}
-Judged by the refutation criteria fixed in the review (Table~\ref{tab:hyp}), H1, H3 and H5 are supported. H4 is not refuted, but the support is weak: the CCE gap falls without
-becoming small, and the faster learner is simpler than the one promised. H2 is refuted at one point: in E0, where the game has several equilibria, some fixed-seats equilibria share more
+Judged by the refutation criteria fixed in the review (Table~\ref{tab:hyp}), H1, H3 and H5 are supported. H4 is not refuted, with unequal support: the faster-learner half holds clearly (for a reduced-form model-based learner and for the simpler leak-aware one), but the CCE gap falls without
+becoming small. H2 is refuted at one point: in E0, where the game has several equilibria, some fixed-seats equilibria share more
 than the cut-off's; in E1 and E2 it holds in every comparison. \textbf{Deviations from the review plan:}
 (i)~tables use 2{,}000 days per cell, not the pilot's 8{,}000; precision is instead reported per equilibrium by the bootstrap;
-(ii)~the ``model-based'' learner is the leak-aware learner above and needs the friend to report how many told questions came up;
-(iii)~mixed equilibria were sought by replicator dynamics only (no support enumeration), with the CCE programs bounding what they could do;
-(iv)~the CCE programs were run for E1 only; (v)~the complete network at $n=6$ was handled by deviation tests, and $n=8$ was not attempted.
+(ii)~the ``model-based'' learner of the review is built in two simpler forms: Leak-aware UCB (UCB1 with counterfactual credit; its leak-rate estimate is logged but not used) and Model-based UCB (a reduced-form model of leaked questions, planned with by one candidate alone); both need the friend to report how many told questions came up;
+(iii)~mixed equilibria were sought by replicator dynamics, by iterated dominance on all networks and by support enumeration on the pairs network only (agents have four or eight actions on the other two),
+with the CCE programs bounding what remains;
+(iv)~the CCE programs use a coarser grid ($\alpha$ in steps of 0.05) for two friend groups; (v)~the complete network at $n=6$ was handled by deviation tests, and $n=8$ was not attempted.
 \textbf{Limits.} Types are coarse and rounds are independent: there is no reputation, and placed candidates do not leave the pool (a stochastic game~\cite{shapley}). Networks are fixed and small.
 There is no real leak data, so every claim is comparative (seats vs.\ cut-off, weak vs.\ strong), not a prediction of how much real candidates share.
 The bootstrap measures Monte Carlo error, not sensitivity to $\Delta$, $\sigma$ or $K/n$, which we held fixed.
@@ -449,9 +479,9 @@ Sections 2--3, Corollary~1; \texttt{utility.py}, \texttt{run\_x2.py}, \texttt{ru
 Bhavay Goyal & Simulator (E0--E2, networks), payoff tables, verification checks, pipeline &
 \texttt{config.py}, \texttt{env.py}, \texttt{tables.py}, \texttt{checks.py}, unit tests; Table~\ref{tab:checks} & Fulfilled\\
 Chaitanya Bhoite & Level-1 solvers (BNE, mixed equilibria, CCE program, bootstrap $\varepsilon$); X1 &
-\texttt{game.py}, \texttt{solvers.py}, \texttt{analysis.py}, \texttt{run\_x1.py}; Figures~\ref{fig:who}--\ref{fig:alpha} & Fulfilled; no support enumeration\\
+\texttt{game.py}, \texttt{solvers.py}, \texttt{support\_enum.py}, \texttt{analysis.py}, \texttt{run\_x1.py}, \texttt{run\_cce.py}, \texttt{run\_support.py}; Figures~\ref{fig:who}--\ref{fig:alpha} & Fulfilled; support enumeration on the pairs network only\\
 Vishnu Sinha & Level-2 learners (incl.\ model-based); regret and CCE metrics; X3; statistics &
-\texttt{learners.py}, \texttt{learning.py}, \texttt{stats.py}, \texttt{run\_x3.py}; Figure~\ref{fig:learn}, Table~\ref{tab:x3} & Fulfilled; learner simplified\\
+\texttt{learners.py}, \texttt{learning.py}, \texttt{stats.py}, \texttt{run\_x3.py}; Figure~\ref{fig:learn}, Table~\ref{tab:x3} & Fulfilled; model-based learner in reduced form\\
 \bottomrule
 \end{tabular}\par}
 \vspace{3pt}

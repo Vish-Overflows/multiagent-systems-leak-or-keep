@@ -44,18 +44,26 @@ the α = 0.2 games above still have exactly one. 117 of the 378 games have more 
 α ≤ 0.025, 62 in leak model E0 (where a redundant tell costs exactly the message cost), and 38 on the steps of the
 fixed-seats staircase (up to 64 profiles), where one type is nearly indifferent.
 
+Mixed and correlated equilibria do not change this picture in E1 and E2: the linear programs over all coarse
+correlated equilibria give a single sharing level in all 212 games, and iterated strict dominance shows that 311 of
+the 378 games have exactly one equilibrium of any kind. In E0 correlated play can share much more or less than the
+pure equilibria (see Known limits).
+
 ![Sharing versus friendliness](results/figures/fig3_sharing_vs_friendliness.png)
 
 ### 2. Learners find the equilibrium, and knowing how leaks work helps
 
 Each (candidate, type) pair is a bandit learner that sees only its own outcome. After 200,000 rounds (30 seeds
-per setting, 900 runs in total) UCB1 has 93% (fixed seats) and 99% (cut-off) of decisions matching the
-equilibrium. Our leak-aware variant of UCB1 reaches 90% in 27,000 and 7,000 rounds, against 56,000 and 18,000
-for plain UCB1.
+per setting, 1,080 runs in total) UCB1 has 93% (fixed seats) and 99% (cut-off) of decisions matching the
+equilibrium. Two learners use how leaks work. Leak-aware UCB (UCB1 plus credit for tells that did not land)
+reaches 90% in 27,000 and 7,000 rounds, against 56,000 and 18,000 for plain UCB1. Model-based UCB (it estimates
+the leak rate and the value of a leaked question by regression, and plans with both) needs 12,000 and 4,500
+rounds, and, unlike Leak-aware UCB, also has lower regret than UCB1 under fixed seats (168 against 246 in E1).
+Both end at 100% in E1 and E2.
 
 Regret ranks the learners almost the other way round. Under fixed seats (E1), cumulative regret is 154 for
 epsilon-greedy and 173 for Thompson sampling, against 246 for UCB1 and 251 for EXP3. UCB1 finds the right answer
-but pays more to get there. The CCE gap falls for all five learners, but at 200,000 rounds it is still about the size
+but pays more to get there. The CCE gap falls for all six learners, but at 200,000 rounds it is still about the size
 of the payoff gaps the learners must detect, so play is closer to a CCE without being near one yet.
 
 ![Learning curves](results/figures/fig4_learning.png)
@@ -77,7 +85,7 @@ the cut-off would lose 2.5 to 4.4 times more, and fixed seats would need 20 ques
 These images are the text of the log files in `results/logs/`, rendered by
 `experiments/make_console_shots.py`.
 
-Learning experiment (X3), one row per learner, leak model and hiring rule (`model-based` is the leak-aware UCB):
+Learning experiment (X3), one row per learner, leak model and hiring rule (`model-based` is the leak-aware UCB, i.e. UCB1 with counterfactual credit; `model-ucb` is the model-based UCB):
 
 ![X3 console output](results/figures/console_x3_learning.png)
 
@@ -99,9 +107,11 @@ Requirements: Python 3.10 or newer and NumPy 2.0 or newer (the code uses `np.bit
 pulls the right version). No GPU is needed. Everything ran on a 10-core laptop.
 
 ```bash
-python -m venv .venv
-.venv/bin/pip install -e ".[dev]"
+uv venv .venv
+uv pip install --python .venv/bin/python -e ".[dev]"      # Windows: .venv\Scripts\python.exe
 ```
+
+(`python -m venv .venv && .venv/bin/pip install -e ".[dev]"` works too.)
 
 To regenerate everything in one go (about 75 minutes on a 10-core laptop):
 
@@ -113,11 +123,13 @@ Or step by step:
 
 | Step | Command | Writes | Time |
 |---|---|---|---|
-| Unit tests (27) | `python -m pytest -q` | console | 5 s |
+| Unit tests (40) | `python -m pytest -q` | console | 15 s |
 | Verification checks | `python experiments/run_checks.py` | `results/checks/checks.json` | 10 s |
 | X1: who tells | `python experiments/run_x1.py` | `results/x1/*.json` | 40 min |
-| X2: motives | `python experiments/run_x2.py` | `results/x2/x2.json` | 10 min |
-| X3: learning | `python experiments/run_x3.py` | `results/x3/x3_<learner>.npz` | 8 min |
+| X1: CCE programs for E0 and E2 | `python experiments/run_cce.py [n_workers] [network:env ...]` | `results/x1/x1_cce_<network>_<env>.json` | 2 h with one worker |
+| X1: mixed equilibria (dominance, support enumeration) | `python experiments/run_support.py` | `results/x1/x1_support.json` | 5 min |
+| X2: motives | `python experiments/run_x2.py` | `results/x2/x2.json` | 20 min |
+| X3: learning | `python experiments/run_x3.py` | `results/x3/x3_<learner>.npz` | 10 min |
 | X3: statistics | `python experiments/analyze_x3.py` | `results/x3/x3_summary.json` | 30 s |
 | X4: company loss | `python experiments/run_x4.py` | `results/x4/x4.json` | 11 min |
 | Figures, tables, numbers | `python experiments/make_figures.py` | `results/figures/`, `report/figures/`, `report/generated/`, `results/numbers.json` | 5 s |
@@ -127,8 +139,9 @@ Or step by step:
 Notes:
 
 - All seeds are fixed, so re-running reproduces the committed result files.
-- Payoff tables are cached in `results/tables/` (263 MB, not committed). They are rebuilt automatically on first
-  use, 15 to 40 seconds each.
+- Payoff tables are cached in `results/tables/` (not committed). They are rebuilt automatically on first use, 15 to
+  40 seconds each. The full set took 263 MB before the tables also stored block means of the pairwise hiring
+  probabilities (needed to bootstrap fairness utilities); the nine X1 tables now take about 100 MB.
 - `run_x1.py` skips (network, leak model) cells whose output file already exists; delete `results/x1/` to force a
   full re-run. The committed `results/logs/x1.log` comes from a run that was resumed this way.
 - The report compiles with [tectonic](https://tectonic-typesetting.github.io) or with any LaTeX installation
@@ -162,14 +175,15 @@ leakgame/            the library
   tables.py          payoff tables by simulation (common random numbers, block means)
   game.py            the game in agent form: interim values, exploitability
   solvers.py         exhaustive pure equilibria, best-response and replicator dynamics, CCE linear program, bootstrap
+  support_enum.py    iterated strict dominance and support enumeration for mixed equilibria
   analysis.py        break-even friendliness, sweeps over friendliness
-  learners.py        epsilon-greedy, UCB1, Thompson sampling, EXP3, leak-aware UCB
+  learners.py        epsilon-greedy, UCB1, Thompson sampling, EXP3, leak-aware UCB, model-based UCB
   learning.py        vectorised learning loop and metrics (agreement, regret, CCE gap)
   stats.py           bootstrap intervals, paired permutation tests, Holm correction
   checks.py          verification of the worked example, Lemma 1 and Propositions 1-3
   pipeline.py        builds tables, games and equilibrium targets for the learning runs
 experiments/         one script per experiment, plus figures and console screenshots
-tests/               27 unit tests
+tests/               40 unit tests
 results/             result files, logs and figures (PNG)
 report/              LaTeX source, generated tables and numbers, figures (PDF), main.pdf
 run_all.sh           runs everything in order
@@ -192,11 +206,23 @@ run_all.sh           runs everything in order
 
 - Tables use 2,000 simulated days per cell (the pilot used 8,000); the bootstrap reports the resulting
   uncertainty for each equilibrium.
-- The "model-based" learner of the proposal is implemented as the simpler leak-aware UCB, which needs the friend
-  to report how many told questions came up. `results/logs/x3_model_based_rerun.log` is from its final run,
-  after a fix that refunds the message cost when crediting the "did not tell" arm.
-- Mixed equilibria are sought by replicator dynamics only; there is no support enumeration.
-- The linear programs over coarse correlated equilibria were run for leak model E1 only.
+- The "model-based" learner of the proposal was not built. What is called `model-based` in the code and result
+  files is UCB1 with counterfactual credit: a tell whose questions did not come up is credited to the arm without
+  that tell. It needs the friend to report how many told questions came up, does not estimate Δ and does not
+  best-respond in an estimated game. Its leak-rate estimate is logged but never used to choose an arm. In E1 the
+  credit is exact in distribution; in E2 it is very slightly biased (not measured). `results/logs/x3_model_based_rerun.log`
+  is from its final run, after a fix that refunds the message cost when crediting the "did not tell" arm.
+- Mixed equilibria are sought by replicator dynamics, by iterated strict dominance on all three networks and by
+  support enumeration on the pairs network only (agents have four or eight actions on the other two). Dominance
+  solves 311 of the 378 games exactly, so each has one equilibrium of any kind; all but one of the others are in
+  leak model E0. Support enumeration finds one mixed equilibrium in each of 3 pairs games (E0, fixed seats), next to
+  two pure ones; with three mixing agents its root finding is not exhaustive. On the other two networks nothing is
+  claimed about mixed equilibria beyond the CCE bound.
+- The linear programs over coarse correlated equilibria cover E0, E1 and E2 (coarser alpha grid, step 0.05, for two
+  friend groups). In E1 and E2 the maximum and minimum sharing coincide in all 212 games, so no mixed or correlated
+  equilibrium shares more or less than the pure one. In E0 they coincide in only 55 of 106 games: for two friend
+  groups at alpha = 0.2 under a cut-off, the four pure equilibria share 67% of the possible tells while correlated
+  play can share anywhere from 66% to 99%. So the pure-equilibrium results describe E0 less completely.
 - The complete network at six candidates is handled by deviation tests, not full enumeration; eight candidates
   were not attempted.
 - One exception to "a cut-off shares at least as much as fixed seats" exists in 189 comparisons: two friend

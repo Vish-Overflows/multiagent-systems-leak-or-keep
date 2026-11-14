@@ -1,7 +1,7 @@
-"""X3 (core): five learners x hiring rule x environment, T = 2e5 rounds, 30 seeds (900 runs).
+"""X3 (core): six learners x hiring rule x environment, T = 2e5 rounds, 30 seeds (1,080 runs).
 
 All 180 runs of one learner (30 seeds x 3 environments x 2 rules) are simulated as one vectorised
-batch; runs sharing a seed share the environment draws (common random numbers).  The five learners
+batch; runs sharing a seed share the environment draws (common random numbers).  The six learners
 run in parallel processes.  Output: results/x3/x3_<learner>.npz
 """
 import os
@@ -19,7 +19,7 @@ from leakgame.utility import FRIEND, homogeneous  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "results", "x3")
-LEARNERS = ["eps-greedy", "UCB1", "Thompson", "EXP3", "model-based"]
+LEARNERS = ["eps-greedy", "UCB1", "Thompson", "EXP3", "model-based", "model-ucb"]
 T = 200_000
 SEEDS = list(range(30))
 ENVS = ["E0", "E1", "E2"]

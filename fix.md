@@ -1,5 +1,40 @@
 # Fix plan: items 5–7 of the review
 
+## Status (what was actually done)
+
+All three items are implemented and their results are in the repository. Where the outcome differed from what the
+plan expected, or the plan was changed, it is listed here; the plan below is left as written.
+
+| Item | Done | Result |
+|---|---|---|
+| 5a CCE programs for E0 and E2 | `experiments/run_cce.py`; 6 cells (about 78 min with two processes) | E1 and E2: one sharing level over all CCEs in 212 of 212 games. **E0: only 55 of 106**; in 48 of them the CCE interval is wider than the range spanned by the pure equilibria (up to 42 points; two groups, α = 0.2, cut-off: pure equilibria 67%, CCE 66% to 99%). The report's old sentence "no mixed or correlated equilibrium shares more or less" held only for E1/E2 and is restricted accordingly. Every pure equilibrium lies in its CCE interval and the rebuilt tables reproduce the X1 equilibria (both asserted per row). |
+| 5b Support enumeration | `leakgame/support_enum.py`, `experiments/run_support.py` | The plan expected "most likely none found". **Three mixed equilibria were found** (pairs, E0, fixed seats, α = 0.05, 0.2, 0.325), one per game, next to two pure ones; each lies inside its CCE interval. Dominance reduction, added beyond the plan, solves 311 of 378 games on all three networks exactly. |
+| 6 Fairness bootstrap | `PayoffTable.Pxx_blocks`, `resample_tables`, `with_Px(..., Pxx=)`; X2 rerun | Only 2 of 44 X2 records changed, both fairness games under a cut-off and only in their bootstrap fields (FAIR(0.5, 0.25): 49.5% → 52.0% exact; mixed FAIR/FRIEND: 99% → 100%). The understatement was real but small; no verdict changed. |
+| 7a Honest naming | docstrings, report, README | The leak-aware learner is described as UCB1 with counterfactual credit; its logged leak-rate estimate is said not to be used. |
+| 7b Model-based learner | `ModelUCB` in `leakgame/learners.py`; X3 run for it; `analyze_x3.py` has six learners | Reaches 90% agreement in 12,000 / 4,500 rounds (E1, seats / cut-off) against 27,000 / 7,000 for leak-aware UCB and 56,000 / 18,000 for UCB1, and lowers regret against UCB1 in all four E1/E2 settings. H4's "faster" half is now supported by a real model-based learner. |
+
+Differences from the plan:
+- The pairwise block table is 112 MB for two groups, not 56 MB.
+- Item 7b: a unit test caught a flaw in the first version of the learner (one tell that happens not to land gave
+  p̂ = 0, zero exploration bonus, and the arm was never tried again in 4 of 20 runs). The bonus now uses an optimistic
+  leak rate. The first, flawed run was discarded and redone.
+- Adding a sixth learner enlarges two Holm families (BAR vs SEATS, CCE-gap tests), so their corrected p-values
+  changed (raw p-values and all per-learner cells did not; cells of the five existing learners agree to 1e-14).
+- Unit tests went from 27 to 40, covering the learning loop, replicator dynamics, the sweep helper, support enumeration
+  and the new learner, so the report's "every module is tested" is now true.
+- The environment is a `uv` virtual environment (`uv venv .venv`; Python 3.10, NumPy 2.2, SciPy 1.15).
+
+Not done:
+- **`report/main.pdf` is not rebuilt.** There is no LaTeX on this machine. I tried to download the official tectonic
+  release into `.tools/` (gitignored, as `run_all.sh` expects) and the download was refused, so I stopped. Build it with
+  `cd report && tectonic main.tex` or on Overleaf, then check the page count (it was 8 pages and the text has grown).
+- Support enumeration for two friend groups and star (agents with four or eight actions).
+
+Also changed: the Contribution table's status column (Chaitanya: "support enumeration on the pairs network only";
+Vishnu: "model-based learner in reduced form"). Check that you are happy with how it credits these tasks.
+
+---
+
 Items 1–4 and 8 are already done:
 - `numpy>=2.0` in `pyproject.toml`.
 - X4 headline reworded.
