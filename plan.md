@@ -24,7 +24,7 @@ merged). Predictions were written before each run; where one failed it says so.
 | 0.1 PDF | rebuilt with `report/tectonic.exe`; **11 pages** (10 of body and references, the appendix on page 11); no undefined references, no overfull boxes | The page limit is still unknown (decision D1). A run-in heading in §5.1 was fixed. My first appendix was placed inside the two-column bibliography group, where floats are silently dropped; it now follows the references |
 | 0.2 Merge | `fix/items-5-7` merged into `main` (local only, nothing pushed); `proposal.pdf` moved to `docs/`; stale root `main.pdf` removed (byte-identical to the old committed report) | — |
 | 0.3 Environment | `uv.lock`, README versions, `.gitattributes`, `X1_WORKERS` / `X3_WORKERS` | The plan said `run_all.sh` has CRLF endings in git. It has LF in git; only a Windows checkout turned it into CRLF. `.gitattributes` fixes that |
-| 0.4 Clean clone | **running** (see below) | The committed results are part of a clone, and `run_x1.py` / `run_cce.py` skip cells whose result file exists, so a plain `run_all.sh` in a clone would *skip* X1 and the CCE programs. The clone's results had to be deleted first |
+| 0.4 Clean clone | **done**: `run_all.sh` ran start to finish in a fresh clone, exit code 0, 2 h 43 min. 38 files identical, 5 differ (all logs, all explained), 2 not produced by `run_all.sh`, 14 figure binaries not compared. Every JSON, NPZ and generated LaTeX file matches the committed one | The committed results are part of a clone, and `run_x1.py` / `run_cce.py` skip cells whose result file exists, so a plain `run_all.sh` in a clone would *skip* X1 and the CCE programs. The clone's results had to be deleted first |
 | 1.1 CCE-gap test | per learner × leak model × rule, 30 seeds as the unit: **36 of 36 significant** (24 of 24 in E1/E2), as predicted | — |
 | 1.2 Rounds to 90% | all three leak models, appendix Table 5 | — |
 | 1.3 H1 pivotality | P(last seat) = **3.6 / 17.9 / 28.6 %** for weak / average / strong, the order of α\* — prediction holds, H1 no longer rests on the loss | Plan guessed "average ≈ strong"; strong is clearly highest |
@@ -34,7 +34,17 @@ merged). Predictions were written before each run; where one failed it says so.
 
 **0.4 clean-clone run.** Command: `X1_WORKERS=2 X3_WORKERS=2 CCE_WORKERS=1 bash run_all.sh` in a fresh clone of `main`
 at `..\FAI_clean` after deleting its committed `results/`, `report/generated/` and `report/figures/`; compare with
-the committed files using numeric tolerances (timings ignored). Status and outcome: see the end of this section.
+the committed files with `python experiments/compare_with_committed.py ..\FAI_clean` (numeric tolerances, timings ignored).
+
+*Outcome.* Run time with 2 / 2 / 1 workers for X1 / X3 / CCE: tests and checks 4 min, X1 47 min, CCE programs 69 min,
+support enumeration 1 min, X2 14 min, X3 15 min, X4 12 min (17:26 to 20:09). Differences, all in logs:
+`checks.log` (last digit of printed floats, and a timing line from the original author's machine), `x1.log` and
+`x1_cce.log` (the committed ones come from a *resumed* run and contain "skip … already done" lines, as the README
+says), `x3.log` (progress lines of parallel workers interleaved differently; the NPZ data is identical) and
+`figures.log` (the committed one was stale, 524 macros; refreshed in Phase 1). Not produced by `run_all.sh`:
+`x3_model_based_rerun.log` and `x3_model_ucb.log`, which document separate reruns. Figures are PNG/PDF and are not
+compared byte for byte; they are drawn from the identical data and tables. Memory was the limit, not time: with
+16 GB and other programs open the CCE program of two friend groups (about 4 GB) must run alone.
 
 **Still open from Phases 0–1:** the page limit (D1); whether to merge `phase-1`; 1.5(e) is in Phase 3.1.
 
