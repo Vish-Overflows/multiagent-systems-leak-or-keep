@@ -39,6 +39,11 @@ and exactly the same under a cut-off.
 The same staircase appears in every friendship network and leak model we solved (378 games). A candidate who is
 friends with everyone never tells under fixed seats, and when everyone is friends nobody does.
 
+Uniqueness is exact in the estimated table. Counting profiles within 0.001 (one message cost) of being an equilibrium,
+the α = 0.2 games above still have exactly one. 117 of the 378 games have more than one such near-equilibrium: 17 at
+α ≤ 0.025, 62 in leak model E0 (where a redundant tell costs exactly the message cost), and 38 on the steps of the
+fixed-seats staircase (up to 64 profiles), where one type is nearly indifferent.
+
 ![Sharing versus friendliness](results/figures/fig3_sharing_vs_friendliness.png)
 
 ### 2. Learners find the equilibrium, and knowing how leaks work helps
@@ -48,13 +53,22 @@ per setting, 900 runs in total) UCB1 has 93% (fixed seats) and 99% (cut-off) of 
 equilibrium. Our leak-aware variant of UCB1 reaches 90% in 27,000 and 7,000 rounds, against 56,000 and 18,000
 for plain UCB1.
 
+Regret ranks the learners almost the other way round. Under fixed seats (E1), cumulative regret is 154 for
+epsilon-greedy and 173 for Thompson sampling, against 246 for UCB1 and 251 for EXP3. UCB1 finds the right answer
+but pays more to get there. The CCE gap falls for all five learners, but at 200,000 rounds it is still about the size
+of the payoff gaps the learners must detect, so play is closer to a CCE without being near one yet.
+
 ![Learning curves](results/figures/fig4_learning.png)
 
-### 3. Leaks cost a cut-off company about ten times more
+### 3. At friendliness 0.2, leaks cost a cut-off company about ten times more, mostly because more people tell
 
 With a bank of 15 questions, equilibrium sharing costs 1.7% of hiring value under fixed seats and 13.1% under a
 cut-off. To keep the loss under 5% the company needs 9 questions under fixed seats and 40 under a cut-off.
 A cut-off still gives the higher absolute value once the bank has 9 or more questions.
+
+Most of the tenfold gap comes from who tells: at α = 0.2 everyone tells under a cut-off but only weak candidates do
+under fixed seats. If everyone told under both rules (dashed line in panel a), fixed seats would lose 6.2% at Q = 15,
+the cut-off would lose 2.5 to 4.4 times more, and fixed seats would need 20 questions instead of 9.
 
 ![Company loss versus bank size](results/figures/fig5_company_loss.png)
 
@@ -81,7 +95,8 @@ Unit tests:
 
 ## Reproducing the results
 
-Requirements: Python 3.10 or newer. No GPU is needed. Everything ran on a 10-core laptop.
+Requirements: Python 3.10 or newer and NumPy 2.0 or newer (the code uses `np.bitwise_count`; `pip install -e .`
+pulls the right version). No GPU is needed. Everything ran on a 10-core laptop.
 
 ```bash
 python -m venv .venv
@@ -185,4 +200,8 @@ run_all.sh           runs everything in order
 - The complete network at six candidates is handled by deviation tests, not full enumeration; eight candidates
   were not attempted.
 - One exception to "a cut-off shares at least as much as fixed seats" exists in 189 comparisons: two friend
-  groups, leak model E0, friendliness 0.375, where the game has several equilibria.
+  groups, leak model E0, friendliness 0.375, where the game has several equilibria. By the refutation criterion
+  fixed in the proposal ("fixed seats share more at some α"), H2 is therefore refuted at that one point; it holds
+  in all 126 E1/E2 comparisons.
+- H4 is not refuted but only weakly supported: the CCE gap falls without becoming small, and the faster learner is
+  the simpler leak-aware UCB.

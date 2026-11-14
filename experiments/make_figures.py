@@ -267,6 +267,27 @@ def numbers_x1(x1, comp):
                 cc_tot += 1; wdt = row["cce_share_max"] - row["cce_share_min"]
                 cc_single += wdt < 1e-6; cc_width = max(cc_width, wdt)
     num("CceTot", cc_tot); num("CceSingle", cc_single); num("CceMaxWidth", f"{cc_width:.3f}")
+    # near-ties: profiles within eps = 0.001 (= c, one message) of being an equilibrium, recorded by sweep_alpha
+    eps_tot = eps_multi = eps_low = eps_e0 = eps_step = eps_step_max = 0
+    for (net, env), rr in x1.items():
+        for rule in ("SEATS", "BAR"):
+            for rec in rr["rules"][rule]["records"]:
+                eps_tot += 1
+                k = rec["n_eps_bne_1e-3"]
+                if k <= 1:
+                    continue
+                eps_multi += 1
+                if rec["alpha"] <= 0.025 + 1e-9:
+                    eps_low += 1            # a tell is worth about its cost
+                elif env == "E0":
+                    eps_e0 += 1             # a redundant tell costs exactly c
+                else:
+                    eps_step += 1; eps_step_max = max(eps_step_max, k)
+                    assert rule == "SEATS", "near-ties in E1/E2 away from alpha ~ 0 expected only on the fixed-seats staircase"
+    num("EpsBneGames", eps_tot); num("EpsBneMulti", eps_multi); num("EpsBneLowAlpha", eps_low)
+    num("EpsBneEzero", eps_e0); num("EpsBneStep", eps_step); num("EpsBneStepMax", eps_step_max)
+    for rule, tag in (("SEATS", "Seats"), ("BAR", "Bar")):
+        num(f"EpsBneHead{tag}", rec_at(r["rules"][rule]["records"], 0.2)["n_eps_bne_1e-3"])
     if comp is not None:
         s = comp["SEATS"]; b = comp["BAR"]
         num("CompSeatsNoShare", sum(x["no_share_is_bne"] for x in s)); num("CompSeatsAllShare", sum(x["all_share_is_bne"] for x in s))
@@ -411,11 +432,13 @@ def table_x3(x3):
     if x3 is None:
         return
     envs, rules = x3["envs"], x3["rules"]
-    lines = [r"\begin{tabular}{@{}l" + "rr" * len(envs) + r"rr@{}}", r"\toprule",
-             " & " + " & ".join(rf"\multicolumn{{2}}{{c}}{{{e}}}" for e in envs) + r" & \multicolumn{2}{c}{Rounds to 90\% (E1)} \\",
-             "".join(rf"\cmidrule(lr){{{2 + 2 * k}-{3 + 2 * k}}}" for k in range(len(envs) + 1)),
-             "Learner & " + " & ".join("Seats & Cut-off" for _ in envs) + r" & Seats & Cut-off \\", r"\midrule"]
+    lines = [r"\begin{tabular}{@{}l" + "rr" * len(envs) + r"rrrr@{}}", r"\toprule",
+             " & " + " & ".join(rf"\multicolumn{{2}}{{c}}{{{e}}}" for e in envs) + r" & \multicolumn{2}{c}{Rounds to 90\% (E1)}"
+             r" & \multicolumn{2}{c}{Regret at $T$ (E1)} \\",
+             "".join(rf"\cmidrule(lr){{{2 + 2 * k}-{3 + 2 * k}}}" for k in range(len(envs) + 2)),
+             "Learner & " + " & ".join("Seats & Cut-off" for _ in envs) + r" & Seats & Cut-off & Seats & Cut-off \\", r"\midrule"]
     best = {(e, r): max(x3["cells"][f"{n}|{e}|{r}"]["agree"]["mean"] for n in x3["learners"]) for e in envs for r in rules}
+    best_reg = {r: min(x3["cells"][f"{n}|E1|{r}"]["regret"]["mean"] for n in x3["learners"]) for r in rules}
     for name in x3["learners"]:
         cells = []
         for e in envs:
@@ -427,6 +450,10 @@ def table_x3(x3):
         for r in rules:
             t = x3["cells"][f"{name}|E1|{r}"]["rounds_to_90"]
             cells.append(f"{t['median'] / 1000:.0f}k" if t["median"] is not None else rf"never\,({pct(t['frac_reached'])}\%)")
+        for r in rules:
+            g = x3["cells"][f"{name}|E1|{r}"]["regret"]
+            txt = f"{g['mean']:.0f}"
+            cells.append(rf"\textbf{{{txt}}}" if g["mean"] <= best_reg[r] + 1e-9 else txt)
         lines.append(LEARNER_TXT[name] + " & " + " & ".join(cells) + r" \\")
     lines += [r"\bottomrule", r"\end{tabular}"]
     with open(os.path.join(GEN, "tab_x3.tex"), "w") as f:
@@ -534,6 +561,11 @@ def fig_company(x4):
             num(f"Lam{tag}Q{qt}", pct(r["Lambda_eq_rel"], 1))
             num(f"LamCI{tag}Q{qt}", f"{pct(r['Lambda_eq_rel_ci95'][0], 1)}, {pct(r['Lambda_eq_rel_ci95'][1], 1)}")
         num(f"LamAll{tag}QFifteen", pct([x for x in rows if x["Q"] == 15][0][rule]["Lambda_allshare_rel"], 1))
+        num(f"LamAll{tag}QFour", pct([x for x in rows if x["Q"] == 4][0][rule]["Lambda_allshare_rel"], 1))
+        okall = [r["Q"] for r in rows if r[rule]["Lambda_allshare_rel"] < 0.05]
+        num(f"QFiveAll{tag}", min(okall) if okall else f"$>${rows[-1]['Q']}")
+        shares = {r[rule]["sharing_rate"] for r in rows}
+        num(f"XfourShare{tag}", pct(shares.pop()) if len(shares) == 1 else "varies")
     better = [r["Q"] for r in rows if r["BAR"]["V_eq"] > r["SEATS"]["V_eq"]]
     worse = [r["Q"] for r in rows if r["BAR"]["V_eq"] <= r["SEATS"]["V_eq"]]
     num("CrossQBarBetterFrom", min(better) if better else "n/a"); num("CrossQBarWorseUpTo", max(worse) if worse else "n/a")
@@ -544,6 +576,9 @@ def fig_company(x4):
     num("VEqSeatsQFour", f"{r4['SEATS']['V_eq']:.2f}"); num("VEqBarQFour", f"{r4['BAR']['V_eq']:.2f}")
     ratio = [r["BAR"]["Lambda_eq"] / r["SEATS"]["Lambda_eq"] for r in rows if r["SEATS"]["Lambda_eq"] > 0]
     num("LamRatioMin", f"{min(ratio):.0f}"); num("LamRatioMax", f"{max(ratio):.0f}")
+    # same comparison with everyone telling under both rules: isolates the rule from who chooses to tell
+    ratio_all = [r["BAR"]["Lambda_allshare"] / r["SEATS"]["Lambda_allshare"] for r in rows if r["SEATS"]["Lambda_allshare"] > 0]
+    num("LamAllRatioMin", f"{min(ratio_all):.1f}"); num("LamAllRatioMax", f"{max(ratio_all):.1f}")
     num("LamOrderHolds", sum(r["BAR"]["Lambda_eq_ci95"][0] > r["SEATS"]["Lambda_eq_ci95"][1] for r in rows)); num("LamOrderTot", len(rows))
     num("XfourSeatsShareSame", "yes" if len({tuple(r["SEATS"]["cell_tells"]) for r in rows}) == 1 else "no")
     num("XfourBarShareSame", "yes" if len({tuple(r["BAR"]["cell_tells"]) for r in rows}) == 1 else "no")

@@ -71,8 +71,10 @@ everyone never.
 (2)~Disliking outsiders makes candidates tell \emph{more} under fixed seats and changes nothing under a cut-off, as our theory predicts.
 (3)~Learners who see only their own outcome find this equilibrium: UCB1 ends with \AgreeUcbEoneSeats--\AgreeUcbEoneBar\% of decisions
 correct, and a learner that uses one fact about leaks (a tell that did not land is the same as no tell) gets there two to three times sooner.
-(4)~Leaks cost a cut-off company \LamRatioMin--\LamRatioMax{} times more than a fixed-seats company: it needs a bank of \QFiveBar{} questions,
-against \QFiveSeats, to keep the loss under 5\%.
+(4)~At friendliness 0.2, leaks cost a cut-off company \LamRatioMin--\LamRatioMax{} times more hiring value than a fixed-seats company: it needs a
+bank of \QFiveBar{} questions, against \QFiveSeats, to keep the loss under 5\%. Most of that gap is \emph{who} tells (everyone under a cut-off, only weak
+candidates under fixed seats): if everyone told under both rules, the cut-off would lose \LamAllRatioMin--\LamAllRatioMax{} times more and need \QFiveAllBar{}
+questions against \QFiveAllSeats.
 
 \textbf{Keywords}\; Bayesian games $\cdot$ multi-agent bandits $\cdot$ empirical game theory $\cdot$ coarse correlated equilibrium
 \end{minipage}\end{center}
@@ -311,7 +313,12 @@ It is also where the one exception sits (\HtwoViolWhere): fixed seats have \Htwo
 \end{itemize}
 \finding{How solid are these equilibria?} The reported profile stays an exact equilibrium in at least 95\% of bootstrap replicates in \XoneBootOk{} of \XoneBootTot{} games (\XoneBootOkPct\%). The exceptions sit
 on a step of the staircase, where a type is nearly indifferent; even there the 95th-percentile $\varepsilon$ is at most \XoneWorstEpsPP{} percentage points of utility. So the \emph{pattern} is certain and each \emph{threshold} is known to
-within one grid step. Best-response dynamics converged in \XoneBrdOk{} of \XoneBrdTot{} runs, and replicator dynamics ended at an enumerated pure equilibrium in \XoneRepMatch{} of \XoneRepTot{} runs (the other \XoneRepRest{}, all in
+within one grid step. Uniqueness is a statement about the estimated table, so we also count near-ties: profiles that are within $\varepsilon=0.001$
+(one message cost, 0.1 percentage points) of being an equilibrium. The games of Figure~\ref{fig:who} ($\alpha=0.2$) still have exactly
+\EpsBneHeadSeats{} (seats) and \EpsBneHeadBar{} (cut-off). Over all \EpsBneGames{} games, \EpsBneMulti{} have more than one: \EpsBneLowAlpha{} at
+$\alpha\le0.025$, where a tell is worth about what it costs; \EpsBneEzero{} in E0, where a redundant tell costs exactly $c$; and \EpsBneStep{} on the steps of the
+fixed-seats staircase in E1/E2 (up to \EpsBneStepMax{} profiles), where one type is nearly indifferent. Away from these, every cut-off game in E1/E2 has a single
+near-equilibrium. Best-response dynamics converged in \XoneBrdOk{} of \XoneBrdTot{} runs, and replicator dynamics ended at an enumerated pure equilibrium in \XoneRepMatch{} of \XoneRepTot{} runs (the other \XoneRepRest{}, all in
 the most fragile game, had not settled after 3{,}000 steps). The CCE linear programs agree from the other side: maximum and minimum sharing over \emph{all} CCEs coincide in \CceSingle{} of \CceTot{} games,
 so no mixed or correlated equilibrium shares more or less than the pure one.
 
@@ -346,13 +353,21 @@ telling stops. This is the case Proposition~\ref{prop:bar} excludes, and the onl
 \end{figure}
 \begin{table}[t]\centering\small
 \caption{Decisions matching the equilibrium after \XthreeT{} rounds (\%, mean $\pm$ half-width of the 95\% CI over \XthreeSeeds{} seeds; best per column in bold), and median rounds to reach 90\%
-(``never ($x$\%)'': the median run did not, $x$\% of runs did). In E0 with a cut-off the equilibria differ only in who makes a redundant tell.}\label{tab:x3}
+(``never ($x$\%)'': the median run did not, $x$\% of runs did), and cumulative regret after \XthreeT{} rounds (Definition~4, in units of one offer, mean over the 12 learners
+and \XthreeSeeds{} seeds; lowest in bold). In E0 with a cut-off the equilibria differ only in who makes a redundant tell.}\label{tab:x3}
 \resizebox{0.93\textwidth}{!}{\input{generated/tab_x3.tex}}
 \end{table}
 \finding{Yes --- but the signal is tiny, so it takes tens of thousands of interviews.} At equilibrium the best row beats the second-best by only \PayGapMinEoneSeats--\PayGapMaxEoneSeats{} percentage points of utility under
 fixed seats and \PayGapMinEoneBar--\PayGapMaxEoneBar{} under a cut-off, while a single outcome is 0 or 1. UCB1 and Thompson sampling nevertheless end with \AgreeUcbEoneSeats\% and \AgreeTsEoneSeats\% (seats)
 and \AgreeUcbEoneBar\% and \AgreeTsEoneBar\% (cut-off) of decisions correct in E1 (Table~\ref{tab:x3}); EXP3, which guards against adversarial rewards, and $\varepsilon$-greedy are slower
 (\AgreeExpEoneSeats/\AgreeExpEoneBar\% and \AgreeEpsEoneSeats/\AgreeEpsEoneBar\%). Results under E2 are the same within error bars.
+
+\finding{Finding the equilibrium and earning along the way are different things.} Regret ranks the learners almost the other way round (Table~\ref{tab:x3}, last
+two columns). Under fixed seats in E1, cumulative regret is \RegretEpsEoneSeats{} for $\varepsilon$-greedy and \RegretTsEoneSeats{} for Thompson sampling, against
+\RegretUcbEoneSeats{} for UCB1 and \RegretExpEoneSeats{} for EXP3; under a cut-off \RegretEpsEoneBar{} and \RegretTsEoneBar{} against \RegretUcbEoneBar{} and
+\RegretExpEoneBar. So UCB1 ends up with the right answer but pays more to get there, and $\varepsilon$-greedy has the lowest regret under fixed seats
+despite the lowest agreement. Plausible reasons, which we did not test: with payoff gaps this small, UCB1's confidence bonus keeps it exploring for a long time,
+while $\varepsilon$-greedy's remaining mistakes are on decisions where the wrong row costs little.
 
 \finding{A cut-off is easier to learn than fixed seats} whenever the equilibrium is unique: the gap is larger and the same for all types. In E1 and E2, agreement under a cut-off is at least as high for every learner and significantly higher
 (Holm-corrected $p<0.05$) in \BarSeatsSig{} of \BarSeatsTests{} paired tests (the exception: \BarSeatsNotSigLearners, at 100\% under both rules). Under fixed seats the slowest learners are the \emph{average} types (UCB1: \TypeUcbEoneSeatsWeak\% of weak, \TypeUcbEoneSeatsAvg\% of average,
@@ -365,8 +380,10 @@ $\MbEarlyEtwoBar$ points (E2); all \MbEarlyTests{} differences are significant a
 The help is one-sided, which is instructive: against UCB1, cumulative regret changes by $\MbRegretEoneBar$ under a cut-off, where the best arm is ``tell everyone'' and each pull also informs every other arm, and by $\MbRegretEoneSeats$ under fixed
 seats, where the best arm for most types is silence --- and silence teaches nothing about telling.
 
-\finding{No-regret play approaches the CCE set} (Figure~\ref{fig:learn}c). The CCE gap falls between 10{,}000 and \XthreeT{} rounds for all five learners (to \GapRatioMin--\GapRatioMax{} of its earlier value;
-Holm-corrected $p<0.001$ in \GapFallSig{} of \GapFallTests{} tests) and ends at \GapFinalMin--\GapFinalMax{} percentage points. It is not yet zero: exploration is still being paid for.
+\finding{Play moves toward the CCE set, but is not yet close to it} (Figure~\ref{fig:learn}c). The CCE gap falls between 10{,}000 and \XthreeT{} rounds for all five learners (to \GapRatioMin--\GapRatioMax{} of its earlier value;
+Holm-corrected $p<0.001$ in \GapFallSig{} of \GapFallTests{} tests) and ends at \GapFinalMin--\GapFinalMax{} percentage points. That is about the size of the payoff gaps the learners have to
+detect (\PayGapMinEoneSeats--\PayGapMaxEoneSeats{} points under fixed seats), so after \XthreeT{} rounds the history of play is measurably closer to a CCE but not yet near one:
+exploration is still being paid for.
 
 \finding{A caution about ``agreement''.} In E0 with a cut-off, agreement looks poor (\AgreeEzeroBarMin--\AgreeEzeroBarMax\%). The game there has \NumEqEzeroBar{} equilibria that differ only in which of two friends tells the last candidate; the learners end up
 both telling. The residual gain from deviating is \ExplEzeroBarMin{} percentage points for every learner --- exactly the message cost $c$. They have learned everything that matters and failed only to coordinate on who saves a message.
@@ -376,10 +393,14 @@ both telling. The residual gain from deviating is \ExplEzeroBarMin{} percentage 
 \includegraphics[width=0.78\textwidth]{figures/fig5_company_loss.pdf}
 \caption{Company's hiring value under equilibrium sharing as the question bank grows (E2, $\alpha=0.2$, $m=3$ questions per interview). 95\% block-bootstrap intervals (\XfourBoot{} replicates) are narrower than the markers.}\label{fig:company}
 \end{figure}
-\finding{Leaks hurt a cut-off company about ten times more.} With the pilot's bank of 15 questions, equilibrium sharing costs \LamSeatsQFifteen\% of hiring value under fixed seats and \LamBarQFifteen\% under a cut-off;
+\finding{At $\alpha=0.2$, leaks hurt a cut-off company about ten times more --- mostly because more people tell.} With the pilot's bank of 15 questions, equilibrium sharing costs \LamSeatsQFifteen\% of hiring value under fixed seats and \LamBarQFifteen\% under a cut-off;
 across all bank sizes the cut-off loses \LamRatioMin--\LamRatioMax{} times more, and the bootstrap intervals are disjoint at all \LamOrderTot{} sizes (Figure~\ref{fig:company}a).
-Two effects add up: under a cut-off everyone tells, and every leaked mark lifts someone over a fixed line, whereas under fixed seats only the weak tell and a leak only reorders candidates.
 To keep the loss below 5\% the company needs $Q\ge\QFiveSeats$ under fixed seats and $Q\ge\QFiveBar$ under a cut-off. Proposition~\ref{prop:leak} explains the shape: the leaked fraction falls like $m\,n_j/Q$.
+Two effects add up, and they are not equally large. The first is \emph{who} tells: at $\alpha=0.2$, \XfourShareBar\% of possible tells are made under a cut-off and \XfourShareSeats\% under fixed seats.
+The second is the rule itself: every leaked mark can lift someone over a fixed line, whereas under fixed seats a leak only reorders candidates. The dashed line in Figure~\ref{fig:company}a separates them.
+If everyone told under both rules, fixed seats would lose \LamAllSeatsQFifteen\% at $Q=15$ (against \LamAllBarQFifteen\%), the cut-off would lose only \LamAllRatioMin--\LamAllRatioMax{} times more,
+and fixed seats would need $Q\ge\QFiveAllSeats$ rather than \QFiveSeats. The tenfold gap is therefore specific to a friendliness at which only weak candidates tell under fixed seats;
+wherever candidates are friendly enough that everyone tells under both rules, the everyone-tells comparison is the relevant one.
 
 \finding{But the cut-off is still the better rule once the bank is large enough} (Figure~\ref{fig:company}b). Without leaks a cut-off hires better (value \VNoLeakBar{} against \VNoLeakSeats): it can hire three good
 candidates or none, where fixed seats must always hire two. Leaks eat this advantage only for small banks: fixed seats give more value up to $Q=\CrossQBarWorseUpTo$, the cut-off from $Q=\CrossQBarBetterFrom$
@@ -387,22 +408,28 @@ candidates or none, where fixed seats must always hire two. Leaks eat this advan
 
 \subsection{Verdict on the hypotheses, deviations and limits}
 \begin{table}[t]\centering\small
-\caption{The five hypotheses fixed in the project review, and what the experiments say.}\label{tab:hyp}
-\begin{tabular}{@{}p{0.5cm}>{\raggedright\arraybackslash}p{5.5cm}>{\raggedright\arraybackslash}p{8.6cm}>{\raggedright\arraybackslash}p{1.75cm}@{}}
+\caption{The five hypotheses fixed in the project review, the refutation criterion fixed with them, and what the experiments say.}\label{tab:hyp}
+\begin{tabular}{@{}p{0.5cm}>{\raggedright\arraybackslash}p{4.1cm}>{\raggedright\arraybackslash}p{3.3cm}>{\raggedright\arraybackslash}p{6.1cm}>{\raggedright\arraybackslash}p{2.0cm}@{}}
 \toprule
- & Hypothesis & Evidence & Verdict\\\midrule
-H1 & Under fixed seats, $\alpha^\star$ is highest for the types most likely to be pivotal &
+ & Hypothesis & Refuted if (review) & Evidence & Verdict\\\midrule
+H1 & Under fixed seats, $\alpha^\star$ is highest for the types most likely to be pivotal & $\alpha^\star$ flat, or lowest for pivotal types &
 $\alpha^\star=\AstarLocalSeatsWeak<\AstarLocalSeatsAvg<\AstarLocalSeatsStrong$, in the order of the chance that a tell costs one's own seat ($\ell=\EllSeatsWeak,\EllSeatsAvg,\EllSeatsStrong$ points) & Supported\\
-H2 & Cut-off shares more than fixed seats for every $\alpha\in[0,0.5]$ & At least as much in \HtwoOk{} of \HtwoCells{} exact comparisons, strictly more in \HtwoStrict; 1 exception, in E0 with several equilibria & Supported, 1~exception\\
-H3 & Fixed seats: sharing rises with $\beta$; cut-off: no effect & \ClanShareMinSeats\%$\to$\ClanShareMaxSeats\% (never falling) vs.\ constant \ClanShareMinBar\% & Supported\\
-H4 & No-regret play nears the CCE set; model-based learners are faster & CCE gap falls for \GapFallSig{} of \GapFallTests{} learners; leak-aware UCB reaches 90\% in \TninetyMbEoneSeats/\TninetyMbEoneBar{} rounds vs.\ \TninetyUcbEoneSeats/\TninetyUcbEoneBar{} for UCB1 & Supported$^\ast$\\
-H5 & $\Lambda_{\textsc{bar}}>\Lambda_{\textsc{seats}}$, and fixed seats need a smaller $Q$ for $\Lambda<5\%$ & \LamRatioMin--\LamRatioMax$\times$ larger, disjoint CIs at every $Q$; $Q\ge\QFiveSeats$ vs.\ $Q\ge\QFiveBar$ & Supported\\
+H2 & Cut-off shares more than fixed seats for every $\alpha\in[0,0.5]$ & Fixed seats share more at some $\alpha$ &
+Holds in all \HtwoCellsNoEzero{} E1/E2 comparisons. In E0 fails once (\HtwoViolWhere): fixed seats have equilibria sharing up to \HtwoViolSeatsHi\%, the cut-off \HtwoViolBar\% &
+Refuted once (E0); holds in E1/E2\\
+H3 & Fixed seats: sharing rises with $\beta$; cut-off: no effect & No rise under fixed seats, or an effect under a cut-off & \ClanShareMinSeats\%$\to$\ClanShareMaxSeats\% (never falling) vs.\ constant \ClanShareMinBar\% & Supported\\
+H4 & No-regret play nears the CCE set; model-based learners are faster & CCE gap does not fall, or not faster &
+CCE gap falls for \GapFallSig{} of \GapFallTests{} learners but ends at \GapFinalMin--\GapFinalMax{} points, the size of the payoff gaps; leak-aware UCB reaches 90\% in \TninetyMbEoneSeats/\TninetyMbEoneBar{} rounds vs.\ \TninetyUcbEoneSeats/\TninetyUcbEoneBar{} for UCB1 & Not refuted; weak$^\ast$\\
+H5 & $\Lambda_{\textsc{bar}}>\Lambda_{\textsc{seats}}$, and fixed seats need a smaller $Q$ for $\Lambda<5\%$ & CI includes 0, or order reversed &
+At $\alpha=0.2$: \LamRatioMin--\LamRatioMax$\times$ larger, disjoint CIs at every $Q$; $Q\ge\QFiveSeats$ vs.\ $Q\ge\QFiveBar$. If everyone told: \LamAllRatioMin--\LamAllRatioMax$\times$; $Q\ge\QFiveAllSeats$ vs.\ $Q\ge\QFiveAllBar$ & Supported\\
 \bottomrule
 \end{tabular}
 
-\raggedright\footnotesize $^\ast$ With the simpler leak-aware learner of Section~\ref{sec:method}; faster in agreement under both rules, lower regret only under a cut-off.
+\raggedright\footnotesize $^\ast$ The CCE gap falls but is not yet small, and the ``model-based'' learner is the simpler leak-aware learner of Section~\ref{sec:method}; it is faster in agreement under both rules, but has lower regret only under a cut-off.
 \end{table}
-All five hypotheses are supported (Table~\ref{tab:hyp}), H2 with one exception and H4 with a simpler learner than promised. \textbf{Deviations from the review plan:}
+Judged by the refutation criteria fixed in the review (Table~\ref{tab:hyp}), H1, H3 and H5 are supported. H4 is not refuted, but the support is weak: the CCE gap falls without
+becoming small, and the faster learner is simpler than the one promised. H2 is refuted at one point: in E0, where the game has several equilibria, some fixed-seats equilibria share more
+than the cut-off's; in E1 and E2 it holds in every comparison. \textbf{Deviations from the review plan:}
 (i)~tables use 2{,}000 days per cell, not the pilot's 8{,}000; precision is instead reported per equilibrium by the bootstrap;
 (ii)~the ``model-based'' learner is the leak-aware learner above and needs the friend to report how many told questions came up;
 (iii)~mixed equilibria were sought by replicator dynamics only (no support enumeration), with the CCE programs bounding what they could do;

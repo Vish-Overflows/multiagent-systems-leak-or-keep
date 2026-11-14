@@ -5,7 +5,7 @@ description = "Leak or Keep? Learning to share interview questions among competi
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
-    "numpy>=1.26",
+    "numpy>=2.0",       # np.bitwise_count (NumPy 2.0+) is used for leak counts and action popcounts
     "scipy>=1.11",
     "matplotlib>=3.8",
 ]
