@@ -1,0 +1,11 @@
+  [model-ucb] t=  22000  agree=0.839  cce_gap=0.00997    50.0s
+  [model-ucb] t=  47000  agree=0.884  cce_gap=0.00798   114.3s
+  [model-ucb] t=  72000  agree=0.899  cce_gap=0.00683   195.8s
+  [model-ucb] t=  97000  agree=0.906  cce_gap=0.00607   271.5s
+  [model-ucb] t= 122000  agree=0.912  cce_gap=0.00553   331.6s
+  [model-ucb] t= 147000  agree=0.912  cce_gap=0.00509   394.2s
+  [model-ucb] t= 172000  agree=0.913  cce_gap=0.00474   442.3s
+  [model-ucb] t= 197000  agree=0.916  cce_gap=0.00444   491.5s
+  [model-ucb] t= 200000  agree=0.916  cce_gap=0.00441   497.3s
+finished model-ucb in 497s
+X3 done in 531s

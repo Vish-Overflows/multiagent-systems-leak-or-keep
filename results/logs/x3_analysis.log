@@ -29,23 +29,32 @@ model-based  E1  SEATS | 0.997 [0.992,1.000]  0.928     0.931  |   247.33  0.005
 model-based  E1  BAR   | 1.000 [1.000,1.000]  0.994     0.992  |    70.45  0.00164   (1.00, 7000.0)  expl=0.00000 exact_eq=1.00 type_ok=[1.0, 1.0, 1.0]
 model-based  E2  SEATS | 1.000 [1.000,1.000]  0.925     0.928  |   247.46  0.00517   (1.00, 28500.0)  expl=0.00000 exact_eq=1.00 type_ok=[1.0, 1.0, 1.0]
 model-based  E2  BAR   | 1.000 [1.000,1.000]  0.994     0.994  |    98.00  0.00241   (1.00, 8500.0)  expl=0.00000 exact_eq=1.00 type_ok=[1.0, 1.0, 1.0]
+model-ucb    E0  SEATS | 0.964 [0.944,0.983]  0.903     0.897  |   383.81  0.00759   (1.00, 12000.0)  expl=0.00273 exact_eq=0.63 type_ok=[0.99, 0.89, 1.0]
+model-ucb    E0  BAR   | 0.531 [0.514,0.547]  0.531     0.522  |   370.05  0.00828   (0.00, None)  expl=0.00100 exact_eq=0.00 type_ok=[0.5, 0.6, 0.5]
+model-ucb    E1  SEATS | 1.000 [1.000,1.000]  0.992     0.978  |   168.34  0.00349   (1.00, 12000.0)  expl=0.00000 exact_eq=1.00 type_ok=[1.0, 1.0, 1.0]
+model-ucb    E1  BAR   | 1.000 [1.000,1.000]  1.000     0.997  |    65.07  0.00139   (1.00, 4500.0)  expl=0.00000 exact_eq=1.00 type_ok=[1.0, 1.0, 1.0]
+model-ucb    E2  SEATS | 1.000 [1.000,1.000]  0.975     0.956  |   178.01  0.00370   (1.00, 15500.0)  expl=0.00038 exact_eq=0.93 type_ok=[1.0, 0.98, 1.0]
+model-ucb    E2  BAR   | 1.000 [1.000,1.000]  0.994     0.997  |    89.22  0.00200   (1.00, 4000.0)  expl=0.00000 exact_eq=1.00 type_ok=[1.0, 1.0, 1.0]
 BAR vs SEATS agreement (Holm):
-  eps-greedy   E0: diff=-0.086 CI=(-0.131,-0.044) p=0.0013 p_holm=0.0052
-  eps-greedy   E1: diff=+0.156 CI=(+0.089,+0.225) p=0.0001 p_holm=0.0008
-  eps-greedy   E2: diff=+0.133 CI=(+0.081,+0.186) p=0.0001 p_holm=0.0008
-  UCB1         E0: diff=-0.406 CI=(-0.431,-0.381) p=0.0001 p_holm=0.0008
-  UCB1         E1: diff=+0.061 CI=(+0.036,+0.089) p=0.0001 p_holm=0.0008
-  UCB1         E2: diff=+0.050 CI=(+0.025,+0.078) p=0.0020 p_holm=0.0060
-  Thompson     E0: diff=-0.225 CI=(-0.264,-0.186) p=0.0001 p_holm=0.0008
-  Thompson     E1: diff=+0.075 CI=(+0.047,+0.103) p=0.0001 p_holm=0.0008
-  Thompson     E2: diff=+0.050 CI=(+0.028,+0.072) p=0.0003 p_holm=0.0021
-  EXP3         E0: diff=-0.422 CI=(-0.444,-0.400) p=0.0001 p_holm=0.0008
-  EXP3         E1: diff=+0.131 CI=(+0.089,+0.175) p=0.0001 p_holm=0.0008
-  EXP3         E2: diff=+0.086 CI=(+0.044,+0.131) p=0.0006 p_holm=0.0030
-  model-based  E0: diff=-0.406 CI=(-0.431,-0.381) p=0.0001 p_holm=0.0008
+  eps-greedy   E0: diff=-0.086 CI=(-0.131,-0.044) p=0.0013 p_holm=0.0078
+  eps-greedy   E1: diff=+0.156 CI=(+0.089,+0.225) p=0.0001 p_holm=0.0010
+  eps-greedy   E2: diff=+0.133 CI=(+0.081,+0.186) p=0.0001 p_holm=0.0009
+  UCB1         E0: diff=-0.406 CI=(-0.431,-0.381) p=0.0001 p_holm=0.0009
+  UCB1         E1: diff=+0.061 CI=(+0.036,+0.089) p=0.0001 p_holm=0.0009
+  UCB1         E2: diff=+0.050 CI=(+0.025,+0.078) p=0.0020 p_holm=0.0100
+  Thompson     E0: diff=-0.225 CI=(-0.264,-0.186) p=0.0001 p_holm=0.0009
+  Thompson     E1: diff=+0.075 CI=(+0.047,+0.103) p=0.0001 p_holm=0.0010
+  Thompson     E2: diff=+0.050 CI=(+0.028,+0.072) p=0.0003 p_holm=0.0028
+  EXP3         E0: diff=-0.422 CI=(-0.444,-0.400) p=0.0001 p_holm=0.0009
+  EXP3         E1: diff=+0.131 CI=(+0.089,+0.175) p=0.0001 p_holm=0.0009
+  EXP3         E2: diff=+0.086 CI=(+0.044,+0.131) p=0.0006 p_holm=0.0042
+  model-based  E0: diff=-0.406 CI=(-0.431,-0.381) p=0.0001 p_holm=0.0009
   model-based  E1: diff=+0.003 CI=(+0.000,+0.008) p=1.0000 p_holm=1.0000
   model-based  E2: diff=+0.000 CI=(+0.000,+0.000) p=1.0000 p_holm=1.0000
-model-based vs UCB1 (Holm):
+  model-ucb    E0: diff=-0.433 CI=(-0.458,-0.406) p=0.0001 p_holm=0.0009
+  model-ucb    E1: diff=+0.000 CI=(+0.000,+0.000) p=1.0000 p_holm=1.0000
+  model-ucb    E2: diff=+0.000 CI=(+0.000,+0.000) p=1.0000 p_holm=1.0000
+leak-aware (counterfactual credit) vs UCB1 (Holm):
   E0 SEATS agree@20k(MB)-agree@20k(UCB1)   : diff=+0.0000 p=1.0000 p_holm=1.0000
   E0 SEATS agree@T(MB)-agree@T(UCB1)       : diff=+0.0000 p=1.0000 p_holm=1.0000
   E0 SEATS regret(MB)-regret(UCB1)         : diff=+0.0000 p=1.0000 p_holm=1.0000
@@ -70,10 +79,36 @@ model-based vs UCB1 (Holm):
   E2 BAR   agree@T(MB)-agree@T(UCB1)       : diff=+0.0056 p=0.4996 p_holm=1.0000
   E2 BAR   regret(MB)-regret(UCB1)         : diff=-321.5863 p=0.0001 p_holm=0.0012
   E2 BAR   cce_gap(MB)-cce_gap(UCB1)       : diff=-0.0067 p=0.0001 p_holm=0.0012
-MB == UCB1 under E0: True
+model-based UCB vs UCB1 (Holm):
+  E0 SEATS agree@20k(MB)-agree@20k(UCB1)   : diff=-0.0306 p=0.2263 p_holm=1.0000
+  E0 SEATS agree@T(MB)-agree@T(UCB1)       : diff=-0.0000 p=1.0000 p_holm=1.0000
+  E0 SEATS regret(MB)-regret(UCB1)         : diff=-79.2117 p=0.0001 p_holm=0.0012
+  E0 SEATS cce_gap(MB)-cce_gap(UCB1)       : diff=-0.0025 p=0.0001 p_holm=0.0012
+  E0 BAR   agree@20k(MB)-agree@20k(UCB1)   : diff=-0.0056 p=0.8254 p_holm=1.0000
+  E0 BAR   agree@T(MB)-agree@T(UCB1)       : diff=-0.0278 p=0.0655 p_holm=0.3930
+  E0 BAR   regret(MB)-regret(UCB1)         : diff=-96.0481 p=0.0001 p_holm=0.0012
+  E0 BAR   cce_gap(MB)-cce_gap(UCB1)       : diff=-0.0031 p=0.0001 p_holm=0.0012
+  E1 SEATS agree@20k(MB)-agree@20k(UCB1)   : diff=+0.2444 p=0.0001 p_holm=0.0012
+  E1 SEATS agree@T(MB)-agree@T(UCB1)       : diff=+0.0694 p=0.0001 p_holm=0.0012
+  E1 SEATS regret(MB)-regret(UCB1)         : diff=-77.2162 p=0.0001 p_holm=0.0012
+  E1 SEATS cce_gap(MB)-cce_gap(UCB1)       : diff=-0.0017 p=0.0001 p_holm=0.0012
+  E1 BAR   agree@20k(MB)-agree@20k(UCB1)   : diff=+0.1472 p=0.0001 p_holm=0.0012
+  E1 BAR   agree@T(MB)-agree@T(UCB1)       : diff=+0.0083 p=0.2538 p_holm=1.0000
+  E1 BAR   regret(MB)-regret(UCB1)         : diff=-356.2622 p=0.0001 p_holm=0.0012
+  E1 BAR   cce_gap(MB)-cce_gap(UCB1)       : diff=-0.0076 p=0.0001 p_holm=0.0012
+  E2 SEATS agree@20k(MB)-agree@20k(UCB1)   : diff=+0.2028 p=0.0001 p_holm=0.0012
+  E2 SEATS agree@T(MB)-agree@T(UCB1)       : diff=+0.0556 p=0.0001 p_holm=0.0012
+  E2 SEATS regret(MB)-regret(UCB1)         : diff=-67.0404 p=0.0001 p_holm=0.0012
+  E2 SEATS cce_gap(MB)-cce_gap(UCB1)       : diff=-0.0015 p=0.0001 p_holm=0.0012
+  E2 BAR   agree@20k(MB)-agree@20k(UCB1)   : diff=+0.1028 p=0.0001 p_holm=0.0012
+  E2 BAR   agree@T(MB)-agree@T(UCB1)       : diff=+0.0056 p=0.4996 p_holm=1.0000
+  E2 BAR   regret(MB)-regret(UCB1)         : diff=-330.3592 p=0.0001 p_holm=0.0012
+  E2 BAR   cce_gap(MB)-cce_gap(UCB1)       : diff=-0.0071 p=0.0001 p_holm=0.0012
+leak-aware == UCB1 under E0: True
 CCE gap falls (10k -> T), Holm:
   eps-greedy  : diff=+0.00459 p=0.0001 p_holm=0.0003
   UCB1        : diff=+0.00586 p=0.0001 p_holm=0.0003
   Thompson    : diff=+0.00660 p=0.0001 p_holm=0.0003
   EXP3        : diff=+0.00733 p=0.0001 p_holm=0.0003
   model-based : diff=+0.00684 p=0.0001 p_holm=0.0003
+  model-ucb   : diff=+0.00733 p=0.0001 p_holm=0.0003
