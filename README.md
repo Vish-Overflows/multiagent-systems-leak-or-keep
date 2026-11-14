@@ -44,6 +44,10 @@ the α = 0.2 games above still have exactly one. 117 of the 378 games have more 
 α ≤ 0.025, 62 in leak model E0 (where a redundant tell costs exactly the message cost), and 38 on the steps of the
 fixed-seats staircase (up to 64 profiles), where one type is nearly indifferent.
 
+The ordering does not rest on the loss itself. Measured on fresh days with nobody sharing, a weak candidate holds the
+last seat on 3.6% of days, an average one on 17.9% and a strong one on 28.6%, the same order as the thresholds
+(`experiments/run_h1.py`).
+
 Mixed and correlated equilibria do not change this picture in E1 and E2: the linear programs over all coarse
 correlated equilibria give a single sharing level in all 212 games, and iterated strict dominance shows that 311 of
 the 378 games have exactly one equilibrium of any kind. In E0 correlated play can share much more or less than the
@@ -60,6 +64,14 @@ reaches 90% in 27,000 and 7,000 rounds, against 56,000 and 18,000 for plain UCB1
 the leak rate and the value of a leaked question by regression, and plans with both) needs 12,000 and 4,500
 rounds, and, unlike Leak-aware UCB, also has lower regret than UCB1 under fixed seats (168 against 246 in E1).
 Both end at 100% in E1 and E2.
+
+Why the learners behave as they do was tested, not guessed (`experiments/run_explanations.py`). UCB1 puts 56% of its
+pulls on non-equilibrium rows under fixed seats (Thompson sampling 41%, epsilon-greedy 37%), which is where its regret
+comes from; our guess that epsilon-greedy's mistakes are on cheap decisions was wrong (the mean payoff gap of its
+mistakes is 1.01 times the mean over all cells). Average types learn slowest because their reward noise relative to
+the payoff gap is the largest, and Model-based UCB gains more in the cells where it can pool across rows. Against the
+baselines (E1, alpha = 0.2), no learner's settled play is below random sharing in welfare; under a cut-off every
+learner is below random sharing in company value, but so is the equilibrium itself (0.771 against 0.833).
 
 Regret ranks the learners almost the other way round. Under fixed seats (E1), cumulative regret is 154 for
 epsilon-greedy and 173 for Thompson sampling, against 246 for UCB1 and 251 for EXP3. UCB1 finds the right answer
@@ -130,14 +142,18 @@ Or step by step:
 
 | Step | Command | Writes | Time |
 |---|---|---|---|
-| Unit tests (40) | `python -m pytest -q` | console | 15 s |
+| Unit tests (42) | `python -m pytest -q` | console | 15 s |
 | Verification checks | `python experiments/run_checks.py` | `results/checks/checks.json` | 10 s |
 | X1: who tells | `python experiments/run_x1.py` | `results/x1/*.json` | 40 min |
 | X1: CCE programs for E0 and E2 | `python experiments/run_cce.py [n_workers] [network:env ...]` | `results/x1/x1_cce_<network>_<env>.json` | 2 h with one worker |
 | X1: mixed equilibria (dominance, support enumeration) | `python experiments/run_support.py` | `results/x1/x1_support.json` | 5 min |
 | X2: motives | `python experiments/run_x2.py` | `results/x2/x2.json` | 20 min |
 | X3: learning | `python experiments/run_x3.py` | `results/x3/x3_<learner>.npz` | 10 min |
-| X3: statistics | `python experiments/analyze_x3.py` | `results/x3/x3_summary.json` | 30 s |
+| X3: statistics | `python experiments/analyze_x3.py` | `results/x3/x3_summary.json` | 2 min |
+| H1 pivotality (independent of the own loss) | `python experiments/run_h1.py` | `results/h1/pivotality.json` | 1 s |
+| Baselines (nobody, random, everybody, equilibrium, learners) | `python experiments/run_baselines.py` | `results/baselines/baselines.json` | 1 min |
+| Tests of the explanations in the report | `python experiments/run_explanations.py` | `results/explanations/explanations.json` | 1 min |
+| Bias of the counterfactual credit in E2 | `python experiments/run_e2_bias.py` | `results/e2_bias/e2_bias.json` | 30 s |
 | X4: company loss | `python experiments/run_x4.py` | `results/x4/x4.json` | 11 min |
 | Figures, tables, numbers | `python experiments/make_figures.py` | `results/figures/`, `report/figures/`, `report/generated/`, `results/numbers.json` | 5 s |
 | Console screenshots | `python experiments/make_console_shots.py` | `results/figures/console_*.png` | 2 s |
@@ -193,7 +209,7 @@ leakgame/            the library
   checks.py          verification of the worked example, Lemma 1 and Propositions 1-3
   pipeline.py        builds tables, games and equilibrium targets for the learning runs
 experiments/         one script per experiment, plus figures and console screenshots
-tests/               40 unit tests
+tests/               42 unit tests
 results/             result files, logs and figures (PNG)
 report/              LaTeX source, generated tables and numbers, figures (PDF), main.pdf
 run_all.sh           runs everything in order
@@ -216,12 +232,15 @@ run_all.sh           runs everything in order
 
 - Tables use 2,000 simulated days per cell (the pilot used 8,000); the bootstrap reports the resulting
   uncertainty for each equilibrium.
-- The "model-based" learner of the proposal was not built. What is called `model-based` in the code and result
-  files is UCB1 with counterfactual credit: a tell whose questions did not come up is credited to the arm without
-  that tell. It needs the friend to report how many told questions came up, does not estimate Δ and does not
-  best-respond in an estimated game. Its leak-rate estimate is logged but never used to choose an arm. In E1 the
-  credit is exact in distribution; in E2 it is very slightly biased (not measured). `results/logs/x3_model_based_rerun.log`
-  is from its final run, after a fix that refunds the message cost when crediting the "did not tell" arm.
+- The proposal's "model-based" learner was built in two simpler forms. `model-based` in the code and result files is
+  UCB1 with counterfactual credit (a tell whose questions did not come up is credited to the arm without that tell);
+  its leak-rate estimate is logged but never used to choose an arm. `model-ucb` fits a model of leaked questions and
+  plans with it, alone (it estimates the value of a leaked question, not Δ, and does not best-respond in an estimated
+  game of all candidates). Both need the friend to report how many told questions came up. The credit is exact in
+  distribution in E1; in E2 it is biased by at most 0.08 percentage points in the worst case we simulated (about two
+  standard errors; smallest payoff gap 0.36), so it is small but not shown to be zero. `results/logs/x3_model_based_rerun.log`
+  is from the final run of the credit learner, after a fix that refunds the message cost when crediting the "did not
+  tell" arm. The stored `final_counts` of this learner include credited observations, so they are not pull counts.
 - Mixed equilibria are sought by replicator dynamics, by iterated strict dominance on all three networks and by
   support enumeration on the pairs network only (agents have four or eight actions on the other two). Dominance
   solves 311 of the 378 games exactly, so each has one equilibrium of any kind; all but one of the others are in

@@ -1,0 +1,19 @@
+\begin{tabular}{@{}lrrrrr@{}}
+\toprule
+ & \multicolumn{2}{c}{Fixed seats} & \multicolumn{3}{c}{Cut-off} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-6}
+Sharing pattern & Tells (\%) & Company value & Tells (\%) & Welfare & Company value \\
+\midrule
+Nobody shares (leak-free company) & 0 & 0.657 & 0 & 2.799 & 0.894 \\
+Random sharing & 50 & 0.631 & 50 & 3.067 & 0.833 \\
+Everybody shares & 100 & 0.614 & 100 & 3.317 & 0.771 \\
+Equilibrium & 33 & 0.645 & 100 & 3.317 & 0.771 \\
+\midrule
+$\varepsilon$-greedy & 43 & 0.638 & 87 & 3.256 & 0.787 \\
+UCB1 & 38 & 0.643 & 99 & 3.314 & 0.772 \\
+Thompson sampling & 38 & 0.643 & 99 & 3.314 & 0.772 \\
+EXP3 & 41 & 0.639 & 94 & 3.288 & 0.778 \\
+Leak-aware UCB & 34 & 0.645 & 100 & 3.317 & 0.771 \\
+Model-based UCB & 33 & 0.645 & 100 & 3.317 & 0.771 \\
+\bottomrule
+\end{tabular}

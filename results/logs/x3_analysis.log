@@ -106,6 +106,7 @@ model-based UCB vs UCB1 (Holm):
   E2 BAR   cce_gap(MB)-cce_gap(UCB1)       : diff=-0.0071 p=0.0001 p_holm=0.0012
 leak-aware == UCB1 under E0: True
 CCE gap falls (10k -> T), Holm:
+CCE gap falls (10k -> T) per learner x leak model x rule, 30 seeds each, Holm over 36: 36 significant; E1/E2: 24 of 24
   eps-greedy  : diff=+0.00459 p=0.0001 p_holm=0.0003
   UCB1        : diff=+0.00586 p=0.0001 p_holm=0.0003
   Thompson    : diff=+0.00660 p=0.0001 p_holm=0.0003

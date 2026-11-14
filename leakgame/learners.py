@@ -29,8 +29,12 @@ realised utility, normalised to [0, 1] with the (known) range of her utility.
               The registry key "model-based" is kept only so result files stay valid.
               Exactness: in E1 the credited sample has exactly the distribution of a
               sample of the shorter arm; in E2 the day is identical but selecting days
-              on which the two question sets are disjoint very slightly changes the
-              other leaks, so the credit is not exactly unbiased there.
+              on which the two question sets are disjoint changes the other leaks, so
+              the credit is not exactly unbiased there (experiments/run_e2_bias.py:
+              at most 0.08 percentage points in the worst case, about two standard
+              errors, against a smallest payoff gap of 0.36).
+              `counts` of this learner include the credited observations: they are
+              not pull counts.
 """
 from __future__ import annotations
 

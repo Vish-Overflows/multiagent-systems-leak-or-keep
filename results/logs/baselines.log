@@ -1,0 +1,32 @@
+E1 SEATS: nobody V=0.6574 W=2.8000 share=0.00  everybody V=0.6137 W=2.7940 share=1.00  random V=0.6315 W=2.7970 share=0.50  equilibrium V=0.6448 W=2.7980 share=0.33
+    eps-greedy   V=0.6375 W=2.7974 share=0.43  realised(last half)=2.7974
+    UCB1         V=0.6428 W=2.7977 share=0.38  realised(last half)=2.7973
+    Thompson     V=0.6425 W=2.7977 share=0.38  realised(last half)=2.7977
+    EXP3         V=0.6392 W=2.7975 share=0.41  realised(last half)=2.7972
+    model-based  V=0.6448 W=2.7980 share=0.34  realised(last half)=2.7965
+    model-ucb    V=0.6448 W=2.7980 share=0.33  realised(last half)=2.7974
+    below random sharing in welfare: none | in company value: 0 learners; equilibrium itself below random in company value: False
+E1 BAR: nobody V=0.8935 W=2.7991 share=0.00  everybody V=0.7708 W=3.3174 share=1.00  random V=0.8326 W=3.0673 share=0.50  equilibrium V=0.7708 W=3.3174 share=1.00
+    eps-greedy   V=0.7870 W=3.2556 share=0.87  realised(last half)=3.2606
+    UCB1         V=0.7717 W=3.3139 share=0.99  realised(last half)=3.1516
+    Thompson     V=0.7717 W=3.3139 share=0.99  realised(last half)=3.2687
+    EXP3         V=0.7784 W=3.2878 share=0.94  realised(last half)=3.1523
+    model-based  V=0.7708 W=3.3174 share=1.00  realised(last half)=3.3136
+    model-ucb    V=0.7708 W=3.3174 share=1.00  realised(last half)=3.3177
+    below random sharing in welfare: none | in company value: 6 learners; equilibrium itself below random in company value: True
+E2 SEATS: nobody V=0.6585 W=2.8000 share=0.00  everybody V=0.6175 W=2.7940 share=1.00  random V=0.6345 W=2.7970 share=0.50  equilibrium V=0.6473 W=2.7980 share=0.33
+    eps-greedy   V=0.6411 W=2.7974 share=0.43  realised(last half)=2.7974
+    UCB1         V=0.6462 W=2.7979 share=0.35  realised(last half)=2.7973
+    Thompson     V=0.6450 W=2.7977 share=0.38  realised(last half)=2.7977
+    EXP3         V=0.6429 W=2.7976 share=0.40  realised(last half)=2.7973
+    model-based  V=0.6473 W=2.7980 share=0.33  realised(last half)=2.7965
+    model-ucb    V=0.6472 W=2.7980 share=0.34  realised(last half)=2.7974
+    below random sharing in welfare: none | in company value: 0 learners; equilibrium itself below random in company value: False
+E2 BAR: nobody V=0.8944 W=2.8014 share=0.00  everybody V=0.7768 W=3.3184 share=1.00  random V=0.8365 W=3.0689 share=0.50  equilibrium V=0.7768 W=3.3184 share=1.00
+    eps-greedy   V=0.7922 W=3.2586 share=0.87  realised(last half)=3.2620
+    UCB1         V=0.7773 W=3.3168 share=1.00  realised(last half)=3.1502
+    Thompson     V=0.7780 W=3.3143 share=0.99  realised(last half)=3.2645
+    EXP3         V=0.7841 W=3.2904 share=0.94  realised(last half)=3.1512
+    model-based  V=0.7768 W=3.3184 share=1.00  realised(last half)=3.3030
+    model-ucb    V=0.7768 W=3.3184 share=1.00  realised(last half)=3.3132
+    below random sharing in welfare: none | in company value: 6 learners; equilibrium itself below random in company value: True

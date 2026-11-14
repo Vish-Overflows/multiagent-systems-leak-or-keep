@@ -7,7 +7,7 @@ from leakgame.config import GameConfig, type_of
 from leakgame.env import draw_days, hire_bar, hire_seats, leak_counts_batch, leak_counts_table, scores
 from leakgame.game import AgentFormGame
 from leakgame.learners import EXP3, UCB1, EpsGreedy, ModelBased, ModelUCB, Thompson
-from leakgame.analysis import sweep_alpha
+from leakgame.analysis import matrix_distribution_values, pivotality_by_type, profile_values, sweep_alpha
 from leakgame.learning import run_learning
 from leakgame.pipeline import build_setup
 from leakgame.solvers import (best_response_dynamics, bootstrap_exploitability, cce_lp, enumerate_pure_bne,
@@ -219,6 +219,28 @@ def test_sweep_alpha_agrees_with_direct_enumeration():
         assert rec["n_bne"] == enumerate_pure_bne(g).count
         assert rec["sharing_rate_mean"] == pytest.approx(g.sharing_rate(enumerate_pure_bne(g).profiles[0])[0])
     assert set(out["alpha_star"]) == set(out["cells"]) and out["loss_gain"]
+
+
+def test_pivotality_by_type_is_a_valid_distribution():
+    r = pivotality_by_type(GameConfig(), n_days=120_000, seed=1)
+    # every rank is equally likely overall, so the mean over the three equally likely types is 1/n (rank K) and K/n (hired)
+    assert np.mean(r["P_rank_K"]) == pytest.approx(1 / 6, abs=0.005)
+    assert np.mean(r["P_hired"]) == pytest.approx(2 / 6, abs=0.005)
+    assert r["P_rank_K"][0] < r["P_rank_K"][1] < r["P_rank_K"][2]          # weak < average < strong
+
+
+def test_baseline_values_match_the_tables(small_table):
+    g = AgentFormGame(small_table, homogeneous(FRIEND(0.3), 4), "BAR")
+    M = g.M
+    V = small_table.V[:, :, 1].astype(float)
+    assert matrix_distribution_values(g, np.eye(M)[0])["company_value"] == pytest.approx(V[:, 0].mean())
+    assert matrix_distribution_values(g, np.eye(M)[M - 1])["company_value"] == pytest.approx(V[:, -1].mean())
+    assert matrix_distribution_values(g, np.ones(M))["company_value"] == pytest.approx(V.mean())
+    assert matrix_distribution_values(g, np.eye(M)[0])["share"] == 0.0 and matrix_distribution_values(g, np.eye(M)[M - 1])["share"] == 1.0
+    assert matrix_distribution_values(g, np.ones(M))["share"] == pytest.approx(0.5)        # each possible tell with prob 1/2
+    sig = enumerate_pure_bne(g).profiles[0]
+    pv = profile_values(g, sig)
+    assert pv["welfare"] == pytest.approx(g.expected_utilities(sig).sum()) and pv["share"] == pytest.approx(g.sharing_rate(sig)[0])
 
 
 # ------------------------------------------------------------------ the learning loop

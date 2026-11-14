@@ -145,6 +145,20 @@ def main():
     for t, a in zip(tests, adj):
         t["p_holm"] = float(a)
     summary["tests"]["cce_gap_falls"] = tests
+    # ---- the same question per (learner, leak model, rule), with the 30 seeds as the unit: runs that share a seed
+    #      share their random draws and the six games are different populations, so the pooled test above is only a summary
+    tests = []
+    for name in names:
+        d = data[name]
+        for env in envs:
+            for rule in rules:
+                m = sel(d, env, rule)
+                t = paired_test(d["cce_gap"][m, i10k], d["cce_gap"][m, -1])
+                t.update({"learner": name, "env": env, "rule": rule, "what": "cce_gap(10k)-cce_gap(T)"}); tests.append(t)
+    adj = holm([t["p"] for t in tests])
+    for t, a in zip(tests, adj):
+        t["p_holm"] = float(a)
+    summary["tests"]["cce_gap_falls_by_setting"] = tests
     # ---- learner ranking by final agreement pooled (for the text)
     summary["ranking_final_agree"] = sorted([(n, float(data[n]["agree_greedy"][:, -1].mean())) for n in names], key=lambda x: -x[1])
     summary["seconds_per_learner"] = {n: float(data[n]["seconds"]) for n in names}
@@ -173,6 +187,13 @@ def main():
     if "mb_equals_ucb1_under_E0" in summary:
         print("leak-aware == UCB1 under E0:", summary.get("mb_equals_ucb1_under_E0"))
     print("CCE gap falls (10k -> T), Holm:")
+    by = summary["tests"]["cce_gap_falls_by_setting"]
+    print(f"CCE gap falls (10k -> T) per learner x leak model x rule, 30 seeds each, Holm over {len(by)}: "
+          f"{sum(t['p_holm'] < 0.05 and t['mean_diff'] > 0 for t in by)} significant; E1/E2: "
+          f"{sum(t['p_holm'] < 0.05 and t['mean_diff'] > 0 for t in by if t['env'] != 'E0')} of {sum(t['env'] != 'E0' for t in by)}")
+    for t in by:
+        if not (t["p_holm"] < 0.05 and t["mean_diff"] > 0):
+            print(f"  not significant: {t['learner']:12s} {t['env']} {t['rule']:5s} diff={t['mean_diff']:+.5f} p={t['p']:.4f} p_holm={t['p_holm']:.4f}")
     for t in summary["tests"]["cce_gap_falls"]:
         print(f"  {t['learner']:12s}: diff={t['mean_diff']:+.5f} p={t['p']:.4f} p_holm={t['p_holm']:.4f}")
 
