@@ -28,7 +28,7 @@ import numpy as np
 from .config import GameConfig, type_of
 from .env import DayDraws, draw_question_sets, hire_seats, leak_counts_batch
 from .game import AgentFormGame, popcount_int
-from .learners import LEARNERS, ModelBased
+from .learners import LEARNERS, ModelBased, ModelUCB
 from .tables import PayoffTable, profile_index
 from .utility import Utility, reward_range, weights
 
@@ -103,8 +103,21 @@ def run_learning(learner_name: str, setup: LearningSetup, T: int = 200_000, ckpt
     rng_env = np.random.default_rng(env_seed)
     rng_learn = np.random.default_rng(learner_seed)
     Learner = LEARNERS[learner_name]
-    learner = Learner(B, C, Kmax, valid, rng_learn, horizon_per_cell=T / 3.0)
+    extra = {}
+    if getattr(Learner, "needs_model_info", False):
+        # the model-based learner needs to know which friends each arm tells and what a tell costs (both are
+        # part of the candidate's own problem), not the environment's parameters
+        Lmax = max(len(game0.L[i]) for i in active)
+        arm_bits = np.zeros((C, Kmax, Lmax), dtype=bool)
+        for c, ta in enumerate(cells):
+            for a in range(ta.n_actions):
+                for t_pos in range(len(game0.L[ta.player])):
+                    arm_bits[c, a, t_pos] = (a >> t_pos) & 1
+        cost = np.array([cfg0.c / (hi[ta.player] - lo[ta.player]) for ta in cells])
+        extra = {"arm_bits": arm_bits, "cost": cost, "m": m}
+    learner = Learner(B, C, Kmax, valid, rng_learn, horizon_per_cell=T / 3.0, **extra)
     is_mb = isinstance(learner, ModelBased)
+    is_model = isinstance(learner, ModelUCB)
 
     regret_sum = np.zeros((B, C, Kmax)); regret_played = np.zeros((B, C))
     cce_sum = np.zeros((B, C, Kmax)); cce_played = np.zeros((B, C))
@@ -151,11 +164,16 @@ def run_learning(learner_name: str, setup: LearningSetup, T: int = 200_000, ckpt
         u = xf @ Wlin.T + xf * (xf @ Wpair.T) - cfg0.c * n_told                  # (B, n)
         util_acc += u.sum(axis=1)
         # ---- 4. learner updates (realised cells only)
-        bs, cs, arms, rs, credits, credit_rs = [], [], [], [], [], []
+        bs, cs, arms, rs, credits, credit_rs, feats_l = [], [], [], [], [], [], []
         for i in active:
             c = cell_idx[i][theta[:, i]]
             r = (u[:, i] - lo[i]) / (hi[i] - lo[i])
             bs.append(arangeB); cs.append(c); arms.append(a_real[:, i]); rs.append(r)
+            if is_model:
+                ft = np.zeros((B, Lmax))
+                for t_pos, j in enumerate(game0.L[i]):
+                    ft[:, t_pos] = kij[:, i, j]                                  # 0 for friends not told
+                feats_l.append(ft)
             if is_mb:
                 inert = np.zeros(B, dtype=np.int64)
                 for j in game0.L[i]:
@@ -173,6 +191,8 @@ def run_learning(learner_name: str, setup: LearningSetup, T: int = 200_000, ckpt
         b_all = np.concatenate(bs); c_all = np.concatenate(cs); a_all = np.concatenate(arms); r_all = np.concatenate(rs)
         if is_mb:
             learner.update(b_all, c_all, a_all, r_all, credit=np.concatenate(credits), credit_reward=np.concatenate(credit_rs))
+        elif is_model:
+            learner.update(b_all, c_all, a_all, r_all, feats=np.concatenate(feats_l))
         else:
             learner.update(b_all, c_all, a_all, r_all)
         # ---- 5. metrics
@@ -214,7 +234,7 @@ def run_learning(learner_name: str, setup: LearningSetup, T: int = 200_000, ckpt
             out["cce_gap"][:, ck_pos] = gap_player.max(axis=1)
             out["cce_gap_cell_mean"][:, ck_pos] = gap_cell.mean(axis=1)
             out["util_mean"][:, ck_pos] = util_acc / t
-            if is_mb:
+            if is_mb or is_model:
                 out["leak_rate_hat"][:, ck_pos] = learner.leak_rate_estimate(m)
             ck_pos += 1
             if verbose and (ck_pos % 25 == 0 or t == T):

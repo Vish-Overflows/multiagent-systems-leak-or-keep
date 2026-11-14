@@ -1,0 +1,14 @@
+\begin{tabular}{@{}lrrrrrr@{}}
+\toprule
+ & \multicolumn{2}{c}{E0} & \multicolumn{2}{c}{E1} & \multicolumn{2}{c}{E2} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}
+Learner & Seats & Cut-off & Seats & Cut-off & Seats & Cut-off \\
+\midrule
+$\varepsilon$-greedy & never\,(47\%) & never\,(13\%) & never\,(20\%) & never\,(50\%) & never\,(13\%) & 160.5k \\
+UCB1 & 16.5k & never\,(3\%) & 56k & 18k & 60.5k & 12k \\
+Thompson sampling & 19.5k & never\,(13\%) & 78k & 19k & 80k & 16.5k \\
+EXP3 & 29k & never\,(3\%) & 141k & 61k & 122k & 41k \\
+Leak-aware UCB & 16.5k & never\,(3\%) & 27k & 7k & 28.5k & 8.5k \\
+Model-based UCB & 12k & never\,(0\%) & 12k & 4.5k & 15.5k & 4k \\
+\bottomrule
+\end{tabular}

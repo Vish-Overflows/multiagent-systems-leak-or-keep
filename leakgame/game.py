@@ -43,7 +43,7 @@ class TypeAgent:
 
 class AgentFormGame:
     def __init__(self, table: PayoffTable, pop: Sequence[Utility], rule: str, Px: np.ndarray | None = None,
-                 build_V: bool = True):
+                 build_V: bool = True, Pxx: np.ndarray | None = None):
         self.table = table
         self.cfg: GameConfig = table.cfg
         self.pop = list(pop)
@@ -80,7 +80,8 @@ class AgentFormGame:
             self.act_of_S.append(acts)
         self.n_told_of_S = np.stack([popcount_int(self.act_of_S[i]) for i in range(n)], axis=1)  # (M, n)
         self.type_agents: List[TypeAgent] = [TypeAgent(i, th, self.K[i]) for i in self.active for th in range(3)]
-        self.EU = self._expected_utilities(Px if Px is not None else table.Px)   # list of (T, M)
+        self.EU = self._expected_utilities(Px if Px is not None else table.Px,
+                                           Pxx if Pxx is not None else table.Pxx)   # list of (T, M)
         self.V: List[np.ndarray | None] = [None] * n
         self.others: List[List[int]] = [[j for j in self.active if j != i] for i in range(n)]
         if build_V:
@@ -88,11 +89,16 @@ class AgentFormGame:
                 self.V[i] = self._build_V(i)
 
     # ------------------------------------------------------------------ tables
-    def _expected_utilities(self, Px: np.ndarray) -> List[np.ndarray]:
+    @property
+    def uses_pairwise(self) -> bool:
+        """True if some utility in the population depends on P(x_i x_j) (FAIR), not just on P(x_j)."""
+        return any(np.any(weights(self.pop[i], self.cfg, i)[1] != 0) for i in range(self.n))
+
+    def _expected_utilities(self, Px: np.ndarray, Pxx: np.ndarray) -> List[np.ndarray]:
         """EU_i[t, S] for every player (uses this rule's hiring probabilities)."""
         cfg = self.cfg
         Px_r = Px[:, :, self.r, :].astype(np.float64)              # (T, M, n)
-        Pxx_r = self.table.Pxx[:, :, self.r, :, :].astype(np.float64)
+        Pxx_r = Pxx[:, :, self.r, :, :].astype(np.float64)
         out = []
         for i in range(self.n):
             w_lin, w_pair = weights(self.pop[i], cfg, i)
@@ -254,9 +260,10 @@ class AgentFormGame:
         return g
 
     # ------------------------------------------------------- bootstrap support
-    def with_Px(self, Px: np.ndarray, build_V: bool = False) -> "AgentFormGame":
-        """Same game on a resampled hiring-probability table (block bootstrap)."""
-        return AgentFormGame(self.table, self.pop, self.rule, Px=Px, build_V=build_V)
+    def with_Px(self, Px: np.ndarray, build_V: bool = False, Pxx: np.ndarray | None = None) -> "AgentFormGame":
+        """Same game on a resampled hiring-probability table (block bootstrap).  Utilities with a pairwise
+        term (FAIR) need the matching resampled Pxx (PayoffTable.resample_tables); the others ignore it."""
+        return AgentFormGame(self.table, self.pop, self.rule, Px=Px, build_V=build_V, Pxx=Pxx)
 
     def profile_interim_values(self, sig: np.ndarray) -> List[np.ndarray]:
         """For ONE profile: V_i[sigma_{-i}, :, :] for each active player computed directly from EU

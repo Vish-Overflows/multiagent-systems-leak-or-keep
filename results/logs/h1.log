@@ -1,0 +1,4 @@
+P_rank_K   weak:  3.59% (se 0.01)  average: 17.86% (se 0.02)  strong: 28.55% (se 0.02)
+P_rank_K1  weak:  8.98% (se 0.01)  average: 23.62% (se 0.02)  strong: 17.40% (se 0.02)
+P_hired    weak:  4.45% (se 0.01)  average: 26.34% (se 0.02)  strong: 69.20% (se 0.02)
+order of P(rank = K): ['weak', 'average', 'strong'] -> matches the alpha* order weak < average < strong: True

@@ -1,0 +1,19 @@
+(a) noise / gap by type (E1):
+  SEATS weak: sd=0.150 gap=0.40pp (sd/gap)^2=1474  average: sd=0.296 gap=0.55pp (sd/gap)^2=2934  strong: sd=0.315 gap=0.76pp (sd/gap)^2=1730 | average hardest: True
+        Spearman((sd/gap)^2, error rate) per learner: {'eps-greedy': -0.09, 'UCB1': 0.8, 'Thompson': 0.7, 'EXP3': 0.05, 'model-based': 0.22, 'model-ucb': nan}
+        final error rate by type, UCB1: [0.01, 0.17, 0.04]
+  BAR   weak: sd=0.146 gap=0.98pp (sd/gap)^2=226  average: sd=0.329 gap=0.98pp (sd/gap)^2=1141  strong: sd=0.298 gap=0.97pp (sd/gap)^2=941 | average hardest: True
+        Spearman((sd/gap)^2, error rate) per learner: {'eps-greedy': 0.71, 'UCB1': 0.46, 'Thompson': 0.41, 'EXP3': 0.52, 'model-based': nan, 'model-ucb': nan}
+        final error rate by type, UCB1: [0.0, 0.03, 0.0]
+(b) share of pulls on non-equilibrium arms, and agreement (E1):
+  SEATS eps-greedy: 37% (regret 154, agree 71%)  UCB1: 56% (regret 246, agree 93%)  Thompson: 41% (regret 173, agree 92%)  EXP3: 57% (regret 251, agree 81%)  model-ucb: 41% (regret 168, agree 100%)
+  BAR   eps-greedy: 23% (regret 178, agree 86%)  UCB1: 48% (regret 421, agree 99%)  Thompson: 23% (regret 191, agree 99%)  EXP3: 51% (regret 442, agree 94%)  model-ucb: 9% (regret 65, agree 100%)
+(c) gap of the mistakes / mean gap (E1):
+  SEATS eps-greedy: 1.01  UCB1: 1.01  Thompson: 0.99  EXP3: 1.03  model-ucb: 0.00
+  BAR   eps-greedy: 1.00  UCB1: 1.00  Thompson: 0.99  EXP3: 1.00  model-ucb: 0.00
+(d) relative regret reduction vs UCB1, four-arm cells | two-arm cells:
+  E1|SEATS   model-ucb: 34% | 25%    leak-aware: 0% | -3%
+  E1|BAR     model-ucb: 86% | 81%    leak-aware: 83% | 84%
+  E2|SEATS   model-ucb: 30% | 22%    leak-aware: 0% | -4%
+  E2|BAR     model-ucb: 80% | 77%    leak-aware: 75% | 81%
+(d) model-ucb reduction larger in four-arm cells in 4 of 4 settings

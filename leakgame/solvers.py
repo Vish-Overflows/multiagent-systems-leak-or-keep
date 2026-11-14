@@ -107,9 +107,15 @@ def bootstrap_exploitability(game: AgentFormGame, sig: np.ndarray, R: int = 1000
     eps0, gains0 = game.profile_exploitability_direct(sig)
     eps = np.zeros(R)
     gains = np.zeros((R, len(gains0)))
+    pairwise = game.uses_pairwise
     for r in range(R):
-        Px = game.table.resample_blocks(rng)
-        g = game.with_Px(Px, build_V=False)
+        # same random draw either way; FAIR utilities also need Pxx resampled with the same blocks
+        if pairwise:
+            Px, Pxx = game.table.resample_tables(rng)
+            g = game.with_Px(Px, build_V=False, Pxx=Pxx)
+        else:
+            Px = game.table.resample_blocks(rng)
+            g = game.with_Px(Px, build_V=False)
         eps[r], gains[r] = g.profile_exploitability_direct(sig)
     return BootstrapResult(eps0, eps, float((eps <= 1e-12).mean()), float(np.quantile(eps, 0.95)),
                            gains.mean(axis=0), gains.std(axis=0))
@@ -120,8 +126,12 @@ def bootstrap_bne_set(game: AgentFormGame, R: int = 30, seed: int = 0) -> Dict:
     rng = np.random.default_rng(seed)
     counts, sets = [], []
     for r in range(R):
-        Px = game.table.resample_blocks(rng)
-        g = game.with_Px(Px, build_V=True)
+        if game.uses_pairwise:
+            Px, Pxx = game.table.resample_tables(rng)
+            g = game.with_Px(Px, build_V=True, Pxx=Pxx)
+        else:
+            Px = game.table.resample_blocks(rng)
+            g = game.with_Px(Px, build_V=True)
         res = enumerate_pure_bne(g)
         counts.append(res.count)
         sets.append({tuple(p) for p in res.profiles})

@@ -17,7 +17,7 @@ from leakgame.utility import FRIEND, homogeneous  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "results", "x3")
-LEARNERS = ["eps-greedy", "UCB1", "Thompson", "EXP3", "model-based"]
+LEARNERS = ["eps-greedy", "UCB1", "Thompson", "EXP3", "model-based", "model-ucb"]
 
 
 def load(name):
@@ -83,7 +83,7 @@ def main():
                 i10k = int(np.argmin(np.abs(ck - 10000)))
                 rec["cce_gap_ratio_T_over_10k"] = float(d["cce_gap"][m, -1].mean() / max(d["cce_gap"][m, i10k].mean(), 1e-12))
                 rec["cce_gap_at_10k"] = float(d["cce_gap"][m, i10k].mean())
-                if name == "model-based":
+                if name in ("model-based", "model-ucb"):
                     rec["leak_rate_hat"] = {"mean": float(np.nanmean(d["leak_rate_hat"][m, -1])), "sd": float(np.nanstd(d["leak_rate_hat"][m, -1]))}
                 # per-decision breakdown: is the most-played action the equilibrium action?
                 mp = d["final_counts"][m].argmax(axis=2)                          # (seeds, C)
@@ -111,13 +111,15 @@ def main():
     for t, a in zip(tests, adj):
         t["p_holm"] = float(a)
     summary["tests"]["bar_vs_seats_agreement"] = tests
-    # ---- H4: model-based vs UCB1 (paired by seed/env/rule): agreement at 20k and final regret, CCE gap
-    if "model-based" in data and "UCB1" in data:
+    # ---- H4: leak-aware (counterfactual credit) and model-based learners vs UCB1 (paired by seed/env/rule):
+    #      agreement at 20k and final, regret, CCE gap; one Holm family per learner
+    for mb_name, test_key in (("model-based", "model_based_vs_ucb1"), ("model-ucb", "model_ucb_vs_ucb1")):
+      if mb_name in data and "UCB1" in data:
         tests = []
         i20 = int(np.argmin(np.abs(ck - 20000)))
         for env in envs:
             for rule in rules:
-                mb, ub = data["model-based"], data["UCB1"]
+                mb, ub = data[mb_name], data["UCB1"]
                 m1, m2 = sel(mb, env, rule), sel(ub, env, rule)
                 for key, idx, what in [("agree_greedy", i20, "agree@20k(MB)-agree@20k(UCB1)"),
                                        ("agree_greedy", -1, "agree@T(MB)-agree@T(UCB1)"),
@@ -127,11 +129,12 @@ def main():
         adj = holm([t["p"] for t in tests])
         for t, a in zip(tests, adj):
             t["p_holm"] = float(a)
-        summary["tests"]["model_based_vs_ucb1"] = tests
-        # identical trajectories under E0?
-        m1 = sel(data["model-based"], "E0", "SEATS"); m2 = sel(data["UCB1"], "E0", "SEATS")
-        summary["mb_equals_ucb1_under_E0"] = bool(np.allclose(data["model-based"]["agree_greedy"][m1], data["UCB1"]["agree_greedy"][m2]) and
-                                                  np.allclose(data["model-based"]["regret_mean"][m1], data["UCB1"]["regret_mean"][m2]))
+        summary["tests"][test_key] = tests
+        if mb_name == "model-based":
+            # identical trajectories under E0?  (only the counterfactual-credit learner is UCB1 plus credit)
+            m1 = sel(data["model-based"], "E0", "SEATS"); m2 = sel(data["UCB1"], "E0", "SEATS")
+            summary["mb_equals_ucb1_under_E0"] = bool(np.allclose(data["model-based"]["agree_greedy"][m1], data["UCB1"]["agree_greedy"][m2]) and
+                                                      np.allclose(data["model-based"]["regret_mean"][m1], data["UCB1"]["regret_mean"][m2]))
     # ---- H4: does the CCE gap fall?  paired gap(T) vs gap(10^4) for each learner (pooled over env/rule), Holm over learners
     tests = []
     i10k = int(np.argmin(np.abs(ck - 10000)))
@@ -142,6 +145,20 @@ def main():
     for t, a in zip(tests, adj):
         t["p_holm"] = float(a)
     summary["tests"]["cce_gap_falls"] = tests
+    # ---- the same question per (learner, leak model, rule), with the 30 seeds as the unit: runs that share a seed
+    #      share their random draws and the six games are different populations, so the pooled test above is only a summary
+    tests = []
+    for name in names:
+        d = data[name]
+        for env in envs:
+            for rule in rules:
+                m = sel(d, env, rule)
+                t = paired_test(d["cce_gap"][m, i10k], d["cce_gap"][m, -1])
+                t.update({"learner": name, "env": env, "rule": rule, "what": "cce_gap(10k)-cce_gap(T)"}); tests.append(t)
+    adj = holm([t["p"] for t in tests])
+    for t, a in zip(tests, adj):
+        t["p_holm"] = float(a)
+    summary["tests"]["cce_gap_falls_by_setting"] = tests
     # ---- learner ranking by final agreement pooled (for the text)
     summary["ranking_final_agree"] = sorted([(n, float(data[n]["agree_greedy"][:, -1].mean())) for n in names], key=lambda x: -x[1])
     summary["seconds_per_learner"] = {n: float(data[n]["seconds"]) for n in names}
@@ -162,12 +179,21 @@ def main():
     print("BAR vs SEATS agreement (Holm):")
     for t in summary["tests"]["bar_vs_seats_agreement"]:
         print(f"  {t['learner']:12s} {t['env']}: diff={t['mean_diff']:+.3f} CI=({t['ci95'][0]:+.3f},{t['ci95'][1]:+.3f}) p={t['p']:.4f} p_holm={t['p_holm']:.4f}")
-    if "model_based_vs_ucb1" in summary["tests"]:
-        print("model-based vs UCB1 (Holm):")
-        for t in summary["tests"]["model_based_vs_ucb1"]:
-            print(f"  {t['env']} {t['rule']:5s} {t['what']:32s}: diff={t['mean_diff']:+.4f} p={t['p']:.4f} p_holm={t['p_holm']:.4f}")
-        print("MB == UCB1 under E0:", summary.get("mb_equals_ucb1_under_E0"))
+    for test_key, label in (("model_based_vs_ucb1", "leak-aware (counterfactual credit)"), ("model_ucb_vs_ucb1", "model-based UCB")):
+        if test_key in summary["tests"]:
+            print(f"{label} vs UCB1 (Holm):")
+            for t in summary["tests"][test_key]:
+                print(f"  {t['env']} {t['rule']:5s} {t['what']:32s}: diff={t['mean_diff']:+.4f} p={t['p']:.4f} p_holm={t['p_holm']:.4f}")
+    if "mb_equals_ucb1_under_E0" in summary:
+        print("leak-aware == UCB1 under E0:", summary.get("mb_equals_ucb1_under_E0"))
     print("CCE gap falls (10k -> T), Holm:")
+    by = summary["tests"]["cce_gap_falls_by_setting"]
+    print(f"CCE gap falls (10k -> T) per learner x leak model x rule, 30 seeds each, Holm over {len(by)}: "
+          f"{sum(t['p_holm'] < 0.05 and t['mean_diff'] > 0 for t in by)} significant; E1/E2: "
+          f"{sum(t['p_holm'] < 0.05 and t['mean_diff'] > 0 for t in by if t['env'] != 'E0')} of {sum(t['env'] != 'E0' for t in by)}")
+    for t in by:
+        if not (t["p_holm"] < 0.05 and t["mean_diff"] > 0):
+            print(f"  not significant: {t['learner']:12s} {t['env']} {t['rule']:5s} diff={t['mean_diff']:+.5f} p={t['p']:.4f} p_holm={t['p_holm']:.4f}")
     for t in summary["tests"]["cce_gap_falls"]:
         print(f"  {t['learner']:12s}: diff={t['mean_diff']:+.5f} p={t['p']:.4f} p_holm={t['p_holm']:.4f}")
 

@@ -1,0 +1,84 @@
+{
+ "n_days": 4000000,
+ "smallest_gap_pp": 0.36,
+ "second_teller": {
+  "SEATS|weak": {
+   "bias_pp": -0.011279119170692908,
+   "se_pp": 0.019381155064151973,
+   "share_credited": 0.4835468652219695,
+   "mean_u_silent_pp": 20.610505094412446
+  },
+  "SEATS|average": {
+   "bias_pp": 0.04844724979923276,
+   "se_pp": 0.0369330011691299,
+   "share_credited": 0.4841841095873962,
+   "mean_u_silent_pp": 39.792958891217864
+  },
+  "SEATS|strong": {
+   "bias_pp": 0.0344608557424686,
+   "se_pp": 0.03960726896434914,
+   "share_credited": 0.48282485977410844,
+   "mean_u_silent_pp": 78.95504520681725
+  },
+  "BAR|weak": {
+   "bias_pp": -0.010367301090727365,
+   "se_pp": 0.015769381193779415,
+   "share_credited": 0.4835468652219695,
+   "mean_u_silent_pp": 15.943745995106065
+  },
+  "BAR|average": {
+   "bias_pp": 0.051822464381584554,
+   "se_pp": 0.03869215152117934,
+   "share_credited": 0.4841841095873962,
+   "mean_u_silent_pp": 36.183743355479855
+  },
+  "BAR|strong": {
+   "bias_pp": -0.0797345388140025,
+   "se_pp": 0.03947792270331917,
+   "share_credited": 0.48282485977410844,
+   "mean_u_silent_pp": 91.9641225737058
+  }
+ },
+ "no_other_teller": {
+  "SEATS|weak": {
+   "bias_pp": 0.03269050790237482,
+   "se_pp": 0.020055426047755384,
+   "share_credited": 0.4841843123925631,
+   "mean_u_silent_pp": 20.10414486039862
+  },
+  "SEATS|average": {
+   "bias_pp": -0.04014585735766518,
+   "se_pp": 0.0377893975209143,
+   "share_credited": 0.4828316012493196,
+   "mean_u_silent_pp": 40.343892773228696
+  },
+  "SEATS|strong": {
+   "bias_pp": 0.05513611167817789,
+   "se_pp": 0.039154794811769186,
+   "share_credited": 0.4835603853321784,
+   "mean_u_silent_pp": 79.6592457598836
+  },
+  "BAR|weak": {
+   "bias_pp": 0.009495263777456464,
+   "se_pp": 0.015578174973911375,
+   "share_credited": 0.4841843123925631,
+   "mean_u_silent_pp": 14.610968674756652
+  },
+  "BAR|average": {
+   "bias_pp": -0.045623694919960656,
+   "se_pp": 0.03870181097038918,
+   "share_credited": 0.4828316012493196,
+   "mean_u_silent_pp": 34.806431926924105
+  },
+  "BAR|strong": {
+   "bias_pp": 0.020343774823838867,
+   "se_pp": 0.039358029689501445,
+   "share_credited": 0.4835603853321784,
+   "mean_u_silent_pp": 90.6241736319695
+  }
+ },
+ "max_abs_bias_pp": 0.0797345388140025,
+ "max_abs_bias_over_gap": 0.22148483003889582,
+ "prediction_holds": true,
+ "seconds": 25.00446081161499
+}

@@ -1,0 +1,684 @@
+{
+ "network": "star",
+ "env": "E2",
+ "n_days": 2000,
+ "cce": {
+  "SEATS": [
+   {
+    "alpha": 0.0,
+    "cce_share_max": 0.0,
+    "cce_share_min": 0.0,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 12.809448480606079,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 0.0,
+    "bne_share_max": 0.0,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.025,
+    "cce_share_max": 0.0,
+    "cce_share_min": 0.0,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 15.042703866958618,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 0.0,
+    "bne_share_max": 0.0,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.05,
+    "cce_share_max": 0.0,
+    "cce_share_min": 0.0,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 18.699752807617188,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 0.0,
+    "bne_share_max": 0.0,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.075,
+    "cce_share_max": 0.0,
+    "cce_share_min": 0.0,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 17.444509506225586,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 0.0,
+    "bne_share_max": 0.0,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.1,
+    "cce_share_max": 0.13333333333333333,
+    "cce_share_min": 0.13333333333333333,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 13.935086250305176,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 0.13333333333333333,
+    "bne_share_max": 0.13333333333333333,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.125,
+    "cce_share_max": 0.13333333333333333,
+    "cce_share_min": 0.13333333333333333,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 13.6985445022583,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 0.13333333333333333,
+    "bne_share_max": 0.13333333333333333,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.15,
+    "cce_share_max": 0.13333333333333333,
+    "cce_share_min": 0.13333333333333333,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 12.481587171554565,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 0.13333333333333333,
+    "bne_share_max": 0.13333333333333333,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.175,
+    "cce_share_max": 0.13333333333333333,
+    "cce_share_min": 0.13333333333333333,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 14.404051542282104,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 0.13333333333333333,
+    "bne_share_max": 0.13333333333333333,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.2,
+    "cce_share_max": 0.13333333333333333,
+    "cce_share_min": 0.13333333333333333,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 15.100308895111084,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 0.13333333333333333,
+    "bne_share_max": 0.13333333333333333,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.225,
+    "cce_share_max": 0.13333333333333333,
+    "cce_share_min": 0.13333333333333333,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 15.104030132293701,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 0.13333333333333333,
+    "bne_share_max": 0.13333333333333333,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.25,
+    "cce_share_max": 0.13333333333333333,
+    "cce_share_min": 0.13333333333333333,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 17.92842197418213,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 0.13333333333333333,
+    "bne_share_max": 0.13333333333333333,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.275,
+    "cce_share_max": 0.26666666666666666,
+    "cce_share_min": 0.26666666666666666,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 12.606430292129517,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 0.26666666666666666,
+    "bne_share_max": 0.26666666666666666,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.3,
+    "cce_share_max": 0.26666666666666666,
+    "cce_share_min": 0.26666666666666666,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 11.46338939666748,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 0.26666666666666666,
+    "bne_share_max": 0.26666666666666666,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.325,
+    "cce_share_max": 0.39999999999999997,
+    "cce_share_min": 0.39999999999999997,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 11.830665349960327,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 0.39999999999999997,
+    "bne_share_max": 0.39999999999999997,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.35,
+    "cce_share_max": 0.39999999999999997,
+    "cce_share_min": 0.39999999999999997,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 12.055057764053345,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 0.39999999999999997,
+    "bne_share_max": 0.39999999999999997,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.375,
+    "cce_share_max": 0.39999999999999997,
+    "cce_share_min": 0.39999999999999997,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 13.085637092590332,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 0.39999999999999997,
+    "bne_share_max": 0.39999999999999997,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.4,
+    "cce_share_max": 0.39999999999999997,
+    "cce_share_min": 0.39999999999999997,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 12.300968408584595,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 0.39999999999999997,
+    "bne_share_max": 0.39999999999999997,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.425,
+    "cce_share_max": 0.39999999999999997,
+    "cce_share_min": 0.39999999999999997,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 12.574583292007446,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 0.39999999999999997,
+    "bne_share_max": 0.39999999999999997,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.45,
+    "cce_share_max": 0.39999999999999997,
+    "cce_share_min": 0.39999999999999997,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 11.259626865386963,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 0.39999999999999997,
+    "bne_share_max": 0.39999999999999997,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.475,
+    "cce_share_max": 0.39999999999999997,
+    "cce_share_min": 0.39999999999999997,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 11.700926542282104,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 0.39999999999999997,
+    "bne_share_max": 0.39999999999999997,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.5,
+    "cce_share_max": 0.39999999999999997,
+    "cce_share_min": 0.39999999999999997,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 17.61473560333252,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 0.39999999999999997,
+    "bne_share_max": 0.39999999999999997,
+    "matches_x1_equilibria": true
+   }
+  ],
+  "BAR": [
+   {
+    "alpha": 0.0,
+    "cce_share_max": 0.0,
+    "cce_share_min": 0.0,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 15.265413284301758,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 0.0,
+    "bne_share_max": 0.0,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.025,
+    "cce_share_max": 1.0,
+    "cce_share_min": 1.0,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 12.651800632476807,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 1.0,
+    "bne_share_max": 1.0,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.05,
+    "cce_share_max": 1.0,
+    "cce_share_min": 1.0,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 11.779499530792236,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 1.0,
+    "bne_share_max": 1.0,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.075,
+    "cce_share_max": 1.0,
+    "cce_share_min": 1.0,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 25.352546215057373,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 1.0,
+    "bne_share_max": 1.0,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.1,
+    "cce_share_max": 1.0,
+    "cce_share_min": 1.0,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 23.632195949554443,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 1.0,
+    "bne_share_max": 1.0,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.125,
+    "cce_share_max": 1.0,
+    "cce_share_min": 1.0,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 27.66388249397278,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 1.0,
+    "bne_share_max": 1.0,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.15,
+    "cce_share_max": 1.0,
+    "cce_share_min": 1.0,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 17.47553062438965,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 1.0,
+    "bne_share_max": 1.0,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.175,
+    "cce_share_max": 1.0,
+    "cce_share_min": 1.0,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 15.709447145462036,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 1.0,
+    "bne_share_max": 1.0,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.2,
+    "cce_share_max": 1.0,
+    "cce_share_min": 1.0,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 14.569459915161133,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 1.0,
+    "bne_share_max": 1.0,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.225,
+    "cce_share_max": 1.0,
+    "cce_share_min": 1.0,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 15.115250587463379,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 1.0,
+    "bne_share_max": 1.0,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.25,
+    "cce_share_max": 1.0,
+    "cce_share_min": 1.0,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 16.151317596435547,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 1.0,
+    "bne_share_max": 1.0,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.275,
+    "cce_share_max": 1.0,
+    "cce_share_min": 1.0,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 18.10382390022278,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 1.0,
+    "bne_share_max": 1.0,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.3,
+    "cce_share_max": 1.0,
+    "cce_share_min": 1.0,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 17.288846731185913,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 1.0,
+    "bne_share_max": 1.0,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.325,
+    "cce_share_max": 1.0,
+    "cce_share_min": 1.0,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 15.822439670562744,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 1.0,
+    "bne_share_max": 1.0,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.35,
+    "cce_share_max": 1.0,
+    "cce_share_min": 1.0,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 15.3105309009552,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 1.0,
+    "bne_share_max": 1.0,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.375,
+    "cce_share_max": 1.0,
+    "cce_share_min": 1.0,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 23.07644534111023,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 1.0,
+    "bne_share_max": 1.0,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.4,
+    "cce_share_max": 1.0,
+    "cce_share_min": 1.0,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 22.112369775772095,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 1.0,
+    "bne_share_max": 1.0,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.425,
+    "cce_share_max": 1.0,
+    "cce_share_min": 1.0,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 21.43238592147827,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 1.0,
+    "bne_share_max": 1.0,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.45,
+    "cce_share_max": 1.0,
+    "cce_share_min": 1.0,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 27.072070121765137,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 1.0,
+    "bne_share_max": 1.0,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.475,
+    "cce_share_max": 1.0,
+    "cce_share_min": 1.0,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 23.736384630203247,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 1.0,
+    "bne_share_max": 1.0,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.5,
+    "cce_share_max": 1.0,
+    "cce_share_min": 1.0,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 24.443500995635986,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 1.0,
+    "bne_share_max": 1.0,
+    "matches_x1_equilibria": true
+   }
+  ]
+ },
+ "seconds": 935.9231879711151
+}

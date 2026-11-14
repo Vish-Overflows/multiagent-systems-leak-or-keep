@@ -51,6 +51,7 @@ def main():
             Vtab = tab.V[:, :, rule_i].astype(float)
             v_noleak = float(Vtab[:, 0].mean())
             v_all = float(Vtab[:, -1].mean())
+            v_random = float(Vtab.mean())             # random sharing: every possible tell with probability 1/2 (uniform over matrices)
             star = res.profiles[0] if res.count else None
             v_star = value_of_profile(g, star, Vtab) if star is not None else float("nan")
             # bootstrap CI for Lambda at the (fixed) equilibrium profile
@@ -68,8 +69,9 @@ def main():
                 "n_bne": res.count,
                 "sharing_rate": float(g.sharing_rate(star)[0]) if star is not None else None,
                 "cell_tells": popcount_int(g.cells_from_profile(star)).tolist() if star is not None else None,
-                "V_noleak": v_noleak, "V_eq": v_star, "V_allshare": v_all,
-                "Lambda_eq": v_noleak - v_star, "Lambda_allshare": v_noleak - v_all,
+                "V_noleak": v_noleak, "V_eq": v_star, "V_allshare": v_all, "V_random": v_random,
+                "Lambda_eq": v_noleak - v_star, "Lambda_allshare": v_noleak - v_all, "Lambda_random": v_noleak - v_random,
+                "Lambda_random_rel": (v_noleak - v_random) / v_noleak,
                 "Lambda_eq_rel": (v_noleak - v_star) / v_noleak, "Lambda_allshare_rel": (v_noleak - v_all) / v_noleak,
                 "Lambda_eq_ci95": [float(np.quantile(lam_bs, 0.025)), float(np.quantile(lam_bs, 0.975))] if star is not None else None,
                 "Lambda_eq_rel_ci95": [float(np.quantile(lam_bs, 0.025) / v_noleak), float(np.quantile(lam_bs, 0.975) / v_noleak)] if star is not None else None,

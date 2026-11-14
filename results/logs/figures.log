@@ -1,3 +1,4 @@
+  wrote tab_baselines.tex
 found: X1 cells 9 | complete True | X2 True | X3 True | X4 True | checks True
   wrote fig1_who_tells
   wrote fig3_sharing_vs_friendliness
@@ -7,6 +8,7 @@ found: X1 cells 9 | complete True | X2 True | X3 True | X4 True | checks True
   wrote tab_x2.tex
   wrote fig4_learning
   wrote tab_x3.tex
+  wrote tab_rounds90.tex
   wrote fig5_company_loss
   wrote tab_checks.tex
-  wrote numbers.tex (524 macros)
+  wrote numbers.tex (780 macros)

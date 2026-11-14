@@ -36,10 +36,11 @@ NET = {"two_groups": "Two friend groups", "pairs": "Pairs of friends", "star": "
        "complete": "Everyone is friends"}
 TYPES = ["weak", "average", "strong"]
 LEARNER = {"eps-greedy": r"$\varepsilon$-greedy", "UCB1": "UCB1", "Thompson": "Thompson", "EXP3": "EXP3",
-           "model-based": "Leak-aware UCB"}
+           "model-based": "Leak-aware UCB", "model-ucb": "Model-based UCB"}
 LEARNER_TXT = {"eps-greedy": r"$\varepsilon$-greedy", "UCB1": "UCB1", "Thompson": "Thompson sampling", "EXP3": "EXP3",
-               "model-based": "Leak-aware UCB"}
-LCOL = {"eps-greedy": "#7f7f7f", "UCB1": "#1f77b4", "Thompson": "#2ca02c", "EXP3": "#9467bd", "model-based": "#d62728"}
+               "model-based": "Leak-aware UCB", "model-ucb": "Model-based UCB"}
+LCOL = {"eps-greedy": "#7f7f7f", "UCB1": "#1f77b4", "Thompson": "#2ca02c", "EXP3": "#9467bd", "model-based": "#d62728",
+        "model-ucb": "#17becf"}
 
 plt.rcParams.update({
     "font.size": 8.5, "axes.titlesize": 9, "axes.labelsize": 8.5, "legend.fontsize": 7.5,
@@ -199,7 +200,7 @@ def fig_why(x1, x2):
     save(fig, "fig2_why_and_clans")
 
 
-def numbers_x1(x1, comp):
+def numbers_x1(x1, comp, support=None):
     r = x1.get(("two_groups", "E1"))
     if r is None:
         return
@@ -267,6 +268,80 @@ def numbers_x1(x1, comp):
                 cc_tot += 1; wdt = row["cce_share_max"] - row["cce_share_min"]
                 cc_single += wdt < 1e-6; cc_width = max(cc_width, wdt)
     num("CceTot", cc_tot); num("CceSingle", cc_single); num("CceMaxWidth", f"{cc_width:.3f}")
+    # the same, per leak model (E0/E2 programs come from run_cce.py), and how often the CCE interval is wider than
+    # the range spanned by the pure equilibria (rows from run_cce.py also carry the pure-equilibrium range)
+    tag_env = {"E0": "Ezero", "E1": "Eone", "E2": "Etwo"}
+    for e, te in tag_env.items():
+        tot = single = wider = 0; width = 0.0; where = None
+        for (net, env), rr in x1.items():
+            if env != e:
+                continue
+            for rule in ("SEATS", "BAR"):
+                for row in rr.get("cce", {}).get(rule, []):
+                    w = row["cce_share_max"] - row["cce_share_min"]
+                    tot += 1; single += w < 1e-6
+                    if w > width:
+                        width, where = w, (net, rule, row["alpha"])
+                    if row.get("bne_share_min") is not None and w > row["bne_share_max"] - row["bne_share_min"] + 1e-6:
+                        wider += 1
+        num(f"CceTot{te}", tot); num(f"CceSingle{te}", single); num(f"CceWider{te}", wider)
+        num(f"CceMaxWidth{te}", f"{100 * width:.0f}")
+    # worked example for the text: two friend groups, E0, cut-off, alpha = 0.2
+    ex = [r for r in (x1.get(("two_groups", "E0"), {}).get("cce", {}).get("BAR", [])) if abs(r["alpha"] - 0.2) < 1e-9]
+    if ex and ex[0].get("bne_share_min") is not None:
+        r0 = ex[0]
+        num("CceExN", r0["n_bne"]); num("CceExPure", pct(r0["bne_share_min"]))
+        num("CceExLo", pct(r0["cce_share_min"])); num("CceExHi", pct(r0["cce_share_max"]))
+    # support enumeration (pairs) and dominance reduction (all networks), from run_support.py
+    if support is not None:
+        netname = {"pairs": "Pairs", "star": "Star", "two_groups": "TwoGroups"}
+        all_tot = all_solved = 0
+        for net, tn in netname.items():
+            rows = [r for k, v in support["games"].items() if k.split("/")[0] == net for r in v]
+            solved = sum(r["dominance_solvable"] for r in rows)
+            num(f"Dom{tn}Tot", len(rows)); num(f"Dom{tn}Solved", solved)
+            all_tot += len(rows); all_solved += solved
+            for e, te in tag_env.items():
+                er = [r for k, v in support["games"].items() if k.split("/")[:2] == [net, e] for r in v]
+                num(f"Dom{tn}{te}Tot", len(er)); num(f"Dom{tn}{te}Solved", sum(r["dominance_solvable"] for r in er))
+        num("DomTot", all_tot); num("DomSolved", all_solved)
+        other = []                                  # games dominance leaves open outside E0
+        for k, v in support["games"].items():
+            net, env, rule = k.split("/")
+            for row in v:
+                if env != "E0" and not row["dominance_solvable"]:
+                    other.append((NET[net].lower(), env, RULE[rule].lower(), row["alpha"]))
+        num("DomOpenOutsideEzero", len(other))
+        if len(other) == 1:
+            num("DomOpenWhere", f"{other[0][0]}, {other[0][1]}, {other[0][2]}, $\\alpha={other[0][3]:g}$")
+        prow = [r for k, v in support["games"].items() if k.split("/")[0] == "pairs" for r in v]
+        num("SuppPairsGames", len(prow))
+        num("SuppPairsMixedGames", sum(r["support"]["n_mixed"] > 0 for r in prow))
+        num("SuppPairsMixedTotal", sum(r["support"]["n_mixed"] for r in prow))
+        num("SuppPairsComplete", sum(r["support"]["complete"] for r in prow))
+        num("SuppPairsMaxFree", max(r["support"]["n_free"] for r in prow))
+        num("SuppPairsPureOk", sum(r["support"]["pure_matches_enumeration"] for r in prow))
+    # near-ties: profiles within eps = 0.001 (= c, one message) of being an equilibrium, recorded by sweep_alpha
+    eps_tot = eps_multi = eps_low = eps_e0 = eps_step = eps_step_max = 0
+    for (net, env), rr in x1.items():
+        for rule in ("SEATS", "BAR"):
+            for rec in rr["rules"][rule]["records"]:
+                eps_tot += 1
+                k = rec["n_eps_bne_1e-3"]
+                if k <= 1:
+                    continue
+                eps_multi += 1
+                if rec["alpha"] <= 0.025 + 1e-9:
+                    eps_low += 1            # a tell is worth about its cost
+                elif env == "E0":
+                    eps_e0 += 1             # a redundant tell costs exactly c
+                else:
+                    eps_step += 1; eps_step_max = max(eps_step_max, k)
+                    assert rule == "SEATS", "near-ties in E1/E2 away from alpha ~ 0 expected only on the fixed-seats staircase"
+    num("EpsBneGames", eps_tot); num("EpsBneMulti", eps_multi); num("EpsBneLowAlpha", eps_low)
+    num("EpsBneEzero", eps_e0); num("EpsBneStep", eps_step); num("EpsBneStepMax", eps_step_max)
+    for rule, tag in (("SEATS", "Seats"), ("BAR", "Bar")):
+        num(f"EpsBneHead{tag}", rec_at(x1[("two_groups", "E1")]["rules"][rule]["records"], 0.2)["n_eps_bne_1e-3"])
     if comp is not None:
         s = comp["SEATS"]; b = comp["BAR"]
         num("CompSeatsNoShare", sum(x["no_share_is_bne"] for x in s)); num("CompSeatsAllShare", sum(x["all_share_is_bne"] for x in s))
@@ -402,20 +477,44 @@ def fig_learning(x3):
     ax.legend(handles=[Line2D([], [], color="k", lw=1.2, ls="-", label="fixed seats"), Line2D([], [], color="k", lw=1.2, ls="--", label="cut-off")],
               frameon=False, loc="lower left", fontsize=6.5, handlelength=2.0, borderaxespad=0.2)
     h, l = axes[0].get_legend_handles_labels()
-    fig.legend(h, l, loc="upper center", ncol=5, frameon=False, bbox_to_anchor=(0.5, 1.07), handlelength=1.6, columnspacing=1.4)
+    fig.legend(h, l, loc="upper center", ncol=len(h), frameon=False, bbox_to_anchor=(0.5, 1.07), handlelength=1.3, columnspacing=0.9, fontsize=7)
     fig.tight_layout(w_pad=1.3)
     save(fig, "fig4_learning")
+
+
+def table_rounds90(x3):
+    """Appendix: median rounds to 90% agreement for every leak model (Table 3 shows E1 only)."""
+    if x3 is None:
+        return
+    envs, rules = x3["envs"], x3["rules"]
+    lines = [r"\begin{tabular}{@{}l" + "rr" * len(envs) + r"@{}}", r"\toprule",
+             " & " + " & ".join(rf"\multicolumn{{2}}{{c}}{{{e}}}" for e in envs) + r" \\",
+             "".join(rf"\cmidrule(lr){{{2 + 2 * k}-{3 + 2 * k}}}" for k in range(len(envs))),
+             "Learner & " + " & ".join("Seats & Cut-off" for _ in envs) + r" \\", r"\midrule"]
+    for name in x3["learners"]:
+        cells = []
+        for e in envs:
+            for r in rules:
+                t = x3["cells"][f"{name}|{e}|{r}"]["rounds_to_90"]
+                cells.append(f"{t['median'] / 1000:g}k" if t["median"] is not None else rf"never\,({pct(t['frac_reached'])}\%)")
+        lines.append(LEARNER_TXT[name] + " & " + " & ".join(cells) + r" \\")
+    lines += [r"\bottomrule", r"\end{tabular}"]
+    with open(os.path.join(GEN, "tab_rounds90.tex"), "w") as f:
+        f.write("\n".join(lines) + "\n")
+    print("  wrote tab_rounds90.tex")
 
 
 def table_x3(x3):
     if x3 is None:
         return
     envs, rules = x3["envs"], x3["rules"]
-    lines = [r"\begin{tabular}{@{}l" + "rr" * len(envs) + r"rr@{}}", r"\toprule",
-             " & " + " & ".join(rf"\multicolumn{{2}}{{c}}{{{e}}}" for e in envs) + r" & \multicolumn{2}{c}{Rounds to 90\% (E1)} \\",
-             "".join(rf"\cmidrule(lr){{{2 + 2 * k}-{3 + 2 * k}}}" for k in range(len(envs) + 1)),
-             "Learner & " + " & ".join("Seats & Cut-off" for _ in envs) + r" & Seats & Cut-off \\", r"\midrule"]
+    lines = [r"\begin{tabular}{@{}l" + "rr" * len(envs) + r"rrrr@{}}", r"\toprule",
+             " & " + " & ".join(rf"\multicolumn{{2}}{{c}}{{{e}}}" for e in envs) + r" & \multicolumn{2}{c}{Rounds to 90\% (E1)}"
+             r" & \multicolumn{2}{c}{Regret at $T$ (E1)} \\",
+             "".join(rf"\cmidrule(lr){{{2 + 2 * k}-{3 + 2 * k}}}" for k in range(len(envs) + 2)),
+             "Learner & " + " & ".join("Seats & Cut-off" for _ in envs) + r" & Seats & Cut-off & Seats & Cut-off \\", r"\midrule"]
     best = {(e, r): max(x3["cells"][f"{n}|{e}|{r}"]["agree"]["mean"] for n in x3["learners"]) for e in envs for r in rules}
+    best_reg = {r: min(x3["cells"][f"{n}|E1|{r}"]["regret"]["mean"] for n in x3["learners"]) for r in rules}
     for name in x3["learners"]:
         cells = []
         for e in envs:
@@ -426,14 +525,18 @@ def table_x3(x3):
                 cells.append(rf"\textbf{{{txt}}}" if c["mean"] >= best[(e, r)] - 1e-9 else txt)
         for r in rules:
             t = x3["cells"][f"{name}|E1|{r}"]["rounds_to_90"]
-            cells.append(f"{t['median'] / 1000:.0f}k" if t["median"] is not None else rf"never\,({pct(t['frac_reached'])}\%)")
+            cells.append(f"{t['median'] / 1000:g}k" if t["median"] is not None else rf"never\,({pct(t['frac_reached'])}\%)")
+        for r in rules:
+            g = x3["cells"][f"{name}|E1|{r}"]["regret"]
+            txt = f"{g['mean']:.0f}"
+            cells.append(rf"\textbf{{{txt}}}" if g["mean"] <= best_reg[r] + 1e-9 else txt)
         lines.append(LEARNER_TXT[name] + " & " + " & ".join(cells) + r" \\")
     lines += [r"\bottomrule", r"\end{tabular}"]
     with open(os.path.join(GEN, "tab_x3.tex"), "w") as f:
         f.write("\n".join(lines) + "\n")
     print("  wrote tab_x3.tex")
     # numbers
-    tagL = {"eps-greedy": "Eps", "UCB1": "Ucb", "Thompson": "Ts", "EXP3": "Exp", "model-based": "Mb"}
+    tagL = {"eps-greedy": "Eps", "UCB1": "Ucb", "Thompson": "Ts", "EXP3": "Exp", "model-based": "Mb", "model-ucb": "Mu"}
     tagR = {"SEATS": "Seats", "BAR": "Bar"}
     tagE = {"E0": "Ezero", "E1": "Eone", "E2": "Etwo"}
     num("XthreeT", f"{x3['T'] // 1000}{{,}}000"); num("XthreeSeeds", x3["n_seeds"]); num("XthreeRuns", len(x3["learners"]) * len(envs) * len(rules) * x3["n_seeds"])
@@ -449,7 +552,7 @@ def table_x3(x3):
                 num("Expl" + key, f"{100 * c['expl_mostplayed']['mean']:.2f}")
                 num("ExactEq" + key, pct(c["expl_mostplayed"]["frac_exact_eq"]))
                 t90 = c["rounds_to_90"]
-                num("Tninety" + key, f"{t90['median'] / 1000:.0f}{{,}}000" if t90["median"] is not None else "never")
+                num("Tninety" + key, f"{int(t90['median']):,}".replace(",", "{,}") if t90["median"] is not None else "never")
                 for th, tn in enumerate(("Weak", "Avg", "Strong")):
                     num("Type" + key + tn, pct(c["per_type_correct"][th]))
         pooled = np.mean([x3["cells"][f"{name}|{e}|{r}"]["agree"]["mean"] for e in envs for r in rules])
@@ -476,24 +579,32 @@ def table_x3(x3):
     num("ExplEzeroBarMin", f"{100 * min(c['expl_mostplayed']['mean'] for c in e0):.2f}"); num("ExplEzeroBarMax", f"{100 * max(c['expl_mostplayed']['mean'] for c in e0):.2f}")
     t = x3["tests"]["cce_gap_falls"]
     num("GapFallTests", len(t)); num("GapFallSig", sum(x["p_holm"] < 0.05 and x["mean_diff"] > 0 for x in t))
-    if "model_based_vs_ucb1" in x3["tests"]:
-        t = x3["tests"]["model_based_vs_ucb1"]
-        for env in ("E1", "E2"):
+    t = x3["tests"]["cce_gap_falls_by_setting"]       # per learner x leak model x rule, 30 seeds as the unit
+    num("GapFallSetTests", len(t)); num("GapFallSetSig", sum(x["p_holm"] < 0.05 and x["mean_diff"] > 0 for x in t))
+    t12 = [x for x in t if x["env"] != "E0"]
+    num("GapFallSetTestsEonetwo", len(t12)); num("GapFallSetSigEonetwo", sum(x["p_holm"] < 0.05 and x["mean_diff"] > 0 for x in t12))
+    # leak-aware (counterfactual credit, prefix Mb) and model-based (prefix Mu) learners against UCB1
+    for pre, key, lname in (("Mb", "model_based_vs_ucb1", "model-based"), ("Mu", "model_ucb_vs_ucb1", "model-ucb")):
+        if key not in x3["tests"]:
+            continue
+        t = x3["tests"][key]
+        for env in ("E0", "E1", "E2"):
             for r in rules:
-                for what, tg in (("agree@20k(MB)-agree@20k(UCB1)", "MbEarly"), ("agree@T(MB)-agree@T(UCB1)", "MbFinal"),
-                                 ("regret(MB)-regret(UCB1)", "MbRegret")):
+                for what, tg in (("agree@20k(MB)-agree@20k(UCB1)", pre + "Early"), ("agree@T(MB)-agree@T(UCB1)", pre + "Final"),
+                                 ("regret(MB)-regret(UCB1)", pre + "Regret")):
                     x = [y for y in t if y["env"] == env and y["rule"] == r and y["what"] == what][0]
                     val = f"{100 * x['mean_diff']:+.0f}" if "agree" in what else f"{x['mean_diff']:+.0f}"
                     num(tg + tagE[env] + tagR[r], val)
                     num(tg + "P" + tagE[env] + tagR[r], "<0.001" if x["p_holm"] < 0.001 else f"{x['p_holm']:.3f}")
         early = [y for y in t if y["what"].startswith("agree@20k") and y["env"] != "E0"]
-        num("MbEarlySig", sum(y["p_holm"] < 0.05 and y["mean_diff"] > 0 for y in early)); num("MbEarlyTests", len(early))
+        num(pre + "EarlySig", sum(y["p_holm"] < 0.05 and y["mean_diff"] > 0 for y in early)); num(pre + "EarlyTests", len(early))
         reg = [y for y in t if y["what"].startswith("regret") and y["env"] != "E0"]
-        num("MbRegretSig", sum(y["p_holm"] < 0.05 and y["mean_diff"] < 0 for y in reg)); num("MbRegretTests", len(reg))
+        num(pre + "RegretSig", sum(y["p_holm"] < 0.05 and y["mean_diff"] < 0 for y in reg)); num(pre + "RegretTests", len(reg))
+        if lname in x3["learners"]:
+            for env in ("E0", "E1", "E2"):
+                num(pre + "LeakHat" + tagE[env], f"{x3['cells'][lname + '|' + env + '|SEATS']['leak_rate_hat']['mean']:.3f}")
+    if "model_based_vs_ucb1" in x3["tests"]:
         num("MbSameAsUcbEzero", "yes" if x3.get("mb_equals_ucb1_under_E0") else "no")
-        num("MbLeakHatEone", f"{x3['cells']['model-based|E1|SEATS']['leak_rate_hat']['mean']:.3f}")
-        num("MbLeakHatEtwo", f"{x3['cells']['model-based|E2|SEATS']['leak_rate_hat']['mean']:.3f}")
-        num("MbLeakHatEzero", f"{x3['cells']['model-based|E0|SEATS']['leak_rate_hat']['mean']:.3f}")
 
 
 # =============================================================================== X4
@@ -534,6 +645,13 @@ def fig_company(x4):
             num(f"Lam{tag}Q{qt}", pct(r["Lambda_eq_rel"], 1))
             num(f"LamCI{tag}Q{qt}", f"{pct(r['Lambda_eq_rel_ci95'][0], 1)}, {pct(r['Lambda_eq_rel_ci95'][1], 1)}")
         num(f"LamAll{tag}QFifteen", pct([x for x in rows if x["Q"] == 15][0][rule]["Lambda_allshare_rel"], 1))
+        if "Lambda_random_rel" in rows[0][rule]:            # random sharing: every possible tell with probability 1/2
+            num(f"LamRandom{tag}QFifteen", pct([x for x in rows if x["Q"] == 15][0][rule]["Lambda_random_rel"], 1))
+        num(f"LamAll{tag}QFour", pct([x for x in rows if x["Q"] == 4][0][rule]["Lambda_allshare_rel"], 1))
+        okall = [r["Q"] for r in rows if r[rule]["Lambda_allshare_rel"] < 0.05]
+        num(f"QFiveAll{tag}", min(okall) if okall else f"$>${rows[-1]['Q']}")
+        shares = {r[rule]["sharing_rate"] for r in rows}
+        num(f"XfourShare{tag}", pct(shares.pop()) if len(shares) == 1 else "varies")
     better = [r["Q"] for r in rows if r["BAR"]["V_eq"] > r["SEATS"]["V_eq"]]
     worse = [r["Q"] for r in rows if r["BAR"]["V_eq"] <= r["SEATS"]["V_eq"]]
     num("CrossQBarBetterFrom", min(better) if better else "n/a"); num("CrossQBarWorseUpTo", max(worse) if worse else "n/a")
@@ -542,8 +660,14 @@ def fig_company(x4):
     num("VEqSeatsQFifteen", f"{r15['SEATS']['V_eq']:.2f}"); num("VEqBarQFifteen", f"{r15['BAR']['V_eq']:.2f}")
     r4 = [x for x in rows if x["Q"] == 4][0]
     num("VEqSeatsQFour", f"{r4['SEATS']['V_eq']:.2f}"); num("VEqBarQFour", f"{r4['BAR']['V_eq']:.2f}")
+    if "Lambda_random" in rows[0]["BAR"]:
+        r15b = [x for x in rows if x["Q"] == 15][0]["BAR"]
+        num("LamEqOverRandomBar", f"{r15b['Lambda_eq'] / r15b['Lambda_random']:.1f}")
     ratio = [r["BAR"]["Lambda_eq"] / r["SEATS"]["Lambda_eq"] for r in rows if r["SEATS"]["Lambda_eq"] > 0]
     num("LamRatioMin", f"{min(ratio):.0f}"); num("LamRatioMax", f"{max(ratio):.0f}")
+    # same comparison with everyone telling under both rules: isolates the rule from who chooses to tell
+    ratio_all = [r["BAR"]["Lambda_allshare"] / r["SEATS"]["Lambda_allshare"] for r in rows if r["SEATS"]["Lambda_allshare"] > 0]
+    num("LamAllRatioMin", f"{min(ratio_all):.1f}"); num("LamAllRatioMax", f"{max(ratio_all):.1f}")
     num("LamOrderHolds", sum(r["BAR"]["Lambda_eq_ci95"][0] > r["SEATS"]["Lambda_eq_ci95"][1] for r in rows)); num("LamOrderTot", len(rows))
     num("XfourSeatsShareSame", "yes" if len({tuple(r["SEATS"]["cell_tells"]) for r in rows}) == 1 else "no")
     num("XfourBarShareSame", "yes" if len({tuple(r["BAR"]["cell_tells"]) for r in rows}) == 1 else "no")
@@ -589,6 +713,82 @@ def table_checks(ch):
     print("  wrote tab_checks.tex")
 
 
+def table_baselines(bl):
+    """Appendix: nobody / random / everybody / equilibrium / settled play of each learner (E1, two friend groups, alpha = 0.2)."""
+    if bl is None:
+        return
+    gs, gb = bl["games"]["E1|SEATS"], bl["games"]["E1|BAR"]
+    rows = [("Nobody shares (leak-free company)", gs["nobody"], gb["nobody"]), ("Random sharing", gs["random"], gb["random"]),
+            ("Everybody shares", gs["everybody"], gb["everybody"]), ("Equilibrium", gs["equilibrium"], gb["equilibrium"])]
+    rows += [(LEARNER_TXT[n], gs["learners"][n], gb["learners"][n]) for n in gs["learners"]]
+    L = [r"\begin{tabular}{@{}lrrrrr@{}}", r"\toprule",
+         r" & \multicolumn{2}{c}{Fixed seats} & \multicolumn{3}{c}{Cut-off} \\", r"\cmidrule(lr){2-3}\cmidrule(lr){4-6}",
+         r"Sharing pattern & Tells (\%) & Company value & Tells (\%) & Welfare & Company value \\", r"\midrule"]
+    for k, (name, s, b) in enumerate(rows):
+        if k == 4:
+            L.append(r"\midrule")
+        L.append(f"{name} & {100 * s['share']:.0f} & {s['company_value']:.3f} & {100 * b['share']:.0f} & {b['welfare']:.3f} & {b['company_value']:.3f} \\\\")
+    L += [r"\bottomrule", r"\end{tabular}"]
+    with open(os.path.join(GEN, "tab_baselines.tex"), "w") as f:
+        f.write("\n".join(L) + "\n")
+    print("  wrote tab_baselines.tex")
+    # numbers for the text
+    for tag, g in (("Seats", gs), ("Bar", gb)):
+        for key, nm in (("nobody", "Nobody"), ("random", "Random"), ("everybody", "Every"), ("equilibrium", "Eq")):
+            num(f"BaseV{nm}{tag}", f"{g[key]['company_value']:.3f}")
+            num(f"BaseW{nm}{tag}", f"{g[key]['welfare']:.3f}")
+        vals = [v["company_value"] for v in g["learners"].values()]; wel = [v["welfare"] for v in g["learners"].values()]
+        num(f"BaseVLearnMin{tag}", f"{min(vals):.3f}"); num(f"BaseWLearnMin{tag}", f"{min(wel):.3f}")
+    num("BaseLearnBelowWelfare", sum(len(bl["games"][k]["learners_below_random_welfare"]) for k in bl["games"]))
+    num("BaseEqBelowRandomBar", "yes" if gb["equilibrium_below_random_company_value"] else "no")
+
+
+def numbers_expl(ex):
+    """Tests of the explanations the report gave without testing them (experiments/run_explanations.py)."""
+    if ex is None:
+        return
+    a = ex["a"]["E1|SEATS"]
+    for t, tn in (("weak", "Weak"), ("average", "Avg"), ("strong", "Strong")):
+        num("ExpSd" + tn, f"{a['by_type'][t]['reward_sd']:.2f}")
+        num("ExpSnr" + tn, f"{a['by_type'][t]['noise_over_gap_sq']:,.0f}".replace(",", "{,}"))
+    num("ExpRhoUcb", f"{a['correlation_with_error']['UCB1']['spearman']:.2f}")
+    num("ExpRhoTs", f"{a['correlation_with_error']['Thompson']['spearman']:.2f}")
+    num("ExpAvgHardest", "yes" if all(ex["a"][k]["average_is_hardest"] for k in ("E1|SEATS", "E1|BAR")) else "no")
+    for rule, tr in (("SEATS", "Seats"), ("BAR", "Bar")):
+        for name, tn in (("eps-greedy", "Eps"), ("UCB1", "Ucb"), ("Thompson", "Ts"), ("EXP3", "Exp"), ("model-ucb", "Mu")):
+            num(f"ExpWrong{tn}{tr}", pct(ex["b"][f"E1|{rule}"][name]["share_pulls_on_wrong_arms"]))
+        num("ExpMistakeGapEps" + tr, f"{ex['c'][f'E1|{rule}']['eps-greedy']['mean_gap_of_mistakes_over_mean_gap']:.2f}")
+        d = ex["d"][f"E1|{rule}"]["model-ucb"]
+        num("ExpPoolFourEone" + tr, pct(d["four_arm_cells"])); num("ExpPoolTwoEone" + tr, pct(d["two_arm_cells"]))
+    num("ExpPoolWins", ex["d_summary"]["model_ucb_larger_in_four_arm_cells"]); num("ExpPoolOf", ex["d_summary"]["of"])
+    ratios = [v["mean_cost_per_cell_from_wrong_pulls"] / v["stored_regret"] for k in ex["b"] for v in ex["b"][k].values()]
+    num("ExpCostMatchPct", f"{100 * max(abs(r - 1) for r in ratios):.0f}")
+
+
+def numbers_e2bias(eb):
+    """Bias of the counterfactual credit in E2 (experiments/run_e2_bias.py)."""
+    if eb is None:
+        return
+    st = eb["second_teller"]; ct = eb["no_other_teller"]
+    num("EtwoBiasMax", f"{eb['max_abs_bias_pp']:.2f}")
+    num("EtwoBiasOverGap", pct(eb["max_abs_bias_over_gap"]))
+    num("EtwoBiasSe", f"{np.mean([v['se_pp'] for v in st.values()]):.2f}")
+    num("EtwoBiasControlMax", f"{max(abs(v['bias_pp']) for v in ct.values()):.2f}")
+    num("EtwoBiasDays", f"{eb['n_days'] // 1_000_000}\,million")
+    num("EtwoBiasGap", f"{eb['smallest_gap_pp']:.2f}")
+
+
+def numbers_h1(piv):
+    """Independent pivotality of the three types (experiments/run_h1.py)."""
+    if piv is None:
+        return
+    for th, tn in enumerate(("Weak", "Avg", "Strong")):
+        num("Piv" + tn, f"{100 * piv['P_rank_K'][th]:.1f}")
+        num("PivNext" + tn, f"{100 * piv['P_rank_K1'][th]:.1f}")
+    num("PivDays", f"{piv['n_days'] // 1_000_000}\,million")
+    num("PivOrderOk", "yes" if piv["order_matches_alpha_star"] else "no")
+
+
 def main():
     x1 = {}
     for net in ("two_groups", "pairs", "star"):
@@ -597,12 +797,21 @@ def main():
             if r is not None:
                 x1[(net, env)] = r
     comp = load("x1/x1_complete_local.json")
+    for (net, env), r in x1.items():                 # E0/E2 CCE programs (run_cce.py) join the E1 ones from run_x1.py
+        extra = load(f"x1/x1_cce_{net}_{env}.json")
+        if extra is not None:
+            r["cce"] = extra["cce"]
+    support = load("x1/x1_support.json")
+    numbers_h1(load("h1/pivotality.json"))
+    numbers_e2bias(load("e2_bias/e2_bias.json"))
+    numbers_expl(load("explanations/explanations.json"))
+    table_baselines(load("baselines/baselines.json"))
     x2, x3, x4, ch = load("x2/x2.json"), load("x3/x3_summary.json"), load("x4/x4.json"), load("checks/checks.json")
     print("found: X1 cells", len(x1), "| complete", comp is not None, "| X2", x2 is not None, "| X3", x3 is not None,
           "| X4", x4 is not None, "| checks", ch is not None)
-    fig_who_tells(x1); fig_sharing_vs_alpha(x1, comp); fig_why(x1, x2); numbers_x1(x1, comp)
+    fig_who_tells(x1); fig_sharing_vs_alpha(x1, comp); fig_why(x1, x2); numbers_x1(x1, comp, support)
     table_x2(x2)
-    fig_learning(x3); table_x3(x3)
+    fig_learning(x3); table_x3(x3); table_rounds90(x3)
     fig_company(x4)
     table_checks(ch)
     with open(os.path.join(GEN, "numbers.tex"), "w") as f:

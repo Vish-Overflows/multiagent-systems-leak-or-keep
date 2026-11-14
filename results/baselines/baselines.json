@@ -1,0 +1,299 @@
+{
+ "alpha": 0.2,
+ "games": {
+  "E1|SEATS": {
+   "nobody": {
+    "welfare": 2.8000000015365853,
+    "company_value": 0.6574459157493415,
+    "share": 0.0
+   },
+   "everybody": {
+    "welfare": 2.7940000040171933,
+    "company_value": 0.6136549975842318,
+    "share": 1.0
+   },
+   "random": {
+    "welfare": 2.7969999999849335,
+    "company_value": 0.6314942905964129,
+    "share": 0.49999999999999994
+   },
+   "equilibrium": {
+    "welfare": 2.798000000818484,
+    "company_value": 0.6448417156313537,
+    "share": 0.3333333333333333
+   },
+   "learners": {
+    "eps-greedy": {
+     "welfare": 2.7974000003338775,
+     "company_value": 0.6375230775160637,
+     "share": 0.4333333333333334,
+     "realised_last_half": 2.797405469333827,
+     "realised_last_half_se": 0.0001154750274629852
+    },
+    "UCB1": {
+     "welfare": 2.7977333342615642,
+     "company_value": 0.642813679648255,
+     "share": 0.3777777777777779,
+     "realised_last_half": 2.797250603667361,
+     "realised_last_half_se": 1.386387507498057e-05
+    },
+    "Thompson": {
+     "welfare": 2.7977333341078494,
+     "company_value": 0.642506288383236,
+     "share": 0.3777777777777778,
+     "realised_last_half": 2.7976806316681273,
+     "realised_last_half_se": 3.267583236506989e-05
+    },
+    "EXP3": {
+     "welfare": 2.7975111118054325,
+     "company_value": 0.6391602641239703,
+     "share": 0.41481481481481486,
+     "realised_last_half": 2.7972365380005746,
+     "realised_last_half_se": 2.665242099076409e-05
+    },
+    "model-based": {
+     "welfare": 2.7979888897872924,
+     "company_value": 0.6447687071740268,
+     "share": 0.3351851851851853,
+     "realised_last_half": 2.796465481329249,
+     "realised_last_half_se": 2.101360745399105e-05
+    },
+    "model-ucb": {
+     "welfare": 2.7980000008184853,
+     "company_value": 0.644841715631354,
+     "share": 0.3333333333333334,
+     "realised_last_half": 2.797437226001034,
+     "realised_last_half_se": 1.2881865443353506e-05
+    }
+   },
+   "learners_below_random_welfare": [],
+   "learners_below_random_company_value": [],
+   "equilibrium_below_random_company_value": false,
+   "max_company_value_gap_to_equilibrium": 0.007318638115289988
+  },
+  "E1|BAR": {
+   "nobody": {
+    "welfare": 2.7990551425777737,
+    "company_value": 0.8935306544922834,
+    "share": 0.0
+   },
+   "everybody": {
+    "welfare": 3.3173954698661205,
+    "company_value": 0.7707870637139482,
+    "share": 1.0
+   },
+   "random": {
+    "welfare": 3.0673262664160523,
+    "company_value": 0.8326120707205992,
+    "share": 0.49999999999999994
+   },
+   "equilibrium": {
+    "welfare": 3.3173954698661157,
+    "company_value": 0.7707870637139482,
+    "share": 0.9999999999999997
+   },
+   "learners": {
+    "eps-greedy": {
+     "welfare": 3.2555617528864484,
+     "company_value": 0.7869510672173252,
+     "share": 0.8703703703703702,
+     "realised_last_half": 3.260586015662749,
+     "realised_last_half_se": 0.00560844897882648
+    },
+    "UCB1": {
+     "welfare": 3.313890302993557,
+     "company_value": 0.7717071826362443,
+     "share": 0.9925925925925924,
+     "realised_last_half": 3.1516080446629653,
+     "realised_last_half_se": 0.0016750588541940338
+    },
+    "Thompson": {
+     "welfare": 3.3139098594555154,
+     "company_value": 0.7717006127233029,
+     "share": 0.9925925925925924,
+     "realised_last_half": 3.2687174769966214,
+     "realised_last_half_se": 0.002426561385357184
+    },
+    "EXP3": {
+     "welfare": 3.2878147794258408,
+     "company_value": 0.778371382177967,
+     "share": 0.9388888888888887,
+     "realised_last_half": 3.152316628996304,
+     "realised_last_half_se": 0.001989294351582744
+    },
+    "model-based": {
+     "welfare": 3.317395469866115,
+     "company_value": 0.7707870637139479,
+     "share": 0.9999999999999998,
+     "realised_last_half": 3.3136341203301587,
+     "realised_last_half_se": 0.0012310883013492162
+    },
+    "model-ucb": {
+     "welfare": 3.317395469866115,
+     "company_value": 0.7707870637139479,
+     "share": 0.9999999999999998,
+     "realised_last_half": 3.317687386330216,
+     "realised_last_half_se": 0.0009748823253079017
+    }
+   },
+   "learners_below_random_welfare": [],
+   "learners_below_random_company_value": [
+    "eps-greedy",
+    "UCB1",
+    "Thompson",
+    "EXP3",
+    "model-based",
+    "model-ucb"
+   ],
+   "equilibrium_below_random_company_value": true,
+   "max_company_value_gap_to_equilibrium": 0.01616400350337699
+  },
+  "E2|SEATS": {
+   "nobody": {
+    "welfare": 2.8000000006084416,
+    "company_value": 0.6584887286512496,
+    "share": 0.0
+   },
+   "everybody": {
+    "welfare": 2.793999998925197,
+    "company_value": 0.6174678834553153,
+    "share": 1.0
+   },
+   "random": {
+    "welfare": 2.7969999999093904,
+    "company_value": 0.634503371648474,
+    "share": 0.49999999999999994
+   },
+   "equilibrium": {
+    "welfare": 2.7980000015740343,
+    "company_value": 0.6472865784800591,
+    "share": 0.3333333333333333
+   },
+   "learners": {
+    "eps-greedy": {
+     "welfare": 2.797399999999311,
+     "company_value": 0.6411382662620829,
+     "share": 0.4333333333333334,
+     "realised_last_half": 2.7973671763336077,
+     "realised_last_half_se": 0.00010088145113725385
+    },
+    "UCB1": {
+     "welfare": 2.7979000011637907,
+     "company_value": 0.6462362049938267,
+     "share": 0.35000000000000003,
+     "realised_last_half": 2.797251387334015,
+     "realised_last_half_se": 1.1727091424236335e-05
+    },
+    "Thompson": {
+     "welfare": 2.797733334010306,
+     "company_value": 0.6450080542767247,
+     "share": 0.3777777777777779,
+     "realised_last_half": 2.7976723120013927,
+     "realised_last_half_se": 3.701778754425969e-05
+    },
+    "EXP3": {
+     "welfare": 2.79761111158296,
+     "company_value": 0.6429330214713219,
+     "share": 0.39814814814814825,
+     "realised_last_half": 2.7972674053340603,
+     "realised_last_half_se": 1.5691823988185168e-05
+    },
+    "model-based": {
+     "welfare": 2.7980000015740347,
+     "company_value": 0.6472865784800592,
+     "share": 0.3333333333333334,
+     "realised_last_half": 2.7965293963298037,
+     "realised_last_half_se": 1.8263717777484802e-05
+    },
+    "model-ucb": {
+     "welfare": 2.797977779326702,
+     "company_value": 0.6471911955989822,
+     "share": 0.33703703703703713,
+     "realised_last_half": 2.79741990433442,
+     "realised_last_half_se": 1.5840793808958955e-05
+    }
+   },
+   "learners_below_random_welfare": [],
+   "learners_below_random_company_value": [],
+   "equilibrium_below_random_company_value": false,
+   "max_company_value_gap_to_equilibrium": 0.006148312217976182
+  },
+  "E2|BAR": {
+   "nobody": {
+    "welfare": 2.801363510068824,
+    "company_value": 0.8944040668824246,
+    "share": 0.0
+   },
+   "everybody": {
+    "welfare": 3.3184229048884015,
+    "company_value": 0.7768342213443128,
+    "share": 1.0
+   },
+   "random": {
+    "welfare": 3.0688839830547754,
+    "company_value": 0.8364854034062261,
+    "share": 0.49999999999999994
+   },
+   "equilibrium": {
+    "welfare": 3.3184229048884006,
+    "company_value": 0.7768342213443128,
+    "share": 0.9999999999999997
+   },
+   "learners": {
+    "eps-greedy": {
+     "welfare": 3.2586450408102587,
+     "company_value": 0.7921730641585175,
+     "share": 0.8740740740740738,
+     "realised_last_half": 3.2620144536628684,
+     "realised_last_half_se": 0.006168124879692657
+    },
+    "UCB1": {
+     "welfare": 3.3167644549853774,
+     "company_value": 0.7772931145084088,
+     "share": 0.9962962962962961,
+     "realised_last_half": 3.1502189419963478,
+     "realised_last_half_se": 0.0016868533188941137
+    },
+    "Thompson": {
+     "welfare": 3.3143026579970667,
+     "company_value": 0.7779791024627084,
+     "share": 0.9907407407407405,
+     "realised_last_half": 3.264507703663264,
+     "realised_last_half_se": 0.0020048854870667074
+    },
+    "EXP3": {
+     "welfare": 3.2903650224849654,
+     "company_value": 0.7840618747285129,
+     "share": 0.9407407407407404,
+     "realised_last_half": 3.1512453139963217,
+     "realised_last_half_se": 0.0020299435673720623
+    },
+    "model-based": {
+     "welfare": 3.3184229048883993,
+     "company_value": 0.7768342213443128,
+     "share": 0.9999999999999998,
+     "realised_last_half": 3.3030234283300763,
+     "realised_last_half_se": 0.0012433638896155784
+    },
+    "model-ucb": {
+     "welfare": 3.3184229048883993,
+     "company_value": 0.7768342213443128,
+     "share": 0.9999999999999998,
+     "realised_last_half": 3.3132355206635205,
+     "realised_last_half_se": 0.0010654703431405151
+    }
+   },
+   "learners_below_random_welfare": [],
+   "learners_below_random_company_value": [
+    "eps-greedy",
+    "UCB1",
+    "Thompson",
+    "EXP3",
+    "model-based",
+    "model-ucb"
+   ],
+   "equilibrium_below_random_company_value": true,
+   "max_company_value_gap_to_equilibrium": 0.015338842814204723
+  }
+ }
+}

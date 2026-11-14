@@ -1,0 +1,14 @@
+setting                type     bias (pp)   se (pp)  credited share
+second_teller    SEATS weak      -0.0113   0.0194   48.4%
+second_teller    SEATS average   +0.0484   0.0369   48.4%
+second_teller    SEATS strong    +0.0345   0.0396   48.3%
+second_teller    BAR   weak      -0.0104   0.0158   48.4%
+second_teller    BAR   average   +0.0518   0.0387   48.4%
+second_teller    BAR   strong    -0.0797   0.0395   48.3%
+no_other_teller  SEATS weak      +0.0327   0.0201   48.4%
+no_other_teller  SEATS average   -0.0401   0.0378   48.3%
+no_other_teller  SEATS strong    +0.0551   0.0392   48.4%
+no_other_teller  BAR   weak      +0.0095   0.0156   48.4%
+no_other_teller  BAR   average   -0.0456   0.0387   48.3%
+no_other_teller  BAR   strong    +0.0203   0.0394   48.4%
+largest |bias| with a second teller: 0.0797 pp = 22.1% of the smallest payoff gap (0.36 pp); prediction (< half the gap) holds: True

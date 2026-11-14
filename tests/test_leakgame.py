@@ -6,9 +6,14 @@ from leakgame.checks import lemma1_monotonicity, prop3_leak_formula, worked_exam
 from leakgame.config import GameConfig, type_of
 from leakgame.env import draw_days, hire_bar, hire_seats, leak_counts_batch, leak_counts_table, scores
 from leakgame.game import AgentFormGame
-from leakgame.learners import EXP3, UCB1, EpsGreedy, ModelBased, Thompson
-from leakgame.solvers import best_response_dynamics, cce_lp, enumerate_pure_bne
+from leakgame.learners import EXP3, UCB1, EpsGreedy, ModelBased, ModelUCB, Thompson
+from leakgame.analysis import matrix_distribution_values, pivotality_by_type, profile_values, sweep_alpha
+from leakgame.learning import run_learning
+from leakgame.pipeline import build_setup
+from leakgame.solvers import (best_response_dynamics, bootstrap_exploitability, cce_lp, enumerate_pure_bne,
+                              replicator_dynamics)
 from leakgame.stats import bootstrap_ci, holm, paired_test
+from leakgame.support_enum import TwoActionGame, dominance_reduction, support_enumeration
 from leakgame.tables import all_matrices, build_table
 from leakgame.utility import CLAN, FAIR, FRIEND, SELF, homogeneous, realized_utility, reward_range, weights
 
@@ -142,6 +147,45 @@ def test_best_response_dynamics_reaches_enumerated_equilibrium(small_table):
     assert g.exploitability(out["profile"])[0] == 0.0
 
 
+def test_pairwise_blocks_match_the_pairwise_table(small_table):
+    from leakgame.tables import pair_index
+    iu, ju = pair_index(4)
+    assert np.allclose(small_table.Pxx_blocks.mean(axis=-1), small_table.Pxx[..., iu, ju], atol=1e-6)
+
+
+def test_resample_tables_uses_the_same_blocks_as_resample_blocks(small_table):
+    Px_a = small_table.resample_blocks(np.random.default_rng(11))
+    Px_b, Pxx_b = small_table.resample_tables(np.random.default_rng(11))
+    assert np.array_equal(Px_a, Px_b)                                        # same draw -> same Px
+    # the resampled pairwise table is symmetric, has P(x_i) on the diagonal and is a valid joint probability
+    assert np.allclose(Pxx_b, np.swapaxes(Pxx_b, -1, -2))
+    assert np.allclose(np.diagonal(Pxx_b, axis1=-2, axis2=-1), Px_b)
+    assert (Pxx_b <= Px_b[..., :, None] + 1e-6).all() and (Pxx_b >= -1e-6).all()
+
+
+def test_fair_bootstrap_resamples_the_pairwise_table_but_friend_does_not_need_it(small_table):
+    rng = np.random.default_rng(12)
+    Px, Pxx = small_table.resample_tables(rng)
+    fair = AgentFormGame(small_table, homogeneous(FAIR(0.5, 0.25), 4), "BAR", build_V=False)
+    friend = AgentFormGame(small_table, homogeneous(FRIEND(0.3), 4), "BAR", build_V=False)
+    assert fair.uses_pairwise and not friend.uses_pairwise
+    # FAIR: the expected utilities change when Pxx is resampled with Px, so the bootstrap must pass it
+    assert any(not np.allclose(a, b) for a, b in zip(fair.with_Px(Px).EU, fair.with_Px(Px, Pxx=Pxx).EU))
+    # FRIEND ignores Pxx: identical either way
+    assert all(np.allclose(a, b) for a, b in zip(friend.with_Px(Px).EU, friend.with_Px(Px, Pxx=Pxx).EU))
+
+
+def test_bootstrap_of_friendly_game_is_unchanged_by_the_pairwise_fix(small_table):
+    g = AgentFormGame(small_table, homogeneous(FRIEND(0.3), 4), "SEATS")
+    sig = enumerate_pure_bne(g).profiles[0]
+    got = bootstrap_exploitability(g, sig, R=20, seed=3)
+    rng = np.random.default_rng(3)                                           # the pre-fix procedure, written out
+    eps = []
+    for _ in range(20):
+        eps.append(g.with_Px(small_table.resample_blocks(rng)).profile_exploitability_direct(sig)[0])
+    assert np.array_equal(got.eps_samples, np.array(eps))
+
+
 def test_exploitability_matches_direct_computation(small_table):
     g = AgentFormGame(small_table, homogeneous(FRIEND(0.3), 4), "SEATS")
     rng = np.random.default_rng(5)
@@ -157,6 +201,100 @@ def test_cce_contains_the_equilibrium():
     eq_rate = g.sharing_rate(enumerate_pure_bne(g).profiles[0])[0]
     hi, lo = cce_lp(g, objectives=("max_sharing", "min_sharing"))
     assert lo.sharing_rate - 1e-9 <= eq_rate <= hi.sharing_rate + 1e-9
+
+
+def test_replicator_dynamics_reaches_the_unique_pure_equilibrium(small_table):
+    g = AgentFormGame(small_table, homogeneous(FRIEND(0.5), 4), "BAR")
+    res = enumerate_pure_bne(g)
+    rd = replicator_dynamics(g, seed=0, max_iter=3000)
+    assert rd.is_pure and (rd.pure_profile == res.profiles[0]).all() and rd.exploitability < 1e-6
+
+
+def test_sweep_alpha_agrees_with_direct_enumeration():
+    tab = build_table(GameConfig(n=4, K=2, env="E1", network="pairs"), n_days=600, seed=0, cache_dir=None, verbose=False)
+    out = sweep_alpha(tab, "BAR", [0.0, 0.3], n_boot=5)
+    g0 = AgentFormGame(tab, homogeneous(FRIEND(0.0), 4), "BAR")
+    g3 = AgentFormGame(tab, homogeneous(FRIEND(0.3), 4), "BAR")
+    for rec, g in zip(out["records"], (g0, g3)):
+        assert rec["n_bne"] == enumerate_pure_bne(g).count
+        assert rec["sharing_rate_mean"] == pytest.approx(g.sharing_rate(enumerate_pure_bne(g).profiles[0])[0])
+    assert set(out["alpha_star"]) == set(out["cells"]) and out["loss_gain"]
+
+
+def test_pivotality_by_type_is_a_valid_distribution():
+    r = pivotality_by_type(GameConfig(), n_days=120_000, seed=1)
+    # every rank is equally likely overall, so the mean over the three equally likely types is 1/n (rank K) and K/n (hired)
+    assert np.mean(r["P_rank_K"]) == pytest.approx(1 / 6, abs=0.005)
+    assert np.mean(r["P_hired"]) == pytest.approx(2 / 6, abs=0.005)
+    assert r["P_rank_K"][0] < r["P_rank_K"][1] < r["P_rank_K"][2]          # weak < average < strong
+
+
+def test_baseline_values_match_the_tables(small_table):
+    g = AgentFormGame(small_table, homogeneous(FRIEND(0.3), 4), "BAR")
+    M = g.M
+    V = small_table.V[:, :, 1].astype(float)
+    assert matrix_distribution_values(g, np.eye(M)[0])["company_value"] == pytest.approx(V[:, 0].mean())
+    assert matrix_distribution_values(g, np.eye(M)[M - 1])["company_value"] == pytest.approx(V[:, -1].mean())
+    assert matrix_distribution_values(g, np.ones(M))["company_value"] == pytest.approx(V.mean())
+    assert matrix_distribution_values(g, np.eye(M)[0])["share"] == 0.0 and matrix_distribution_values(g, np.eye(M)[M - 1])["share"] == 1.0
+    assert matrix_distribution_values(g, np.ones(M))["share"] == pytest.approx(0.5)        # each possible tell with prob 1/2
+    sig = enumerate_pure_bne(g).profiles[0]
+    pv = profile_values(g, sig)
+    assert pv["welfare"] == pytest.approx(g.expected_utilities(sig).sum()) and pv["share"] == pytest.approx(g.sharing_rate(sig)[0])
+
+
+# ------------------------------------------------------------------ the learning loop
+def test_run_learning_all_learners_and_leak_aware_equals_ucb1_under_E0():
+    cfg = GameConfig(n=4, K=2, network="pairs")
+    setup = build_setup(cfg, ["E0", "E1"], ["SEATS", "BAR"], [0, 1], homogeneous(FRIEND(0.2), 4), n_days=600, verbose=False)
+    out = {name: run_learning(name, setup, T=600, ckpt_every=300, verbose=False)
+           for name in ("eps-greedy", "UCB1", "Thompson", "EXP3", "model-based", "model-ucb")}
+    for name, o in out.items():
+        assert o["agree_greedy"].shape == (2 * 2 * 2, len(o["checkpoints"])), name
+        assert ((0 <= o["agree_greedy"]) & (o["agree_greedy"] <= 1)).all() and (o["cce_gap"] >= -1e-12).all(), name
+    # under E0 every tell lands, nothing is inert, and the counterfactual-credit learner IS UCB1
+    e0 = out["UCB1"]["env_idx"] == 0
+    for key in ("agree_greedy", "regret_mean", "cce_gap"):
+        assert np.allclose(out["model-based"][key][e0], out["UCB1"][key][e0]), key
+    # the model-based learner reports a leak-rate estimate: exactly 1 in E0 (a told question always comes up)
+    assert np.allclose(out["model-ucb"]["leak_rate_hat"][e0, -1], 1.0)
+
+
+# ------------------------------------------------------------------ mixed equilibria
+def _two_by_two(f0, f1):
+    """Two candidates with one type each; f0[s] = tell-minus-silent payoff of candidate 0 when candidate 1 plays s."""
+    return TwoActionGame([[0], [1]], {0: np.array(f0, float), 1: np.array(f1, float)}, {0: [1], 1: [0]})
+
+
+def test_support_enumeration_finds_the_mixed_equilibrium_of_matching_pennies():
+    r = support_enumeration(_two_by_two([-2, 2], [2, -2]))
+    assert r.pure == [] and len(r.mixed) == 1 and r.complete
+    assert np.allclose(r.mixed[0]["p"], [0.5, 0.5])
+
+
+def test_support_enumeration_coordination_game_has_two_pure_and_one_mixed():
+    r = support_enumeration(_two_by_two([-1, 2], [-1, 2]))
+    assert sorted(tuple(p) for p in r.pure) == [(0, 0), (1, 1)]
+    assert len(r.mixed) == 1 and np.allclose(r.mixed[0]["p"], [1 / 3, 1 / 3])
+
+
+def test_dominance_solves_a_game_and_leaves_no_mixed_equilibrium():
+    r = support_enumeration(_two_by_two([1, 0.5], [1, 0.5]))
+    assert r.n_free == 0 and [tuple(p) for p in r.pure] == [(1, 1)] and r.mixed == []
+
+
+def test_support_enumeration_agrees_with_exhaustive_pure_enumeration_on_a_real_table():
+    cfg = GameConfig(n=4, K=2, env="E1", network="pairs")
+    tab = build_table(cfg, n_days=600, seed=0, cache_dir=None, verbose=False)
+    for rule in ("SEATS", "BAR"):
+        for al in (0.0, 0.2, 0.4):
+            g = AgentFormGame(tab, homogeneous(FRIEND(al), 4), rule)
+            ref = {tuple(g.cells_from_profile(p)) for p in enumerate_pure_bne(g).profiles}
+            r = support_enumeration(g)
+            assert {tuple(int(x) for x in p) for p in r.pure} == ref
+            allowed, _ = dominance_reduction(g)
+            if all(len(a) == 1 for a in allowed):                           # dominance-solvable: unique, exact equilibrium
+                assert ref == {tuple(next(iter(a)) for a in allowed)} and r.mixed == []
 
 
 # ------------------------------------------------------------------ learners
@@ -190,6 +328,40 @@ def test_model_based_credits_only_named_arms():
     credit = np.array([[True, False, False, True]])      # played arm 3 (told both), both tells inert -> also arm 0
     L.update(np.array([0]), np.array([0]), np.array([3]), np.array([0.7]), credit=credit)
     assert L.counts[0, 0].tolist() == [1, 0, 0, 1] and L.sums[0, 0].tolist() == [0.7, 0, 0, 0.7]
+
+
+def _model_ucb_bandit(tell_value, T=4000, B=20, seed=10, p=0.4, m=3, cost=0.02):
+    """One cell, arms {silent, tell one friend}.  Gross reward = 0.5 + tell_value * k + noise, where k ~ Bin(m, p)
+    is the number of told questions that came up; telling also costs `cost`."""
+    rng = np.random.default_rng(seed)
+    L = ModelUCB(B, 1, 2, np.ones((1, 2), dtype=bool), rng, horizon_per_cell=T,
+                 arm_bits=np.array([[[0], [1]]], dtype=bool), cost=np.array([cost]), m=m)
+    b = np.arange(B); c = np.zeros(B, dtype=int)
+    for _ in range(T):
+        arm = L.choose()[:, 0]
+        k = rng.binomial(m, p, B) * (arm == 1)
+        r = 0.5 + tell_value * k + 0.2 * rng.standard_normal(B) - cost * (arm == 1)
+        L.update(b, c, arm, r, feats=k[:, None].astype(float))
+    return L
+
+
+def test_model_ucb_learns_the_leak_rate_and_plays_the_better_arm():
+    # a leaked question is worth 0.1: telling is worth 0.1 * 3 * 0.4 = 0.12 > its cost 0.02
+    L = _model_ucb_bandit(tell_value=0.1)
+    assert (L.most_played()[:, 0] == 1).mean() >= 0.9
+    assert np.allclose(L.leak_rate_estimate(), 0.4, atol=0.03)
+    # a leaked question is worth 0: telling only costs, so silence is best
+    L0 = _model_ucb_bandit(tell_value=0.0)
+    assert (L0.greedy()[:, 0] == 0).mean() >= 0.9
+
+
+def test_model_ucb_uses_its_leak_estimate_to_choose():
+    L = _model_ucb_bandit(tell_value=0.1, T=1500)
+    before = L.means().copy()
+    L.k_sum *= 0.5                       # a lower believed leak rate lowers the predicted value of telling ...
+    after = L.means()
+    assert (after[:, 0, 1] < before[:, 0, 1]).all()
+    assert np.allclose(after[:, 0, 0], before[:, 0, 0])      # ... and does not touch the value of silence
 
 
 # ------------------------------------------------------------------ statistics

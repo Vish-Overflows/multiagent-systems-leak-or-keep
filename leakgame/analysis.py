@@ -5,7 +5,8 @@ from typing import Dict, List, Sequence
 
 import numpy as np
 
-from .config import GameConfig
+from .config import GameConfig, TYPE_NAMES, type_of
+from .env import draw_days, scores
 from .game import AgentFormGame, popcount_int
 from .solvers import (best_response_dynamics, bootstrap_exploitability, br_dynamics_from_many_starts,
                       enumerate_pure_bne, replicator_dynamics)
@@ -149,3 +150,63 @@ def complete_local_sweep(cfg: GameConfig, alphas: Sequence[float], n_days: int =
                 rec[base_name + "_max_gain"] = float(worst)
             out[rule].append(rec)
     return out
+
+
+# ------------------------------------------------------------------ pivotality (independent check of H1)
+def pivotality_by_type(cfg: GameConfig, n_days: int = 1_000_000, seed: int = 0, chunk: int = 250_000) -> Dict:
+    """How often does a candidate of each type hold the LAST seat (rank K) or the first place outside (rank K+1)
+    when nobody shares, under fixed seats?  Measured on fresh simulated days with no leaks, so it does not use any
+    sharing outcome and is independent of the own-loss ell and of alpha* = (ell + c)/G.
+
+    A tell can cost the teller her seat only if she holds rank K and a boosted friend overtakes her; a friend gains
+    from a tell mostly if she holds rank K+1 or just below.  Candidates are exchangeable when nobody shares, so all
+    n candidates are pooled."""
+    rng = np.random.default_rng(seed)
+    n, K = cfg.n, cfg.K
+    cfg0 = cfg.with_(env="E0")                       # no leak draws are needed: k = 0 everywhere
+    counts = {k: np.zeros(3) for k in ("rank_K", "rank_K1", "hired", "n")}
+    done = 0
+    while done < n_days:
+        B = min(chunk, n_days - done)
+        d = draw_days(cfg0, B, rng)
+        Y = scores(cfg0, d, np.zeros((B, n), dtype=np.int16))
+        rank = (Y[:, None, :] > Y[:, :, None]).sum(axis=2) + 1          # 1 = best, ties have probability zero
+        theta = type_of(d.skills)
+        for th in range(3):
+            m = theta == th
+            counts["n"][th] += m.sum()
+            counts["rank_K"][th] += (m & (rank == K)).sum()
+            counts["rank_K1"][th] += (m & (rank == K + 1)).sum()
+            counts["hired"][th] += (m & (rank <= K)).sum()
+        done += B
+    out = {"n_days": n_days, "K": K, "types": list(TYPE_NAMES)}
+    for key in ("rank_K", "rank_K1", "hired"):
+        p = counts[key] / counts["n"]
+        out["P_" + key] = p.tolist()
+        out["se_" + key] = np.sqrt(p * (1 - p) / counts["n"]).tolist()
+    return out
+
+
+# ------------------------------------------------------------------ baselines: what is a sharing pattern worth?
+def profile_values(game: AgentFormGame, sig: np.ndarray) -> Dict[str, float]:
+    """Welfare (sum over all candidates of the ex-ante expected utility), company value E[V] and share of possible
+    tells, for one pure strategy profile of the game (types are uniform)."""
+    T = game.T
+    S_idx = np.zeros(T, dtype=np.int64)
+    for j in game.active:
+        a_j = game._decode_action(j, np.int64(sig[j]), game.profiles[:, j])
+        S_idx += game.rowbits[j][a_j]
+    welfare = float(sum(game.EU[i][np.arange(T), S_idx].mean() for i in range(game.n)))
+    value = float(game.table.V[np.arange(T), S_idx, game.r].astype(float).mean())
+    return {"welfare": welfare, "company_value": value, "share": float(game.sharing_rate(sig)[0])}
+
+
+def matrix_distribution_values(game: AgentFormGame, w: np.ndarray) -> Dict[str, float]:
+    """The same three numbers when the sharing matrix is drawn from the distribution w over all M matrices,
+    independently of anybody's type (nobody shares: w = e_0; everybody shares: w = e_{M-1}; random sharing, every
+    possible tell independently with probability 1/2: w uniform)."""
+    w = np.asarray(w, dtype=float) / np.sum(w)
+    welfare = float(sum(game.EU[i].mean(axis=0) @ w for i in range(game.n)))
+    value = float(game.table.V[:, :, game.r].astype(float).mean(axis=0) @ w)
+    share = float((game.n_told_of_S.sum(axis=1) / max(1, game.cfg.n_free)) @ w)
+    return {"welfare": welfare, "company_value": value, "share": share}

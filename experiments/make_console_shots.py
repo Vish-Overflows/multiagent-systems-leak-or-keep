@@ -41,7 +41,7 @@ def read(name):
 def main():
     x3 = read("x3_analysis.log")
     if x3:
-        render(x3[:31], "console_x3_learning", "python experiments/analyze_x3.py      # final metrics, 30 seeds per row")
+        render(x3[:37], "console_x3_learning", "python experiments/analyze_x3.py      # final metrics, 30 seeds per row")
     x4 = read("x4.log")
     if x4:
         render(x4, "console_x4_company", "python experiments/run_x4.py      # company loss vs question-bank size")
