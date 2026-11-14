@@ -72,7 +72,8 @@ def main():
     os.makedirs(OUT, exist_ok=True)
     t0 = time.time()
     tasks = [(net, env) for net in NETWORKS for env in ENVS]
-    with get_context("spawn").Pool(processes=min(9, len(tasks))) as pool:
+    workers = int(os.environ.get("X1_WORKERS", min(9, len(tasks))))     # a two-groups CCE program needs ~4 GB
+    with get_context("spawn").Pool(processes=workers) as pool:
         for _ in pool.imap_unordered(task, tasks):
             pass
     # complete network: local analysis at n = 6 for the alpha grid

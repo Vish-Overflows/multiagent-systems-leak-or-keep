@@ -1,0 +1,684 @@
+{
+ "network": "star",
+ "env": "E0",
+ "n_days": 2000,
+ "cce": {
+  "SEATS": [
+   {
+    "alpha": 0.0,
+    "cce_share_max": 0.0,
+    "cce_share_min": 0.0,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 11.85909366607666,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 0.0,
+    "bne_share_max": 0.0,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.025,
+    "cce_share_max": 0.0,
+    "cce_share_min": 0.0,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 11.291537046432495,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 0.0,
+    "bne_share_max": 0.0,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.05,
+    "cce_share_max": 0.14084069186735335,
+    "cce_share_min": 0.0,
+    "support_max": 3,
+    "support_min": 1,
+    "lp_seconds": 10.586242914199829,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 2,
+    "bne_share_min": 0.0,
+    "bne_share_max": 0.13333333333333333,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.075,
+    "cce_share_max": 0.13333333333333333,
+    "cce_share_min": 0.13333333333333333,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 11.230007410049438,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 0.13333333333333333,
+    "bne_share_max": 0.13333333333333333,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.1,
+    "cce_share_max": 0.13333333333333333,
+    "cce_share_min": 0.13333333333333333,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 12.549083948135376,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 0.13333333333333333,
+    "bne_share_max": 0.13333333333333333,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.125,
+    "cce_share_max": 0.13333333333333333,
+    "cce_share_min": 0.13333333333333333,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 12.078078746795654,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 0.13333333333333333,
+    "bne_share_max": 0.13333333333333333,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.15,
+    "cce_share_max": 0.13333333333333333,
+    "cce_share_min": 0.13333333333333333,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 14.214461326599121,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 0.13333333333333333,
+    "bne_share_max": 0.13333333333333333,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.175,
+    "cce_share_max": 0.13333333333333333,
+    "cce_share_min": 0.13333333333333333,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 13.135983228683472,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 0.13333333333333333,
+    "bne_share_max": 0.13333333333333333,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.2,
+    "cce_share_max": 0.13333333333333333,
+    "cce_share_min": 0.13333333333333333,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 13.21738338470459,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 0.13333333333333333,
+    "bne_share_max": 0.13333333333333333,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.225,
+    "cce_share_max": 0.26666666666666666,
+    "cce_share_min": 0.26666666666666666,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 14.91939640045166,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 0.26666666666666666,
+    "bne_share_max": 0.26666666666666666,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.25,
+    "cce_share_max": 0.26666666666666666,
+    "cce_share_min": 0.26666666666666666,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 16.10489058494568,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 0.26666666666666666,
+    "bne_share_max": 0.26666666666666666,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.275,
+    "cce_share_max": 0.26666666666666666,
+    "cce_share_min": 0.26666666666666666,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 19.601104021072388,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 0.26666666666666666,
+    "bne_share_max": 0.26666666666666666,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.3,
+    "cce_share_max": 0.35795602962396367,
+    "cce_share_min": 0.19569238513287837,
+    "support_max": 3,
+    "support_min": 4,
+    "lp_seconds": 14.134335041046143,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 3,
+    "bne_share_min": 0.2,
+    "bne_share_max": 0.26666666666666666,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.325,
+    "cce_share_max": 0.3764295589900897,
+    "cce_share_min": 0.19603585665284412,
+    "support_max": 3,
+    "support_min": 3,
+    "lp_seconds": 14.357651710510254,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 2,
+    "bne_share_min": 0.2,
+    "bne_share_max": 0.2,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.35,
+    "cce_share_max": 0.38361860637422385,
+    "cce_share_min": 0.19692253132629586,
+    "support_max": 3,
+    "support_min": 3,
+    "lp_seconds": 11.79899525642395,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 2,
+    "bne_share_min": 0.2,
+    "bne_share_max": 0.2,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.375,
+    "cce_share_max": 0.3874467488878192,
+    "cce_share_min": 0.19748505779496622,
+    "support_max": 3,
+    "support_min": 3,
+    "lp_seconds": 11.712451457977295,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 2,
+    "bne_share_min": 0.2,
+    "bne_share_max": 0.2,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.4,
+    "cce_share_max": 0.389824513198251,
+    "cce_share_min": 0.197873718082191,
+    "support_max": 3,
+    "support_min": 3,
+    "lp_seconds": 13.818203687667847,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 2,
+    "bne_share_min": 0.2,
+    "bne_share_max": 0.2,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.425,
+    "cce_share_max": 0.3914449260222696,
+    "cce_share_min": 0.19815833050523857,
+    "support_max": 3,
+    "support_min": 3,
+    "lp_seconds": 13.557392835617065,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 2,
+    "bne_share_min": 0.2,
+    "bne_share_max": 0.2,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.45,
+    "cce_share_max": 0.39262013046948757,
+    "cce_share_min": 0.1983757444368549,
+    "support_max": 3,
+    "support_min": 3,
+    "lp_seconds": 15.7309091091156,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 2,
+    "bne_share_min": 0.2,
+    "bne_share_max": 0.2,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.475,
+    "cce_share_max": 0.393511450825124,
+    "cce_share_min": 0.19854724588425088,
+    "support_max": 3,
+    "support_min": 3,
+    "lp_seconds": 15.473721742630005,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 2,
+    "bne_share_min": 0.2,
+    "bne_share_max": 0.2,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.5,
+    "cce_share_max": 0.3942106669830272,
+    "cce_share_min": 0.1986859892844397,
+    "support_max": 3,
+    "support_min": 3,
+    "lp_seconds": 13.88901400566101,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 2,
+    "bne_share_min": 0.2,
+    "bne_share_max": 0.2,
+    "matches_x1_equilibria": true
+   }
+  ],
+  "BAR": [
+   {
+    "alpha": 0.0,
+    "cce_share_max": 0.0,
+    "cce_share_min": 0.0,
+    "support_max": 1,
+    "support_min": 1,
+    "lp_seconds": 13.891478061676025,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 1,
+    "bne_share_min": 0.0,
+    "bne_share_max": 0.0,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.025,
+    "cce_share_max": 0.9573937104112213,
+    "cce_share_min": 0.7872548826958603,
+    "support_max": 3,
+    "support_min": 3,
+    "lp_seconds": 15.392876148223877,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 2,
+    "bne_share_min": 0.8,
+    "bne_share_max": 0.8,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.05,
+    "cce_share_max": 0.9774984738642819,
+    "cce_share_min": 0.793824218981734,
+    "support_max": 3,
+    "support_min": 3,
+    "lp_seconds": 11.964954853057861,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 2,
+    "bne_share_min": 0.8,
+    "bne_share_max": 0.8,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.075,
+    "cce_share_max": 0.9847123195267318,
+    "cce_share_min": 0.7959247589813688,
+    "support_max": 3,
+    "support_min": 3,
+    "lp_seconds": 11.924554824829102,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 2,
+    "bne_share_min": 0.8,
+    "bne_share_max": 0.8,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.1,
+    "cce_share_max": 0.9884236298908493,
+    "cce_share_min": 0.7969590599406093,
+    "support_max": 3,
+    "support_min": 3,
+    "lp_seconds": 10.551342010498047,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 2,
+    "bne_share_min": 0.8,
+    "bne_share_max": 0.8,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.125,
+    "cce_share_max": 0.9906849869655291,
+    "cce_share_min": 0.7975746233774146,
+    "support_max": 3,
+    "support_min": 3,
+    "lp_seconds": 11.049442291259766,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 2,
+    "bne_share_min": 0.8,
+    "bne_share_max": 0.8,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.15,
+    "cce_share_max": 0.9922072434994904,
+    "cce_share_min": 0.7979829296106554,
+    "support_max": 3,
+    "support_min": 3,
+    "lp_seconds": 13.39490795135498,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 2,
+    "bne_share_min": 0.8,
+    "bne_share_max": 0.8,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.175,
+    "cce_share_max": 0.9933018526557567,
+    "cce_share_min": 0.7982735699027244,
+    "support_max": 3,
+    "support_min": 3,
+    "lp_seconds": 16.308836221694946,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 2,
+    "bne_share_min": 0.8,
+    "bne_share_max": 0.8,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.2,
+    "cce_share_max": 0.9941268275353184,
+    "cce_share_min": 0.7984910019022168,
+    "support_max": 3,
+    "support_min": 3,
+    "lp_seconds": 11.276659488677979,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 2,
+    "bne_share_min": 0.8,
+    "bne_share_max": 0.8,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.225,
+    "cce_share_max": 0.9947708712717139,
+    "cce_share_min": 0.7986597918972365,
+    "support_max": 3,
+    "support_min": 3,
+    "lp_seconds": 11.774796724319458,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 2,
+    "bne_share_min": 0.8,
+    "bne_share_max": 0.8,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.25,
+    "cce_share_max": 0.9952876237470252,
+    "cce_share_min": 0.7987946204372394,
+    "support_max": 3,
+    "support_min": 3,
+    "lp_seconds": 11.015825033187866,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 2,
+    "bne_share_min": 0.8,
+    "bne_share_max": 0.8,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.275,
+    "cce_share_max": 0.9957114285572932,
+    "cce_share_min": 0.798904800457104,
+    "support_max": 3,
+    "support_min": 3,
+    "lp_seconds": 11.255892753601074,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 2,
+    "bne_share_min": 0.8,
+    "bne_share_max": 0.8,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.3,
+    "cce_share_max": 0.9960652940429788,
+    "cce_share_min": 0.7989965250045767,
+    "support_max": 3,
+    "support_min": 3,
+    "lp_seconds": 14.21404218673706,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 2,
+    "bne_share_min": 0.8,
+    "bne_share_max": 0.8,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.325,
+    "cce_share_max": 0.9963652133861961,
+    "cce_share_min": 0.7990740727522405,
+    "support_max": 3,
+    "support_min": 3,
+    "lp_seconds": 12.474262714385986,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 2,
+    "bne_share_min": 0.8,
+    "bne_share_max": 0.8,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.35,
+    "cce_share_max": 0.996622648870245,
+    "cce_share_min": 0.7991404946411631,
+    "support_max": 3,
+    "support_min": 3,
+    "lp_seconds": 12.721897602081299,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 2,
+    "bne_share_min": 0.8,
+    "bne_share_max": 0.8,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.375,
+    "cce_share_max": 0.9968460302706373,
+    "cce_share_min": 0.7991980247657549,
+    "support_max": 3,
+    "support_min": 3,
+    "lp_seconds": 11.686815023422241,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 2,
+    "bne_share_min": 0.8,
+    "bne_share_max": 0.8,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.4,
+    "cce_share_max": 0.9970416955051608,
+    "cce_share_min": 0.7992483365977193,
+    "support_max": 3,
+    "support_min": 3,
+    "lp_seconds": 12.967347621917725,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 2,
+    "bne_share_min": 0.8,
+    "bne_share_max": 0.8,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.425,
+    "cce_share_max": 0.9972145016016443,
+    "cce_share_min": 0.7992927084581967,
+    "support_max": 3,
+    "support_min": 3,
+    "lp_seconds": 12.917516469955444,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 2,
+    "bne_share_min": 0.8,
+    "bne_share_max": 0.8,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.45,
+    "cce_share_max": 0.9973682333498332,
+    "cce_share_min": 0.7993321336483581,
+    "support_max": 3,
+    "support_min": 3,
+    "lp_seconds": 14.142730951309204,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 2,
+    "bne_share_min": 0.8,
+    "bne_share_max": 0.8,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.475,
+    "cce_share_max": 0.9975058837098885,
+    "cce_share_min": 0.7993673956919003,
+    "support_max": 3,
+    "support_min": 3,
+    "lp_seconds": 14.09001898765564,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 2,
+    "bne_share_min": 0.8,
+    "bne_share_max": 0.8,
+    "matches_x1_equilibria": true
+   },
+   {
+    "alpha": 0.5,
+    "cce_share_max": 0.9976298505968072,
+    "cce_share_min": 0.7993991209369752,
+    "support_max": 3,
+    "support_min": 3,
+    "lp_seconds": 11.586126565933228,
+    "lp_status": [
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+     "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    ],
+    "n_bne": 2,
+    "bne_share_min": 0.8,
+    "bne_share_max": 0.8,
+    "matches_x1_equilibria": true
+   }
+  ]
+ },
+ "seconds": 733.5470240116119
+}

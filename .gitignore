@@ -12,3 +12,5 @@ report/*.aux
 report/*.log
 report/*.out
 .DS_Store
+# local LaTeX binary (downloaded by hand, see README)
+report/tectonic.exe
