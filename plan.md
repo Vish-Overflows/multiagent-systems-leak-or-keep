@@ -3,8 +3,8 @@
 This plan says what to do next, in what order, and how we will know each step is done. It is written for the
 four of us. You should be able to pick up any single item and work on it without reading the rest.
 
-- **Where we are:** branch `fix/items-5-7`, 6 commits ahead of `main`, 40 unit tests passing. The review items
-  1–8 are done; `fix.md` records exactly what was done.
+- **Where we are:** Phases 0 and 1 are done (see [Status](#status-after-phases-0-and-1)); `main` has the review items
+  1–8 and Phase 0, branch `phase-1` has Phase 1, 42 unit tests pass. `fix.md` records the review items.
 - **What is open:** the stretch target `n = 8`, robustness of every headline number, E0 (where correlated play
   differs a lot from the pure equilibria), several explanations the report labels "plausible, not tested", and
   the final write-up.
@@ -13,6 +13,30 @@ four of us. You should be able to pick up any single item and work on it without
   (see [Decisions we need to make](#decisions-we-need-to-make)).
 
 ---
+
+## Status after Phases 0 and 1
+
+Everything below is in the repository; commits are `Phase 0` (merged into `main`) and `Phase 1` (branch `phase-1`, not
+merged). Predictions were written before each run; where one failed it says so.
+
+| Item | Result | Where the plan turned out wrong or incomplete |
+|---|---|---|
+| 0.1 PDF | rebuilt with `report/tectonic.exe`; **11 pages** (10 of body and references, the appendix on page 11); no undefined references, no overfull boxes | The page limit is still unknown (decision D1). A run-in heading in §5.1 was fixed. My first appendix was placed inside the two-column bibliography group, where floats are silently dropped; it now follows the references |
+| 0.2 Merge | `fix/items-5-7` merged into `main` (local only, nothing pushed); `proposal.pdf` moved to `docs/`; stale root `main.pdf` removed (byte-identical to the old committed report) | — |
+| 0.3 Environment | `uv.lock`, README versions, `.gitattributes`, `X1_WORKERS` / `X3_WORKERS` | The plan said `run_all.sh` has CRLF endings in git. It has LF in git; only a Windows checkout turned it into CRLF. `.gitattributes` fixes that |
+| 0.4 Clean clone | **running** (see below) | The committed results are part of a clone, and `run_x1.py` / `run_cce.py` skip cells whose result file exists, so a plain `run_all.sh` in a clone would *skip* X1 and the CCE programs. The clone's results had to be deleted first |
+| 1.1 CCE-gap test | per learner × leak model × rule, 30 seeds as the unit: **36 of 36 significant** (24 of 24 in E1/E2), as predicted | — |
+| 1.2 Rounds to 90% | all three leak models, appendix Table 5 | — |
+| 1.3 H1 pivotality | P(last seat) = **3.6 / 17.9 / 28.6 %** for weak / average / strong, the order of α\* — prediction holds, H1 no longer rests on the loss | Plan guessed "average ≈ strong"; strong is clearly highest |
+| 1.4 Baselines | no learner is below random sharing in **welfare** (0 of 24). In **company value under a cut-off every learner is below random sharing — and so is the equilibrium** (0.771 vs 0.833): the cut-off company is hurt by everybody telling | The written prediction ("never below random sharing in company value") was ill posed: the company is not a player. Under fixed seats welfare is flat by construction (exactly K hires), so only company value is informative there. Random sharing was added to X4 (old fields unchanged): at Q = 15 it costs 3.6 % (seats) and 6.5 % (cut-off) against 1.7 % and 13.1 % at the equilibrium |
+| 1.5 Explanations | (a) average types learn slowest because the noise-to-gap ratio is largest: **supported** (ρ = 0.80 UCB1, 0.70 Thompson). (b) UCB1 explores because of its bonus: **supported** (56 % of pulls on wrong rows vs 37–41 %). (c) ε-greedy's mistakes are on cheap decisions: **refuted** (ratio 1.01); its low regret is because it pulls wrong rows less often. (d) pooling across rows: **supported but modest** (4 of 4 settings; 34 vs 25 % in E1 seats). (e) E0 redundancy: still open, Phase 3.1 | The leak-aware learner's stored `final_counts` include *credited* observations, so they are not pull counts; it is excluded from (b)/(c). Its settled profile is unaffected (identical to the greedy-means profile in 100 % of runs). The plan's item 1.5(c) assumed counts are pulls for every learner |
+| 1.6 E2 bias | at most **0.08 pp** (about two standard errors) against a smallest payoff gap of 0.36 pp; a control with no second teller scatters as much. Not shown to be zero, but small next to the signal | — |
+
+**0.4 clean-clone run.** Command: `X1_WORKERS=2 X3_WORKERS=2 CCE_WORKERS=1 bash run_all.sh` in a fresh clone of `main`
+at `..\FAI_clean` after deleting its committed `results/`, `report/generated/` and `report/figures/`; compare with
+the committed files using numeric tolerances (timings ignored). Status and outcome: see the end of this section.
+
+**Still open from Phases 0–1:** the page limit (D1); whether to merge `phase-1`; 1.5(e) is in Phase 3.1.
 
 ## Contents
 
